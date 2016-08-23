@@ -80,7 +80,7 @@ module.exports = {
     // });
   },
 
-  vote: function(state, entry) {
+  vote: function(voteState, entry) {
 
     /*
     Using updateIn makes this pleasingly succinct.
@@ -91,8 +91,9 @@ module.exports = {
     create new Maps in their place.
     If the value at the end is missing, initialize it with 0".
     */
+    let state = voteState || Map();
     return state.updateIn(
-      ['vote', 'tally', entry],
+      ['tally', entry],
       0,
       tally => tally + 1
     );
