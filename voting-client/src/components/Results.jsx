@@ -73,9 +73,10 @@ const Results = React.createClass({
 });
 
 function mapStateToProps(state) {
+  debugger;
   return {
     pair: state.getIn(["vote", "pair"]),
-    tally: state.getIn("vote", "tally"),
+    tally: state.getIn(["vote", "tally"]),
     winner: state.get("winner")
   };
 }

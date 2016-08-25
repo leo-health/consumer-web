@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import {Router, Route, hashHistory} from 'react-router';
 import {fromJS} from 'immutable';
 import io from 'socket.io-client';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import reducer from './reducer';
-import {setState} from './action_creators'
+import remoteActionMiddleware from './remote_action_middleware';
+import {setState} from './action_creators';
 import {VotingContainer} from './components/Voting';
 import {ResultsContainer} from './components/Results';
 
@@ -16,7 +17,7 @@ import {ResultsContainer} from './components/Results';
 var tutorial_on = true;
 if (tutorial_on) {
 
-  const store = createStore(reducer);
+  const store = applyMiddleware(remoteActionMiddleware)(createStore)(reducer);
   store.dispatch(setState({
     vote: {
       pair: ["Sunshine", "Trainspotting"],

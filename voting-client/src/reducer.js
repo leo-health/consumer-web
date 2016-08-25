@@ -2,14 +2,12 @@ import {fromJS, Map} from 'immutable';
 
 function setState(state, newState) {
   if (!newState) { return state }
+  let nextState = state;
 
   const [oldPair, newPair] = [state, newState]
     .map((m)=>m.getIn(["vote", "pair"]));
-
-  let nextState = state;
-  if (oldPair && !oldPair.equals(newPair)) {
-    nextState = resetVote(state);
-  }
+  let pairChanged = oldPair && !oldPair.equals(newPair);
+  if (pairChanged) { nextState = nextState.delete("votedFor") }
 
   return nextState.merge(newState);
 }
@@ -23,19 +21,16 @@ function vote(state, entry) {
   }
 
   // increment the tally
-  let nextState = state.updateIn(["vote", "tally"], (tally)=>tally+1);
+  let nextState = state.updateIn(["vote", "tally"], (tally)=>tally.update(entry, (count)=>count+1), 0);
 
   const votedFor = fromJS({votedFor: entry});
   nextState = nextState.merge(votedFor);
-  
+
   return nextState
 }
 
-function resetVote(state) {
-  return state.delete("votedFor");
-}
-
 function reducer(state = Map(), action) {
+
   switch (action.type) {
     case "SET_STATE":
       return setState(state, fromJS(action.payload));
