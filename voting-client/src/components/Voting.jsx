@@ -6,6 +6,7 @@ import Vote from './Vote';
 function mapStateToProps(state) {
   return {
     pair: state.getIn(["vote", "pair"]),
+    votedFor: state.get("votedFor"),
     winner: state.get("winner")
   };
 }

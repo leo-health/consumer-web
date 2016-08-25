@@ -3,9 +3,8 @@ import {fromJS, Map} from 'immutable';
 function setState(state, newState) {
   if (!newState) { return state }
 
-
-  const oldPair = state.getIn(["vote", "pair"]);
-  const newPair = newState.getIn(["vote", "pair"]);
+  const [oldPair, newPair] = [state, newState]
+    .map((m)=>m.getIn(["vote", "pair"]));
 
   let nextState = state;
   if (oldPair && !oldPair.equals(newPair)) {
@@ -16,19 +15,20 @@ function setState(state, newState) {
 }
 
 function vote(state, entry) {
+
   // only allow a vote for an entry in the pair
   const pair = state.getIn(["vote", "pair"]);
-
   if (!pair.includes(entry)) {
     return state;
   }
 
-  const votedFor = fromJS({votedFor: entry});
+  // increment the tally
+  let nextState = state.updateIn(["vote", "tally"], (tally)=>tally+1);
 
-  console.log(votedFor);
-  console.log(state);
-  console.log(state.merge(votedFor));
-  return state.merge(votedFor);
+  const votedFor = fromJS({votedFor: entry});
+  nextState = nextState.merge(votedFor);
+  
+  return nextState
 }
 
 function resetVote(state) {

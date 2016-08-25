@@ -1,4 +1,7 @@
 import React from 'react';
+import * as actionCreators from '../action_creators';
+import {vote} from '../action_creators';
+import {connect} from 'react-redux';
 
 const Vote = React.createClass({
   getPair: function() {
@@ -19,7 +22,6 @@ const Vote = React.createClass({
     }
     return null;
   },
-
   render: function() {
     return(
       <div className="voting">
@@ -27,7 +29,7 @@ const Vote = React.createClass({
           <button
             key = {entry}
             disabled = {this.isDisabled()}
-            onClick = {() => this.props.vote(entry)}>
+            onClick = {()=>this.props.vote(entry)}>
             <h1>{entry}</h1>
             {this.votedForLabel(entry)}
           </button>
@@ -37,4 +39,4 @@ const Vote = React.createClass({
   }
 });
 
-export default Vote;
+export default connect(null, actionCreators)(Vote);

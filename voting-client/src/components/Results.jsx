@@ -1,6 +1,7 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
+import * as actionCreators from '../action_creators';
 import Winner from './Winner';
 
 const ResultsEntry = React.createClass({
@@ -44,9 +45,6 @@ const ResultsNoWinner = React.createClass({
     }
     return 0;
   },
-  next: function() {
-    return this.props.next || (()=>{})
-  },
   render: function() {
     return (
       <div className="results">
@@ -57,13 +55,7 @@ const ResultsNoWinner = React.createClass({
           }/>
         <button
           className="next-vote-button"
-          ref={(ref)=>{
-            console.log(this);
-            this.nextVoteButton=ref;
-            console.log(ref);
-            console.log(this);
-          }}
-          onClick={this.next}> // .bind(this)
+          onClick={this.props.next}>
           Next Vote
         </button>
       </div>
@@ -88,6 +80,6 @@ function mapStateToProps(state) {
   };
 }
 
-const ResultsContainer = connect(mapStateToProps)(Results);
+const ResultsContainer = connect(mapStateToProps, actionCreators)(Results);
 
 export {Results, ResultsContainer};
