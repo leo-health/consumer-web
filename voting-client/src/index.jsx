@@ -14,7 +14,7 @@ import {ResultsContainer} from './components/Results';
 // BabelLoaderError: SyntaxError: 'import' and 'export' may only appear at the top level
 // import App from './components/App'
 
-var tutorial_on = true;
+var tutorial_on = false;
 if (tutorial_on) {
 
   const store = applyMiddleware(remoteActionMiddleware)(createStore)(reducer);
@@ -43,25 +43,13 @@ if (tutorial_on) {
     </Provider>,
     document.getElementById("app")
   );
-
-
-
-
-
-
-
-
-
-
 } else {
 
   const App = require("./components/App").default;
   ReactDOM.render(
-    <Provider {...{store}}>
       <Router history={hashHistory}>
         <Route path="/" component={App} />
-      </Router>
-    </Provider>,
+      </Router>,
     document.getElementById("app")
   )
 
