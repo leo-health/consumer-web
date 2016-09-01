@@ -4,19 +4,6 @@
   background-color: purple;
 }
 
-.logo {
-  background-color: orange;
-  display: inline;
-}
-
-.welcome {
-  background-color: green;
-  /*position: absolute;*/
-  display: inline-block;
-  /*height: 80px;
-  right: 0px;*/
-}
-
 .sidebar {
   background-color: blue;
   position: inline;
@@ -24,7 +11,7 @@
 
 /* Header */
 .header {
-  background-color: gray;
+  background-color: #FF5F40;
   position: fixed;
   top: 0px;
   left: 0px;
@@ -32,10 +19,42 @@
   height: 8vh;
 }
 
+.logo {
+  height: 7vh;
+  display: inline-block;
+  margin-left: 1%;
+}
+
+
 .profile-dropdown--container {
-  background-color: red;
   position: relative;
   float: right;
+  height: 100%;
   right: 5vw;
+  top: 0px;
+  color: white;
+}
+
+.profile-dropdown--name {
+  font-family: 'Open Sans';
+  position: relative;
+  margin-right: 10px;
+  top: 35%;
+}
+
+.profile-dropdown--picture--container {
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: 1.5px solid white;
+  text-align: center;
   top: 20%;
+}
+
+.profile-dropdown--picture {
+  top: 25%;
+  position: relative;
 }
