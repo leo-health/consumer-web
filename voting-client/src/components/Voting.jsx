@@ -11,7 +11,7 @@ function mapStateToProps(state) {
   };
 }
 
-const Voting = React.createClass({
+export const Voting = React.createClass({
   render: function() {
     const {winner, ...props} = this.props;
     return winner?
@@ -20,6 +20,4 @@ const Voting = React.createClass({
   }
 });
 
-const VotingContainer = connect(mapStateToProps)(Voting);
-
-export {Voting, VotingContainer};
+export const VotingContainer = connect(mapStateToProps)(Voting);

@@ -8,6 +8,14 @@ export function setState(state) {
 export function vote(entry) {
   return {
     type: 'VOTE',
+    meta: {remote: true},
     payload: {entry}
   };
+}
+
+export function next() {
+  return {
+    type: "NEXT",
+    meta: {remote: true}
+  }
 }

@@ -92,6 +92,7 @@ module.exports = {
     If the value at the end is missing, initialize it with 0".
     */
     let state = voteState || Map();
+
     return state.updateIn(
       ['tally', entry],
       0,

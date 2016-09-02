@@ -2,14 +2,16 @@ import {fromJS, Map} from 'immutable';
 
 function setState(state, newState) {
   if (!newState) { return state }
-  let nextState = state;
+  return resetVoteIfPairChanged(state, newState).merge(newState);
+}
 
-  const [oldPair, newPair] = [state, newState]
-    .map((m)=>m.getIn(["vote", "pair"]));
+function resetVoteIfPairChanged(state, newState) {
+  const [oldPair, newPair] = [state, newState].map(
+    (m)=>m.getIn(["vote", "pair"])
+  );
   let pairChanged = oldPair && !oldPair.equals(newPair);
-  if (pairChanged) { nextState = nextState.delete("votedFor") }
-
-  return nextState.merge(newState);
+  if (pairChanged) { return state.delete("votedFor") }
+  return state;
 }
 
 function vote(state, entry) {
@@ -21,7 +23,7 @@ function vote(state, entry) {
   }
 
   // increment the tally
-  let nextState = state.updateIn(["vote", "tally"], (tally)=>tally.update(entry, (count)=>count+1), 0);
+  let nextState = state.updateIn(["vote", "tally", entry], (count)=>count+1, 0);
 
   const votedFor = fromJS({votedFor: entry});
   nextState = nextState.merge(votedFor);
@@ -39,18 +41,5 @@ function reducer(state = Map(), action) {
   }
   return state
 }
-
-
-// is this right to do?
-// function reducer(state = Map(), action) {
-//   const actions = {
-//     "SET_STATE": setState,
-//     "VOTE": vote
-//   };
-//   // can I do this in one line?
-//   const actionFn = actions[action.type];
-//   if (actionFn) { return call(actionFn, state, action.payload); }
-//   return state
-// }
 
 export default reducer;

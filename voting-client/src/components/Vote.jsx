@@ -3,7 +3,7 @@ import * as actionCreators from '../action_creators';
 import {vote} from '../action_creators';
 import {connect} from 'react-redux';
 
-const Vote = React.createClass({
+export const Vote = React.createClass({
   getPair: function() {
     return this.props.pair || [];
   },
@@ -21,6 +21,10 @@ const Vote = React.createClass({
       return <div className = "label">Voted</div>;
     }
     return null;
+  },
+
+  buttonOnClick: function(entry) {
+    return ()=>this.props.vote(entry);
   },
   render: function() {
     return(

@@ -3,10 +3,13 @@ import startServer from './src/server';
 
 export const store = makeStore();
 
-const entries = require("./entries.json");
+startServer(store);
+
 store.dispatch({
   type: "SET_ENTRIES",
-  entries: entries
+  payload: {
+    entries: require("./entries.json")  
+  }
 });
 
-startServer(store);
+store.dispatch({type: "NEXT"});

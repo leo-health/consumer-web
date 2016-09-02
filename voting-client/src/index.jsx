@@ -15,23 +15,22 @@ import {ResultsContainer} from './components/Results';
 // import App from './components/App'
 
 var tutorial_on = true;
-if (tutorial_on) {
 
-  const store = applyMiddleware(remoteActionMiddleware)(createStore)(reducer);
-  store.dispatch(setState({
-    vote: {
-      pair: ["Sunshine", "Trainspotting"],
-      tally: {
-        Sunshine: 2
-      }
-    }
-  }));
+if (tutorial_on) {
 
   // Let's connect to one that we assume to be on the same host as our client, in port 8090 (matching the port we used on the server):
   const socket = io(`${location.protocol}//${location.hostname}:8090`);
   socket.on("state", state => store.dispatch(setState(state)));
 
-  const pair = ["Trainspotting", "28 days later"];
+  const createStoreWithMiddleware = applyMiddleware(
+    remoteActionMiddleware(socket)
+  )(createStore);
+  const store = createStoreWithMiddleware(reducer);
+  // for some reason this creates an infinite loop of calling the middleware function
+  // has something to do with using the `store` variable in the closure before defining it.
+  // what's a good pattern here?
+  // const store = applyMiddleware(remoteActionMiddleware(socket))(createStore)(reducer);
+
   const App = (props) => props.children;
   const routes = <Route component={App}>
     <Route path="/results" component={ResultsContainer} />
