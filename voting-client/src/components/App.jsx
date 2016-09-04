@@ -8,8 +8,6 @@ export default React.createClass({
   render: function() {
     return (
       <div className="container">
-        <Header/>
-        <Navbar/>
         <div className="body">
           <div className="main-body">
             <p>Welcome to Leo + Flatiron Pediatrics</p>

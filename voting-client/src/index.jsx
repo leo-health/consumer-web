@@ -10,6 +10,9 @@ import remoteActionMiddleware from './remote_action_middleware';
 import {setState} from './action_creators';
 import {VotingContainer} from './components/Voting';
 import {ResultsContainer} from './components/Results';
+import Header from './components/header/Header'
+import Navbar from './components/navbar/Navbar'
+
 
 // BabelLoaderError: SyntaxError: 'import' and 'export' may only appear at the top level
 // import App from './components/App'
@@ -47,10 +50,13 @@ if (tutorial_on) {
 
   const App = require("./components/App").default;
   ReactDOM.render(
-      <Router history={hashHistory}>
-
-        <Route path="/" component={App} />
-      </Router>,
+      <div>
+        <Header/>
+        <Navbar/>
+        <Router history={hashHistory}>
+          <Route path="/" component={App} />
+        </Router>
+      </div>,
     document.getElementById("app")
   )
 
