@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './header/Header'
+import Navbar from './navbar/Navbar'
 import '../stylesheets/main.css';
 
 export default React.createClass({
@@ -8,8 +9,8 @@ export default React.createClass({
     return (
       <div className="container">
         <Header/>
+        <Navbar/>
         <div className="body">
-          <h1 className="sidebar">Leo Health</h1>
           <div className="main-body">
             <p>Welcome to Leo + Flatiron Pediatrics</p>
           </div>

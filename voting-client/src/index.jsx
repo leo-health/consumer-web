@@ -48,6 +48,7 @@ if (tutorial_on) {
   const App = require("./components/App").default;
   ReactDOM.render(
       <Router history={hashHistory}>
+
         <Route path="/" component={App} />
       </Router>,
     document.getElementById("app")
