@@ -1,18 +1,19 @@
 import React from 'react';
-import Header from './header/Header'
-import Navbar from './navbar/Navbar'
+import Header from './Header/Header'
+import Navbar from './Navbar/Navbar'
 import '../stylesheets/main.css';
+import { RouteHandler } from 'react-router';
 
 export default React.createClass({
 
   render: function() {
     return (
       <div className="container">
-        <div className="body">
-          <div className="main-body">
-            <p>Welcome to Leo + Flatiron Pediatrics</p>
+        <Header/>
+        <Navbar/>
+          <div className="body">
+            { this.props.children }
           </div>
-        </div>
       </div>
     );
   }
