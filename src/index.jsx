@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, hashHistory} from 'react-router';
-import Header from './components/header/Header'
-import Navbar from './components/navbar/Navbar'
+import Header from './components/Header/Header'
+import Navbar from './components/Navbar/Navbar'
 
 
 // BabelLoaderError: SyntaxError: 'import' and 'export' may only appear at the top level
