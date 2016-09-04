@@ -16,6 +16,7 @@
   left: 0px;
   width: 100vw;
   height: 8vh;
+  z-index: 10;
 }
 
 .logo {
@@ -67,7 +68,8 @@
   top: 8vh;
   left: 0;
   background-color: #262A33;
-  position: absolute;
+  position: fixed;
+  z-index: 10;
 }
 
 .navbar {
@@ -92,4 +94,14 @@
 .navbar--item--icon {
   display: block;
   margin-bottom: 10px;
+}
+
+/* Contaniner */
+.body {
+  position: fixed;
+  top: 8vh;
+  left: 5.5vw;
+  height: 92vh;
+  width: 94.5vw;
+  z-index: 1;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, Link, browserHistory } from 'react-router';
+import { Link } from 'react-router';
 
 const Navbar = React.createClass({
   render: function() {
@@ -12,13 +12,17 @@ const Navbar = React.createClass({
               Recent
             </Link>
           </li>
-          <li className='navbar--item'>
-            <i className="fa fa-child fa-2x navbar--item--icon"></i>
-            Children
+          <li>
+            <Link to="/children" className='navbar--item'>
+              <i className="fa fa-child fa-2x navbar--item--icon"></i>
+              Children
+            </Link>
           </li>
-          <li className='navbar--item'>
-            <i className="fa fa-calendar-o fa-2x navbar--item--icon"></i>
-            Appts
+          <li>
+            <Link to="/appointment" className='navbar--item'>
+              <i className="fa fa-calendar-o fa-2x navbar--item--icon"></i>
+              Appts
+            </Link>
           </li>
           <li>
             <Link to="/chat" className='navbar--item'>
@@ -26,9 +30,11 @@ const Navbar = React.createClass({
               Chat
             </Link>
           </li>
-          <li className='navbar--item'>
-            <i className="fa fa-gear fa-2x navbar--item--icon"></i>
-            Settings
+          <li>
+            <Link to="/settings" className='navbar--item'>
+              <i className="fa fa-gear fa-2x navbar--item--icon"></i>
+              Settings
+            </Link>
           </li>
         </ul>
       </div>
