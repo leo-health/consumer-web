@@ -1,4 +1,6 @@
 # consumer-web
+## Starting in Development
+run ```npm start```
 
 ## [React CSS Modules](https://github.com/gajus/react-css-modules#development)
 
@@ -40,6 +42,31 @@ Each component will have its own CSS file in the same folder (if it uses CSS). F
 
 Also note that the export command is changed into ```export default CSSModules(Header, styles);```.
 
-Finally, any specific classes will be specified with the ```styleName``` label; any global classes will continue to be specified using ```className```. To specify a global class, use ```:global foo```.
+Finally, any specific classes will be specified with the ```styleName``` label; any global classes will continue to be specified using ```className```. To specify a global class, use
 
-##
+```
+:global foo {
+  ...
+}
+```
+
+in the ```global.css``` stylesheet.
+## [React Router](https://github.com/reactjs/react-router)
+Path values are specified in ```index.jsx```, e.g.
+
+```
+<Router history={hashHistory}>
+  <Route path="/" component={App}>
+    <IndexRoute component={Recent}/>
+    <Route path="/chat" component={Chat}/>
+    <Route path="/children" component={Children}/>
+    <Route path="/appointment" component={Appointment}/>
+    <Route path="/settings" component={Settings}/>
+  </Route>
+</Router>
+```
+
+Here we see the path name listed with the corresponding component that will be rendered when we visit that path.
+
+The routes nested in the parent route (where ```component={App}```) are passed as props, and are rendered in ```App.jsx``` as ```this.props.children```. Consequently, any valid url change will cause the appropriate components to be passed and rendered in place of ```this.props.children```. The Navbar and Header are both rendered outside of this, so they will be consistent across the app.
+
