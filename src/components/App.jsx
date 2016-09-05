@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './Header/Header'
 import Navbar from './Navbar/Navbar'
-import '../stylesheets/main.css';
+import styles from './global.css';
 
 export default React.createClass({
 

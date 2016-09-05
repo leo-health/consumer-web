@@ -8,8 +8,6 @@ import Chat from './components/Chat/Chat';
 import Children from './components/Children/Children'
 import Appointment from './components/Appointment/Appointment';
 import Settings from './components/Settings/Settings';
-import './stylesheets/main.css';
-
 
 // BabelLoaderError: SyntaxError: 'import' and 'export' may only appear at the top level
 // import App from './components/App'

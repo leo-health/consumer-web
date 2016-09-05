@@ -1,0 +1,17 @@
+.header {
+  background-color: #FF5F40;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 8vh;
+  z-index: 10;
+}
+
+.logo {
+  height: 5vh;
+  position: relative;
+  top: 15%;
+  display: inline-block;
+  margin-left: 1.2%;
+}
