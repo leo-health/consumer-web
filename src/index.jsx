@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, IndexRoute, hashHistory} from 'react-router';
+import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Recent from './components/Recent/Recent';
@@ -15,7 +15,7 @@ import Settings from './components/Settings/Settings';
 const App = require("./components/App").default;
 ReactDOM.render(
     <div>
-      <Router history={hashHistory}>
+      <Router history={browserHistory}>
         <Route path="/" component={App}>
           <IndexRoute component={Recent}/>
           <Route path="/chat" component={Chat}/>
