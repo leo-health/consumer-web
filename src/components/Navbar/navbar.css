@@ -1,0 +1,34 @@
+/* Navbar */
+.navbar--container {
+  height: 92vh;
+  width: 5.5vw;
+  top: 8vh;
+  left: 0;
+  background-color: #262A33;
+  position: fixed;
+  z-index: 10;
+}
+
+.navbar {
+  margin-top: 8vh;
+  text-align: center;
+  padding: 0;
+}
+
+.navbar--item {
+  font-family: 'Open Sans';
+  font-size: .9em;
+  color: #857377;
+  width: 100%;
+  display: table;
+  margin-bottom: 20px;
+  list-style: none;
+  margin-right: auto;
+  margin-left: auto;
+  text-decoration: none;
+}
+
+.navbar--item--icon {
+  display: block;
+  margin-bottom: 10px;
+}

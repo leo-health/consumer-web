@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -14,10 +15,13 @@ module.exports = {
         loader: 'react-hot!babel'
       },
       { test: /\.css$/,
-        loader: "style-loader!css-loader"
+        loaders: [
+        'style?sourceMap',
+        'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
+        ]
       },
       { test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
-        loader: "file-loader"
+        loader: 'file-loader'
       }
     ]
   },
