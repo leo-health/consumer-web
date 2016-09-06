@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, hashHistory} from 'react-router';
+import {Router, Route, browserHistory} from 'react-router';
 
 // Redux
 import {createStore, applyMiddleware} from 'redux';
@@ -22,25 +22,11 @@ const store = createStore(
   )
 )
 
-store.dispatch(setState({
-    patientListState: {
-      isLoading: false,
-      patientList: [
-        {id: 1, name: "Johnny"},
-        {id: 2, name: "Appleseed"}
-      ],
-      selectedPatient: {name: "Johnny"}
-    }
-  })
-)
-
 ReactDOM.render(
   <Provider {...{store}}>
-    <Router history={hashHistory}>
-      <Route path="/" component={Scheduler} />
-      <Route path="/patients" component={PatientListContainer} />
-      <Route path="/appointment_types" component={AppointmentTypeList} />
-      <Route path="/slots" component={SlotList} />
+    <Router history={browserHistory}>
+      <Route path="/" component={Scheduler}/>
+      <Route path="patients" component={PatientListContainer}/>
     </Router>
   </Provider>,
   document.getElementById("app")

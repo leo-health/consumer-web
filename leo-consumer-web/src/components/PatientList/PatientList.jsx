@@ -22,38 +22,46 @@ export class PatientList extends Component {
     this.props.dispatch(actionCreators.selectPatient(patientID));
   }
 
-  routeBack() {
-    debugger;
-  }
-
   onClickPatient(patientID) {
-    selectPatient(patientID);
-    routeBack();
+    this.selectPatient(patientID);
+    this.routeBack();
   }
 
   render() {
 
+    const {patients, isLoading} = this.props;
 
-
-    if (this.props.isLoading) {
+    if (isLoading || !patients) {
       return <LoadingSpinner/>;
     }
-
-    let patients = this.props.patients.toJS();
 
     return (
       <div>
         {patients.map(patient=>{
-          return (<div key={patient.id} onClick={()=>
-              this.onClickPatient(patient.id)
+          return (<button key={patient.get("id")} onClick={()=>
+              this.onClickPatient(patient.get("id"))
             }>
-            <h2>{patient.first_name}</h2>
-          </div>);
+            <h2>{patient.get("first_name")}</h2>
+          </button>);
         })}
       </div>
     );
   }
 }
+
+// PatientList.propTypes = {
+//   isLoading: React.PropTypes.bool,
+//   patients: React.PropTypes.arrayOf(
+//     React.PropTypes.shape({
+//       id: React.PropTypes.number,
+//       first_name: React.PropTypes.string
+//     })
+//   ).isRequired
+// };
+// PatientList.defaultProps = {
+//   isLoading: true,
+//   patients: []
+// };
 
 
 function mapStateToProps(state) {

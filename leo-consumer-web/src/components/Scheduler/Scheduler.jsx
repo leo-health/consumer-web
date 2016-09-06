@@ -1,20 +1,11 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router';
 
 export class Scheduler extends Component {
-
-  constructor() {
-    super();
-    this.onClickPatients = () => this.props.onClickPatients();
-    this.onClickAppointmentTypes = () => this.props.onClickAppointmentTypes();
-    this.onClickSlots = () => this.props.onClickSlots();
-  }
-
   render() {
     return (
       <div>
-        <button onClick={this.onClickPatients}>Patients</button>
-        <button onClick={this.onClickAppointmentTypes}>AppointmentTypes</button>
-        <button onClick={this.onClickSlots}>Slots</button>
+        <Link to={"patients"}>Patients</Link>
       </div>
     );
   }
