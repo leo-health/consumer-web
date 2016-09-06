@@ -1,7 +1,7 @@
 import {fromJS, Map} from 'immutable';
 
 function setState(state, newState) {
-  return state.merge(newState);
+  return state.merge(fromJS(newState));
 }
 
 function selectPatient(state, payload) {
@@ -21,6 +21,8 @@ function selectSlot(state, payload) {
 
 export default function reducer(state = Map(), action) {
   switch (action.type) {
+    case "SET_STATE":
+      return setState(state, action.payload);
     case "SELECT_PATIENT":
       return selectPatient(state, action.payload);
     case "SELECT_APPOINTMENT_TYPE":

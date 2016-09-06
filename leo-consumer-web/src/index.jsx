@@ -9,7 +9,7 @@ import remoteActionMiddleware from './redux/middlewares/remote_action_middleware
 import {setState} from './redux/actions/action_creators';
 
 import {Scheduler} from './components/Scheduler/Scheduler'
-import {PatientList} from './components/PatientList/PatientList'
+import {PatientListContainer} from './components/PatientList/PatientList'
 import {AppointmentTypeList} from './components/AppointmentTypeList/AppointmentTypeList'
 import {SlotList} from './components/SlotList/SlotList'
 
@@ -18,11 +18,25 @@ import {SlotList} from './components/SlotList/SlotList'
 
 const store = createStore(reducer)
 
+store.dispatch({
+  type: "SET_STATE",
+  payload: {
+    patientListState: {
+      isLoading: false,
+      patientList: [
+        {name: "Johnny"},
+        {name: "Appleseed"}
+      ],
+      selectedPatient: {name: "Johnny"}
+    }
+  }
+})
+
 ReactDOM.render(
   <Provider {...{store}}>
     <Router history={hashHistory}>
       <Route path="/" component={Scheduler} />
-      <Route path="/patients" component={PatientList} />
+      <Route path="/patients" component={PatientListContainer} />
       <Route path="/appointment_types" component={AppointmentTypeList} />
       <Route path="/slots" component={SlotList} />
     </Router>

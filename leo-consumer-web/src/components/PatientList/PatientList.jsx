@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-// import {connect} from 'react-redux';
-// import * as actionCreators from '../action_creators';
+import {connect} from 'react-redux';
+import * as actionCreators from '../../redux/actions/action_creators';
 
 class LoadingSpinner extends Component {
   render() {
@@ -22,8 +22,18 @@ export class PatientList extends Component {
 
     return (
       <div>
-        {patients.map(patient=><h2>patient.name</h2>)}
+        {patients.toJS().map(patient=><h2 key={patient.name}>{patient.name}</h2>)}
       </div>
     );
   }
 }
+
+
+function mapStateToProps(state) {
+  return {
+    patients: state.getIn(["patientListState", "patientList"]),
+    isLoading: state.getIn(["patientListState", "isLoading"])
+  };
+}
+
+export const PatientListContainer = connect(mapStateToProps)(PatientList);

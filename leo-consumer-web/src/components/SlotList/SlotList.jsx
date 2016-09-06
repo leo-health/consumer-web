@@ -28,6 +28,9 @@ export class SlotList extends Component {
   }
 }
 
+// Counter.propTypes = { initialCount: React.PropTypes.number };
+// Counter.defaultProps = { initialCount: 0 };
+
 // function mapStateToProps(state) {
 //
 // }
