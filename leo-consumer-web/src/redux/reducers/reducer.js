@@ -1,16 +1,15 @@
 import {fromJS, Map} from 'immutable';
 import {ActionTypes} from '../actions/action_creators';
-import {PatientListActionTypes} from '../actions/patient_list';
+import {PatientListActionTypes} from '../actions/patient_list_action_creators';
 
 function setState(state, newState) {
   return state.merge(fromJS(newState));
 }
 
 function selectPatient(state, payload) {
-  const {patient} = payload;
   return state.setIn(
-    ["patientListState", "selectedPatient"],
-    fromJS(patient)
+    ["patientListState", "selectedPatientID"],
+    payload.selectedPatientID
   );
 }
 

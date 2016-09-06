@@ -9,10 +9,10 @@ export const PatientListActionTypes = {
   SELECT_PATIENT: 'SELECT_PATIENT'
 }
 
-export function selectPatient(patient) {
+export function selectPatient(selectedPatientID) {
   return {
     type: PatientListActionTypes.SELECT_PATIENT,
-    payload: {patient}
+    payload: {selectedPatientID}
   };
 }
 

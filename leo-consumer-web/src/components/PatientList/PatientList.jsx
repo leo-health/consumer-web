@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import * as actionCreators from '../../redux/actions/patient_list';
+import * as patientListActionCreators from '../../redux/actions/patient_list_action_creators';
 
 class LoadingSpinner extends Component {
   render() {
@@ -15,16 +15,23 @@ class LoadingSpinner extends Component {
 export class PatientList extends Component {
 
   componentDidMount() {
-    this.props.dispatch(actionCreators.fetchPatients());
+    this.props.dispatch(patientListActionCreators.fetchPatients());
   }
 
   selectPatient(patientID) {
-    this.props.dispatch(actionCreators.selectPatient(patientID));
+    this.props.dispatch(patientListActionCreators.selectPatient(patientID));
   }
 
   onClickPatient(patientID) {
     this.selectPatient(patientID);
-    this.routeBack();
+    this.props.history.goBack();
+  }
+
+  renderIfSelected(patientID) {
+    if (patientID === this.props.selectedPatientID) {
+      return <h1>{"test"}</h1>;
+    }
+    return null;
   }
 
   render() {
@@ -41,6 +48,7 @@ export class PatientList extends Component {
           return (<button key={patient.get("id")} onClick={()=>
               this.onClickPatient(patient.get("id"))
             }>
+            {this.renderIfSelected(patient.get("id"))}
             <h2>{patient.get("first_name")}</h2>
           </button>);
         })}
@@ -67,7 +75,8 @@ export class PatientList extends Component {
 function mapStateToProps(state) {
   return {
     patients: state.getIn(["patientListState", "patientList"]),
-    isLoading: state.getIn(["patientListState", "isLoading"])
+    isLoading: state.getIn(["patientListState", "isLoading"]),
+    selectedPatientID: state.getIn(["patientListState", "selectedPatientID"])
   };
 }
 
