@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import * as actionCreators from '../../redux/actions/action_creators';
+import * as actionCreators from '../../redux/actions/patient_list';
 
 class LoadingSpinner extends Component {
   render() {
@@ -13,16 +13,43 @@ class LoadingSpinner extends Component {
 }
 
 export class PatientList extends Component {
-  render() {
-    const {patients, isLoading, ...other} = this.props;
 
-    if (isLoading) {
+  componentDidMount() {
+    this.props.dispatch(actionCreators.fetchPatients());
+  }
+
+  selectPatient(patientID) {
+    this.props.dispatch(actionCreators.selectPatient(patientID));
+  }
+
+  routeBack() {
+    debugger;
+  }
+
+  onClickPatient(patientID) {
+    selectPatient(patientID);
+    routeBack();
+  }
+
+  render() {
+
+
+
+    if (this.props.isLoading) {
       return <LoadingSpinner/>;
     }
 
+    let patients = this.props.patients.toJS();
+
     return (
       <div>
-        {patients.toJS().map(patient=><h2 key={patient.name}>{patient.name}</h2>)}
+        {patients.map(patient=>{
+          return (<div key={patient.id} onClick={()=>
+              this.onClickPatient(patient.id)
+            }>
+            <h2>{patient.first_name}</h2>
+          </div>);
+        })}
       </div>
     );
   }
@@ -35,5 +62,18 @@ function mapStateToProps(state) {
     isLoading: state.getIn(["patientListState", "isLoading"])
   };
 }
+
+// Not really that useful. Am I using it incorrectly?
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     selectPatient: (id) => {
+//       dispatch(actionCreators.selectPatient(id))
+//     },
+//
+//     fetchPatients: () => {
+//       dispatch(actionCreators.fetchPatients())
+//     }
+//   };
+// }
 
 export const PatientListContainer = connect(mapStateToProps)(PatientList);

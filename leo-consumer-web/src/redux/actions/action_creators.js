@@ -1,21 +1,12 @@
-// export function setState(state) {
-//   return {
-//     type: 'SET_STATE',
-//     payload: state
-//   };
-// }
-//
-// export function vote(entry) {
-//   return {
-//     type: 'VOTE',
-//     meta: {remote: true},
-//     payload: {entry}
-//   };
-// }
-//
-// export function next() {
-//   return {
-//     type: "NEXT",
-//     meta: {remote: true}
-//   }
-// }
+
+// TODO: refactor to use constants
+export const ActionTypes = {
+  SET_STATE: 'SET_STATE'
+}
+
+export function setState(state) {
+  return {
+    type: ActionTypes.SET_STATE,
+    payload: state
+  };
+}

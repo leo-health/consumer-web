@@ -1,4 +1,6 @@
 import {fromJS, Map} from 'immutable';
+import {ActionTypes} from '../actions/action_creators';
+import {PatientListActionTypes} from '../actions/patient_list';
 
 function setState(state, newState) {
   return state.merge(fromJS(newState));
@@ -6,29 +8,44 @@ function setState(state, newState) {
 
 function selectPatient(state, payload) {
   const {patient} = payload;
-  return state.set("selectedPatient", fromJS(patient))
+  return state.setIn(
+    ["patientListState", "selectedPatient"],
+    fromJS(patient)
+  );
 }
 
-function selectAppointmentType(state, payload) {
-  const {appointmentType} = payload;
-  return state.set("selectedAppointmentType", fromJS(appointmentType))
+// TODO: use reducer composition
+
+function requestPatients(state) {
+  return state.setIn(
+    ["patientListState", "isLoading"],
+    true
+  );
 }
 
-function selectSlot(state, payload) {
-  const {slot} = payload;
-  return state.set("selectedSlot", fromJS(slot));
+function receivePatients(state, payload) {
+  return state.setIn(
+    ["patientListState", "patientList"],
+    fromJS(payload.patientList)
+  ).setIn(
+    ["patientListState", "isLoading"],
+    false
+  );
 }
+
+
+// TODO: reduce boilerplate
 
 export default function reducer(state = Map(), action) {
   switch (action.type) {
-    case "SET_STATE":
+    case ActionTypes.SET_STATE:
       return setState(state, action.payload);
-    case "SELECT_PATIENT":
+    case PatientListActionTypes.SELECT_PATIENT:
       return selectPatient(state, action.payload);
-    case "SELECT_APPOINTMENT_TYPE":
-      return selectAppointmentType(state, action.payload);
-    case "SELECT_SLOT":
-      return selectSlot(state, action.payload);
+    case PatientListActionTypes.REQUEST_PATIENTS:
+      return requestPatients(state);
+    case PatientListActionTypes.RECEIVE_PATIENTS:
+      return receivePatients(state, action.payload);
   }
   return state
 }

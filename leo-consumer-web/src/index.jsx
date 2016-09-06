@@ -1,36 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, hashHistory} from 'react-router';
-import {fromJS} from 'immutable';
+
+// Redux
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
+import thunkMiddleware from 'redux-thunk'
 import reducer from './redux/reducers/reducer';
-import remoteActionMiddleware from './redux/middlewares/remote_action_middleware';
 import {setState} from './redux/actions/action_creators';
 
+// Components
 import {Scheduler} from './components/Scheduler/Scheduler'
 import {PatientListContainer} from './components/PatientList/PatientList'
 import {AppointmentTypeList} from './components/AppointmentTypeList/AppointmentTypeList'
 import {SlotList} from './components/SlotList/SlotList'
 
-// BabelLoaderError: SyntaxError: 'import' and 'export' may only appear at the top level
-// import App from './components/App'
+const store = createStore(
+  reducer,
+  applyMiddleware(
+    thunkMiddleware // lets us dispatch() functions
+  )
+)
 
-const store = createStore(reducer)
-
-store.dispatch({
-  type: "SET_STATE",
-  payload: {
+store.dispatch(setState({
     patientListState: {
       isLoading: false,
       patientList: [
-        {name: "Johnny"},
-        {name: "Appleseed"}
+        {id: 1, name: "Johnny"},
+        {id: 2, name: "Appleseed"}
       ],
       selectedPatient: {name: "Johnny"}
     }
-  }
-})
+  })
+)
 
 ReactDOM.render(
   <Provider {...{store}}>
