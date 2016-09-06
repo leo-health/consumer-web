@@ -1,0 +1,31 @@
+
+.container {
+  overflow-y: scroll;
+  background-color: purple;
+}
+
+.header {
+  background-color: gray;
+  position: fixed;
+  top: 0px;
+  width: 100vw;
+  height: 10vh;
+}
+
+.logo {
+  background-color: orange;
+  display: inline;
+}
+
+.welcome {
+  background-color: green;
+  /*position: absolute;*/
+  display: inline-block;
+  /*height: 80px;
+  right: 0px;*/
+}
+
+.sidebar {
+  background-color: blue;
+  position: inline;
+}
