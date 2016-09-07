@@ -11,8 +11,8 @@ import {
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import thunkMiddleware from 'redux-thunk'
+import createLogger from 'redux-logger';
 import reducer from './redux/reducers/reducer';
-import {setState} from './redux/actions/action_creators';
 
 // Components
 import App from './components/App/App';
@@ -24,17 +24,21 @@ import Children from './components/Children/Children'
 import Appointment from './components/Appointment/Appointment';
 import Settings from './components/Settings/Settings';
 
-import {Scheduler} from './components/Scheduler/Scheduler'
-import {PatientListContainer} from './components/PatientList/PatientList'
-import {AppointmentTypeList} from './components/AppointmentTypeList/AppointmentTypeList'
-import {SlotList} from './components/SlotList/SlotList'
+import {Scheduler} from './components/Appointment/Scheduler/Scheduler'
+import {PatientListContainer} from './components/Appointment/PatientList/PatientList'
+import {AppointmentTypeListContainer} from './components/Appointment/AppointmentTypeList/AppointmentTypeList'
+
+// TODO: move store configuration into separate file
 
 const store = createStore(
   reducer,
   applyMiddleware(
-    thunkMiddleware // lets us dispatch() functions
+    thunkMiddleware,
+    createLogger()
   )
 )
+
+// TODO: move routing table into separate file
 
 ReactDOM.render(
   <Provider {...{store}}>
@@ -45,7 +49,8 @@ ReactDOM.render(
         <Route path="/children" component={Children}/>
         <Route path="/appointment" component={Appointment}>
           <IndexRoute component={Scheduler}/>
-          <Route path="/patients" component={PatientListContainer}/>
+          <Route path="patients" component={PatientListContainer}/>
+          <Route path="appointment_types" component={AppointmentTypeListContainer}/>
         </Route>
         <Route path="/settings" component={Settings}/>
       </Route>

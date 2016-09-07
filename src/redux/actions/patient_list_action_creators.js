@@ -1,7 +1,8 @@
 import fetch from 'isomorphic-fetch';
 import * as Constants from '../../config/constants';
 
-// TODO: refactor to use constants
+// TODO: pull out generic code, avoid find/replace, copy/paste
+
 export const PatientListActionTypes = {
   REQUEST_PATIENTS: 'REQUEST_PATIENTS',
   RECEIVE_PATIENTS: 'RECEIVE_PATIENTS',
@@ -9,10 +10,15 @@ export const PatientListActionTypes = {
   SELECT_PATIENT: 'SELECT_PATIENT'
 }
 
-export function selectPatient(selectedPatientID) {
+/*
+ TODO: ARCHITECTURE: Explore ways to separate actions/state that come from the server vs state that is only relevant locally
+ For example, selectAppointmentType is related to local user activity, but requestObjects/receiveObjects is API related
+ */
+
+export function selectPatient(selectedObjectID) {
   return {
     type: PatientListActionTypes.SELECT_PATIENT,
-    payload: {selectedPatientID}
+    payload: {selectedObjectID}
   };
 }
 
@@ -22,10 +28,10 @@ export function requestPatients() {
   };
 }
 
-export function receivePatients(patientList) {
+export function receivePatients(objectList) {
   return {
     type: PatientListActionTypes.RECEIVE_PATIENTS,
-    payload: {patientList}
+    payload: {objectList}
   };
 }
 
