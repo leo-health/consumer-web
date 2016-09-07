@@ -6,3 +6,11 @@
   width: 94.5vw;
   z-index: 1;
 }
+
+:global div { font-family: 'Open Sans'; }
+
+:global .gray { color: #666; }
+
+:global .orange { color: #FF5F40; }
+
+:global .bold {font-weight: 600; }
