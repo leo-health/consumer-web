@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import * as actionCreators from '../../../redux/actions/patient_list_action_creators';
-import LoadingSpinner from '../../Generic/LoadingSpinner';
+import {ItemSelectionList} from '../../Generic/ItemSelectionList'
 
 export class PatientList extends Component {
 
   // TODO: separate this out [using object extension, inheritence?, find the right way]
 
+  // props? propType = function
   fetchAction() {
     return actionCreators.fetchPatients();
   }
@@ -18,6 +19,8 @@ export class PatientList extends Component {
 
   onClickObject(objectID) {
     // ????: this doesn't seem right to me.. probably should be in response to a given action, belongs in reducer?
+
+    // NOTE: this actually pops the page off the history, instead of pushing the previous page. Maybe this is what we want.. not sure yet
     this.props.router.goBack();
   }
 
@@ -25,54 +28,14 @@ export class PatientList extends Component {
     return <h2>{object.get("first_name")}</h2>
   }
 
-
-
-  // TODO: find a better name than "objects"
-  // Generic
-
-  componentDidMount() {
-    this.props.dispatch(this.fetchAction());
-  }
-
-  selectObject(objectID) {
-    this.props.dispatch(this.selectAction(objectID));
-  }
-
-  _onClickObject(objectID) {
-    this.selectObject(objectID);
-    this.onClickObject(objectID);
-  }
-
-  renderIfSelected(objectID) {
-
-    // TODO: use css to signify selected state
-
-    if (objectID === this.props.selectedObjectID) {
-      return <h1>{"Selected"}</h1>;
-    }
-    return null;
-  }
-
   render() {
-
-    const {objects, isLoading} = this.props;
-
-    if (isLoading || !objects) {
-      return <LoadingSpinner/>;
-    }
-
-    return (
-      <div>
-        {objects.map(object=>{
-          return (<button key={object.get("id")} onClick={()=>
-              this._onClickObject(object.get("id"))
-            }>
-            {this.renderIfSelected(object.get("id"))}
-            {this.renderRow(object)}
-          </button>);
-        })}
-      </div>
-    );
+    return <ItemSelectionList
+      fetchAction={()=>this.fetchAction()}
+      selectAction={(objectID)=>this.selectAction(objectID)}
+      onClickObject={(objectID)=>this.onClickObject(objectID)}
+      renderRow={(objectID)=>this.renderRow(objectID)}
+      {...this.props}
+      />
   }
 }
 
