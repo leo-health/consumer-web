@@ -12,6 +12,9 @@ const ContentCard = React.createClass({
         <div className='orange' styleName='description'>
           According to researchers, these are 5 vitamins essential to newborn development.
         </div>
+        <div className='bold' styleName='options-container'>
+          <div styleName='option'>DISMISS</div>
+        </div>
         <div styleName='divider'></div>
       </div>
     );

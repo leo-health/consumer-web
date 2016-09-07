@@ -7,6 +7,7 @@
 }
 
 .description {
+  display: inline-block;
   margin-top: 5px;
   font-size: 1.4em;
   font-weight: 300;
@@ -17,4 +18,14 @@
   height: 1px;
   width: 70vw;
   background-color: #666;
+}
+
+.options-container {
+  display: inline-block;
+  position: absolute;
+  margin-left: 10%;
+}
+
+.option {
+  margin-top: 5px;
 }

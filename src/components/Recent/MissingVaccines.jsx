@@ -12,6 +12,9 @@ const UpcomingAppointment = React.createClass({
         <div styleName='description'>
           <span className='orange bold'>Boaty</span> is due for a Hep B vaccination on <span className='orange bold'>Thursday, August 3rd</span>.
         </div>
+        <div className='bold' styleName='options-container'>
+          <div styleName='option'>DISMISS</div>
+        </div>
         <div styleName='divider'></div>
       </div>
     );
