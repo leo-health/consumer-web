@@ -3,7 +3,7 @@ import React from 'react';
 const Children = React.createClass({
   render: function() {
     return (
-      <div className='chat'>
+      <div className=''>
         THIS IS THE CHILDREN COMPONENT
       </div>
     );

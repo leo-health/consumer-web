@@ -3,7 +3,7 @@ import React from 'react';
 const Appointment = React.createClass({
   render: function() {
     return (
-      <div className='chat'>
+      <div className=''>
         THIS IS THE Appointment COMPONENT
       </div>
     );

@@ -3,7 +3,7 @@ import React from 'react';
 const Settings = React.createClass({
   render: function() {
     return (
-      <div className='chat'>
+      <div className=''>
         THIS IS THE Settings COMPONENT
       </div>
     );
