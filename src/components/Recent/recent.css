@@ -1,0 +1,16 @@
+.container {
+  margin-top: 4vh;
+  margin-left: 3vw;
+}
+
+.header {
+  display: inline-block;
+  width: auto;
+  font-size: 1.8em;
+  font-weight: 300;
+  border-bottom: 1px solid;
+}
+
+.content-container {
+  margin-top: 4vh;
+}
