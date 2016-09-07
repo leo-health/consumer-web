@@ -1,0 +1,31 @@
+.container {
+  position: relative;
+  float: right;
+  height: 100%;
+  right: 5vw;
+  top: 0px;
+  color: white;
+}
+
+.greeting {
+  position: relative;
+  margin-right: 10px;
+  top: 35%;
+}
+
+.avatar-container {
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: 1.5px solid white;
+  text-align: center;
+  top: 20%;
+}
+
+.avatar {
+  top: 25%;
+  position: relative;
+}
