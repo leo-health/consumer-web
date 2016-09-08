@@ -25,15 +25,15 @@ export class ItemSelectionList extends Component {
 
   render() {
 
-    const {objects, isLoading} = this.props;
+    const {objectList, isLoading} = this.props;
 
-    if (isLoading || !objects) {
+    if (isLoading || !objectList) {
       return <LoadingSpinner/>;
     }
 
     return (
       <div>
-        {objects.map(object=>{
+        {objectList.map(object=>{
           return (<button key={object.get("id")} onClick={()=>
               this.onClickObject(object.get("id"))
             }>

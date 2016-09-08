@@ -1,38 +1,53 @@
 import React, {Component} from 'react';
-// import {connect} from 'react-redux';
-// import * as actionCreators from '../action_creators';
-
-class LoadingSpinner extends Component {
-  render() {
-    return (
-      <div>
-        <h1>Loading...</h1>
-      </div>
-    );
-  }
-}
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
+import * as actionCreators from '../../../redux/actions/slot_list_action_creators';
+import {ItemSelectionList} from '../../Generic/ItemSelectionList'
 
 export class SlotList extends Component {
-  render() {
-    const {slots, isLoading, ...other} = this.props;
 
-    if (isLoading) {
-      return <LoadingSpinner/>;
-    }
+  fetchAction() {
+    return actionCreators.fetchSlots(this.props.appointmentTypeID);
+  }
 
+  selectAction(objectID) {
+    return actionCreators.selectSlot(objectID)
+  }
+
+  onClickObject(objectID) {
+    this.props.router.goBack();
+  }
+
+  renderRow(object) {
     return (
       <div>
-        {slots.map(slot=><h2>slot.time</h2>)}
+        <span>{object.get("start_datetime")}</span>
+        <span>{object.getIn(["provider", "name"])}</span>
       </div>
     );
   }
+
+  render() {
+    return <ItemSelectionList
+      fetchAction={()=>this.fetchAction()}
+      selectAction={(objectID)=>this.selectAction(objectID)}
+      onClickObject={(objectID)=>this.onClickObject(objectID)}
+      renderRow={(objectID)=>this.renderRow(objectID)}
+      {...this.props}
+      />
+  }
 }
 
-// Counter.propTypes = { initialCount: React.PropTypes.number };
-// Counter.defaultProps = { initialCount: 0 };
+function mapStateToProps(state) {
+  const itemSelectionList = state.get("schedulingSlot");
 
-// function mapStateToProps(state) {
-//
-// }
-//
-// export const SlotsContainer = connect(mapStateToProps, actionCreators)(Results);
+  debugger;
+  return {
+    appointmentTypeID: state.getIn(["schedulingAppointmentType", "selectedObjectID"]),
+    objects: itemSelectionList.get("objectList"),
+    isLoading: itemSelectionList.get("isLoading"),
+    selectedObjectID: itemSelectionList.get("selectedObjectID")
+  };
+}
+
+export const SlotListContainer = connect(mapStateToProps)(withRouter(SlotList));

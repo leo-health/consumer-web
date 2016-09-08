@@ -20,6 +20,8 @@ class _Scheduler extends Component {
           Patients</button>
         <button onClick={()=>this.onClickRelativeURLPush("appointment_types")}>
           AppointmentTypes</button>
+        <button onClick={()=>this.onClickRelativeURLPush("slots")}>
+          Slots</button>
       </div>
     );
   }

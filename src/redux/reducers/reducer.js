@@ -34,7 +34,20 @@ function schedulingPatient(state = Map(), action) {
   return state;
 }
 
+function schedulingSlot(state = Map(), action) {
+  switch (action.type) {
+    case PatientListActionTypes.SELECT_SLOT:
+      return selectObject(state, action.payload.selectedObjectID);
+    case PatientListActionTypes.REQUEST_SLOTS:
+      return requestObjects(state);
+    case PatientListActionTypes.RECEIVE_SLOTS:
+      return receiveObjects(state, action.payload.objectList);
+  }
+  return state;
+}
+
 export default combineReducers({
   schedulingPatient,
+  schedulingSlot,
   schedulingAppointmentType
 });

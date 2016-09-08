@@ -7,7 +7,6 @@ import {ItemSelectionList} from '../../Generic/ItemSelectionList'
 export class PatientList extends Component {
 
   // TODO: separate this out [using object extension, inheritence?, find the right way]
-
   // props? propType = function
   fetchAction() {
     return actionCreators.fetchPatients();
@@ -19,8 +18,8 @@ export class PatientList extends Component {
 
   onClickObject(objectID) {
     // ????: this doesn't seem right to me.. probably should be in response to a given action, belongs in reducer?
-
     // NOTE: this actually pops the page off the history, instead of pushing the previous page. Maybe this is what we want.. not sure yet
+    // This will not work if we hit this route directly, since there was nothing on the history before
     this.props.router.goBack();
   }
 
@@ -28,6 +27,8 @@ export class PatientList extends Component {
     return <h2>{object.get("first_name")}</h2>
   }
 
+  // TODO: continue to explore abstraction strategies
+  // The following is still duplicated across ItemSelectionList containers.
   render() {
     return <ItemSelectionList
       fetchAction={()=>this.fetchAction()}
@@ -41,7 +42,7 @@ export class PatientList extends Component {
 
 function mapStateToProps(state) {
   return {
-    objects: state.get("objectList"),
+    objectList: state.get("objectList"),
     isLoading: state.get("isLoading"),
     selectedObjectID: state.get("selectedObjectID")
   };

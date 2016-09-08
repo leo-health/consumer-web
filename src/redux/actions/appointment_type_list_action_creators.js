@@ -35,7 +35,6 @@ export function receiveAppointmentTypes(objectList) {
   };
 }
 
-
 const temporaryErrorHandler = (scenario) => (reason) => {
   console.log(`${scenario} - Caught error! ${reason}`);
 }
@@ -56,13 +55,11 @@ export function fetchAppointmentTypes() {
     // In this case, we return a promise to wait for.
     // This is not required by thunk middleware, but it is convenient for us.
 
-
-    // TODO: remove hard coding
-    const authentication_token = "Tem43-tfYgj_vNaxZ3WL";
-
     // TODO: abstract api requests into separate file
 
-    return fetch(`${Constants.API_BASE_URL}/appointment_types?authentication_token=${authentication_token}`)
+    const base = Constants.API_BASE_URL;
+    const auth = Constants.HARD_CODED_AUTH_TOKEN;
+    return fetch(`${base}/appointment_types?authentication_token=${auth}`)
       .then(response => response.json())
       .then(json => dispatch(receiveAppointmentTypes(json.data)))
       .catch(temporaryErrorHandler("generic"));
