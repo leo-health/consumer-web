@@ -1,11 +1,17 @@
-.header {
+.container {
   background-color: #FF5F40;
   position: fixed;
+  display: block;
   top: 0px;
   left: 0px;
   width: 100vw;
-  height: 8vh;
-  z-index: 10;
+  height: 23vh;
+  z-index: 11;
+}
+
+.logo-container {
+  margin-top: 1vh;
+  text-align: center;
 }
 
 .logo {
@@ -13,5 +19,31 @@
   position: relative;
   top: 15%;
   display: inline-block;
-  margin-left: 1.2%;
+}
+
+.button-container {
+  width: 100vw;
+}
+
+.icon {
+  position: absolute;
+  color: white;
+}
+
+.icon img {
+  height: 7vh;
+  float: left;
+}
+
+.settings {
+  composes: icon;
+  float: left;
+  margin-left: 10px;
+}
+
+.phr {
+  composes: icon;
+  float: right;
+  right: 0px;
+  margin-right: 10px;
 }
