@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import * as actionCreators from '../../../redux/actions/slot_list_action_creators';
 import {ItemSelectionList} from '../../Generic/ItemSelectionList'
+import ErrorMessage from '../../Generic/ErrorMessage'
 
 export class SlotList extends Component {
 
@@ -10,45 +11,46 @@ export class SlotList extends Component {
     return actionCreators.fetchSlots(this.props.appointmentTypeID);
   }
 
-  selectAction(objectID) {
-    return actionCreators.selectSlot(objectID)
+  selectAction(object) {
+    return actionCreators.selectSlot(object)
   }
 
-  onClickObject(objectID) {
+  onClickObject(object) {
     this.props.router.goBack();
   }
 
   renderRow(object) {
-    return (
-      <div>
-        <span>{object.get("start_datetime")}</span>
-        <span>{object.getIn(["provider", "name"])}</span>
-      </div>
-    );
+    const formattedDate = object.get("start_datetime");
+    return <span>{formattedDate}</span>;
   }
 
   render() {
+
+    if (this.props.apiError) {
+      const {apiError} = this.props;
+      return <ErrorMessage apiError={apiError}/>;
+    }
+
     return <ItemSelectionList
       fetchAction={()=>this.fetchAction()}
-      selectAction={(objectID)=>this.selectAction(objectID)}
-      onClickObject={(objectID)=>this.onClickObject(objectID)}
-      renderRow={(objectID)=>this.renderRow(objectID)}
+      selectAction={(object)=>this.selectAction(object)}
+      onClickObject={(object)=>this.onClickObject(object)}
+      renderRow={(object)=>this.renderRow(object)}
       {...this.props}
       />
   }
 }
 
+// TODO: ????: reduce boilerplate - slice subset of immutable Map
 function mapStateToProps(state) {
   const itemSelectionList = state.get("schedulingSlot");
-  const props = {
+  return {
     appointmentTypeID: state.getIn(["schedulingAppointmentType", "selectedObjectID"]),
     objectList: itemSelectionList.get("objectList"),
     isLoading: itemSelectionList.get("isLoading"),
-    selectedObjectID: itemSelectionList.get("selectedObjectID")
+    selectedObjectID: itemSelectionList.get("selectedObjectID"),
+    apiError: itemSelectionList.get("apiError")
   };
-
-
-  return props;
 }
 
 export const SlotListContainer = connect(mapStateToProps)(withRouter(SlotList));

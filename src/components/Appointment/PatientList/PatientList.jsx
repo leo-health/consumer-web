@@ -12,11 +12,11 @@ export class PatientList extends Component {
     return actionCreators.fetchPatients();
   }
 
-  selectAction(objectID) {
-    return actionCreators.selectPatient(objectID)
+  selectAction(object) {
+    return actionCreators.selectPatient(object)
   }
 
-  onClickObject(objectID) {
+  onClickObject(object) {
     // ????: this doesn't seem right to me.. probably should be in response to a given action, belongs in reducer?
     // NOTE: this actually pops the page off the history, instead of pushing the previous page. Maybe this is what we want.. not sure yet
     // This will not work if we hit this route directly, since there was nothing on the history before
@@ -32,9 +32,9 @@ export class PatientList extends Component {
   render() {
     return <ItemSelectionList
       fetchAction={()=>this.fetchAction()}
-      selectAction={(objectID)=>this.selectAction(objectID)}
-      onClickObject={(objectID)=>this.onClickObject(objectID)}
-      renderRow={(objectID)=>this.renderRow(objectID)}
+      selectAction={(object)=>this.selectAction(object)}
+      onClickObject={(object)=>this.onClickObject(object)}
+      renderRow={(object)=>this.renderRow(object)}
       {...this.props}
       />
   }

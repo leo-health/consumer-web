@@ -10,11 +10,11 @@ export class AppointmentTypeList extends Component {
     return actionCreators.fetchAppointmentTypes();
   }
 
-  selectAction(objectID) {
-    return actionCreators.selectAppointmentType(objectID)
+  selectAction(object) {
+    return actionCreators.selectAppointmentType(object)
   }
 
-  onClickObject(objectID) {
+  onClickObject(object) {
     this.props.router.goBack();
   }
 
@@ -25,9 +25,9 @@ export class AppointmentTypeList extends Component {
   render() {
     return <ItemSelectionList
       fetchAction={()=>this.fetchAction()}
-      selectAction={(objectID)=>this.selectAction(objectID)}
-      onClickObject={(objectID)=>this.onClickObject(objectID)}
-      renderRow={(objectID)=>this.renderRow(objectID)}
+      selectAction={(object)=>this.selectAction(object)}
+      onClickObject={(object)=>this.onClickObject(object)}
+      renderRow={(object)=>this.renderRow(object)}
       {...this.props}
       />
   }

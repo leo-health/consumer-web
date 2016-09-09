@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router';
+import {connect} from 'react-redux';
+import * as actionCreators from '../../../redux/actions/schedule_action_creators';
+
 
 // TODO: find a good pattern for these higher order components
 
@@ -22,9 +25,17 @@ class _Scheduler extends Component {
           AppointmentTypes</button>
         <button onClick={()=>this.onClickRelativeURLPush("slots")}>
           Slots</button>
+        <button onClick={()=>this.props.schedule()}>
+          Schedule</button>
       </div>
     );
   }
 }
 
-export const Scheduler = withRouter(_Scheduler);
+function mapStateToProps(state) {
+  return {
+    // TODO: fill in
+  };
+}
+
+export const Scheduler = connect(mapStateToProps, actionCreators)(withRouter(_Scheduler));
