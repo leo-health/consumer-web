@@ -1,6 +1,7 @@
-.header {
+.container {
   background-color: #FF5F40;
   position: fixed;
+  display: block;
   top: 0px;
   left: 0px;
   width: 100vw;

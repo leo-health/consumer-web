@@ -1,11 +1,13 @@
 .container {
-  height: 92vh;
-  width: 5.5vw;
-  top: 8vh;
+  height: 6vh;
+  width: 100vw;
   left: 0;
-  background-color: #262A33;
   position: fixed;
   z-index: 10;
+  top: 23vh;
+  background-color: white;
+  border-bottom: 1px solid #666;
+
 }
 
 .navbar {
@@ -14,19 +16,28 @@
   padding: 0;
 }
 
-.item {
-  font-size: .9em;
-  color: #857377;
-  width: 100%;
-  display: table;
-  margin-bottom: 20px;
-  list-style: none;
-  margin-right: auto;
-  margin-left: auto;
-  text-decoration: none;
+.link-container {
+  display: inline-block;
+  width: 49.5%;
+  height: 100%;
+  text-align: center;
 }
 
-.icon {
-  display: block !important;
-  margin-bottom: 10px;
+.link {
+  position: relative;
+  display: inline-block;
+  top: 30%;
+  text-transform: uppercase;
+  font-size: 30px;
+  text-decoration: none;
+  color: #FF5F40;
+}
+
+.divider {
+  position: absolute;
+  display: inline-block;
+  top: 20%;
+  height: 60%;
+  width: 1px;
+  background-color: #FF5F40;
 }

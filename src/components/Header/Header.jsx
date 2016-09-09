@@ -12,7 +12,7 @@ const Header = React.createClass({
     var phrUrl = require("../../images/phr.png");
 
     return (
-      <div styleName='header'>
+      <div styleName='container'>
         <div styleName='button-container'>
           <Link to="/" styleName='settings'>
             <img src={settingsUrl} alt="Leo Health" styleName='logo'/>

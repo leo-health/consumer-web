@@ -7,7 +7,17 @@ const Navbar = React.createClass({
   render: function() {
     return (
       <div styleName='container'>
-
+        <div styleName='link-container'>
+          <Link to="/" styleName='link'>
+            Schedule a visit
+          </Link>
+        </div>
+        <div styleName='divider'></div>
+        <div styleName='link-container'>
+          <Link to="/" styleName='link'>
+            Message us
+          </Link>
+        </div>
       </div>
     );
   }
