@@ -40,14 +40,15 @@ export class SlotList extends Component {
 
 function mapStateToProps(state) {
   const itemSelectionList = state.get("schedulingSlot");
-
-  debugger;
-  return {
+  const props = {
     appointmentTypeID: state.getIn(["schedulingAppointmentType", "selectedObjectID"]),
-    objects: itemSelectionList.get("objectList"),
+    objectList: itemSelectionList.get("objectList"),
     isLoading: itemSelectionList.get("isLoading"),
     selectedObjectID: itemSelectionList.get("selectedObjectID")
   };
+
+
+  return props;
 }
 
 export const SlotListContainer = connect(mapStateToProps)(withRouter(SlotList));

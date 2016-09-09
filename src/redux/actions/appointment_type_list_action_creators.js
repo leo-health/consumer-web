@@ -12,7 +12,7 @@ export const AppointmentTypeListActionTypes = {
 
 /*
  TODO: ARCHITECTURE: Explore ways to separate actions/state that come from the server vs state that is only relevant locally
- For example, selectAppointmentType is related to local user activity, but requestObjects/receiveObjects is API related
+ For example, selectAppointmentType is related to local user activity, but requestObjects/receiveObjects is an API response
  */
 
 export function selectAppointmentType(selectedObjectID) {

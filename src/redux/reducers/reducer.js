@@ -1,6 +1,7 @@
 import {fromJS, Map} from 'immutable';
 import {ActionTypes} from '../actions/action_creators';
 import {PatientListActionTypes} from '../actions/patient_list_action_creators';
+import {SlotListActionTypes} from '../actions/slot_list_action_creators';
 import {AppointmentTypeListActionTypes} from '../actions/appointment_type_list_action_creators';
 import {combineReducers} from 'redux-immutable';
 
@@ -36,11 +37,11 @@ function schedulingPatient(state = Map(), action) {
 
 function schedulingSlot(state = Map(), action) {
   switch (action.type) {
-    case PatientListActionTypes.SELECT_SLOT:
+    case SlotListActionTypes.SELECT_SLOT:
       return selectObject(state, action.payload.selectedObjectID);
-    case PatientListActionTypes.REQUEST_SLOTS:
+    case SlotListActionTypes.REQUEST_SLOTS:
       return requestObjects(state);
-    case PatientListActionTypes.RECEIVE_SLOTS:
+    case SlotListActionTypes.RECEIVE_SLOTS:
       return receiveObjects(state, action.payload.objectList);
   }
   return state;

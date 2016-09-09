@@ -26,13 +26,18 @@ export function requestSlots() {
 export function receiveSlots(objectList) {
   return {
     type: SlotListActionTypes.RECEIVE_SLOTS,
-    payload: {objectList}
+    payload: {
+      objectList: objectList.map(slot => {
+        return {...slot, id: slot.start_datetime}
+      })
+    }
   };
 }
 
-const temporaryErrorHandler = (scenario) => (reason) => {
-  console.log(`${scenario} - Caught error! ${reason}`);
-}
+// this promise.catch function is useless, something is going wrong here. reason is json read error, not the api error response
+// const temporaryErrorHandler = (scenario) => (reason) => {
+//   console.log(`${scenario} - Caught error! ${reason}`);
+// }
 
 export function fetchSlots(appointment_type_id) {
   return function (dispatch) {
@@ -55,7 +60,6 @@ export function fetchSlots(appointment_type_id) {
     .then(response => response.json())
     .then(json => {
       dispatch(receiveSlots(json.data[0].slots))
-    })
-    .catch(temporaryErrorHandler("GET /slots"));
+    });
   }
 }

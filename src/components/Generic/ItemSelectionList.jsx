@@ -25,7 +25,7 @@ export class ItemSelectionList extends Component {
 
   render() {
 
-    const {objectList, isLoading} = this.props;
+    const {isLoading, objectList} = this.props;
 
     if (isLoading || !objectList) {
       return <LoadingSpinner/>;
@@ -34,12 +34,14 @@ export class ItemSelectionList extends Component {
     return (
       <div>
         {objectList.map(object=>{
-          return (<button key={object.get("id")} onClick={()=>
-              this.onClickObject(object.get("id"))
-            }>
-            {this.renderIfSelected(object.get("id"))}
-            {this.props.renderRow(object)}
-          </button>);
+          return (
+            <button key={object.get("id")} onClick={()=>
+                this.onClickObject(object.get("id"))
+              }>
+              {this.renderIfSelected(object.get("id"))}
+              {this.props.renderRow(object)}
+            </button>
+          );
         })}
       </div>
     );
