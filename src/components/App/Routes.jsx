@@ -1,6 +1,7 @@
 import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 import App from './App';
+import Home from './Home';
 import Header from '../Header/Header';
 import Navbar from '../Navbar/Navbar';
 import Recent from '../Recent/Recent';
@@ -15,13 +16,16 @@ import Settings from '../Settings/Settings';
 
 export default
 <Route path="/" component={App}>
-  <Route path="/chat" component={Chat}/>
-  <Route path="/children" component={Children}/>
-  <Route path="/appointment" component={Appointment}>
-    <IndexRoute component={Scheduler}/>
-    <Route path="patients" component={PatientListContainer}/>
-    <Route path="appointment_types" component={AppointmentTypeListContainer}/>
-    <Route path="slots" component={SlotListContainer}/>
+  <Route component={Home}>
+    <IndexRoute/>
+    <Route path="chat" component={Chat}/>
+    <Route path="appointment" component={Appointment}>
+      <IndexRoute component={Scheduler}/>
+      <Route path="patients" component={PatientListContainer}/>
+      <Route path="appointment_types" component={AppointmentTypeListContainer}/>
+      <Route path="slots" component={SlotListContainer}/>
+    </Route>
   </Route>
-  <Route path="/settings" component={Settings}/>
+  <Route path="children" component={Children}/>
+  <Route path="settings" component={Settings}/>
 </Route>;
