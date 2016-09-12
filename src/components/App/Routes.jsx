@@ -15,7 +15,6 @@ import Settings from '../Settings/Settings';
 
 export default
 <Route path="/" component={App}>
-  <IndexRoute component={Recent}/>
   <Route path="/chat" component={Chat}/>
   <Route path="/children" component={Children}/>
   <Route path="/appointment" component={Appointment}>

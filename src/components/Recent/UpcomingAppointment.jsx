@@ -1,6 +1,8 @@
 import React from 'react';
 import CSSSModules from 'react-css-modules';
 import styles from './cards.css';
+import { Link } from 'react-router';
+
 
 const UpcomingAppointment = React.createClass({
   render: function() {
@@ -25,7 +27,9 @@ const UpcomingAppointment = React.createClass({
           </div>
         </div>
         <div className='bold' styleName='options-container'>
-          <div styleName="option">Schedule a visit</div>
+          <Link to="/appointment">
+            <div styleName="option">Schedule a visit</div>
+          </Link>
         </div>
       </div>
     );
