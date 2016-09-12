@@ -1,10 +1,9 @@
 :global .body {
   position: fixed;
-  top: 8vh;
-  left: 5.5vw;
-  height: 92vh;
-  width: 94.5vw;
-  z-index: 1;
+  top: 30vh;
+  height: 70vh;
+  width: 100vw;
+  overflow-y: auto;
 }
 
 :global div { font-family: 'Open Sans'; }
@@ -13,4 +12,38 @@
 
 :global .orange { color: #FF5F40; }
 
-:global .bold {font-weight: 600; }
+:global .white { color: white; }
+
+:global .bold { font-weight: 600; }
+
+:global .unstyled { text-decoration: none; }
+
+:global .overlay {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+}
+
+:global .window {
+  display: block;
+  height: 96vh;
+  width: 96vw;
+  position: fixed;
+  margin: 0 auto;
+  z-index: 100;
+  top: 2vh;
+  left: 2vw;
+  overflow-y: auto;
+  text-align: center;
+  background-color: white;
+  font-size: 40px;
+}
+
+:global .window button {
+  font-size: 40px;
+}

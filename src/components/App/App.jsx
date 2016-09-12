@@ -1,6 +1,7 @@
 import React from 'react';
-import Header from '../Header/Header'
-import Navbar from '../Navbar/Navbar'
+import Header from '../Header/Header';
+import Navbar from '../Navbar/Navbar';
+import Recent from '../Recent/Recent';
 import styles from './global.css';
 
 export default React.createClass({
@@ -11,6 +12,7 @@ export default React.createClass({
         <Header/>
         <Navbar/>
           <div className="body">
+            <Recent/>
             { this.props.children }
           </div>
       </div>

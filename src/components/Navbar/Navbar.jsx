@@ -7,38 +7,17 @@ const Navbar = React.createClass({
   render: function() {
     return (
       <div styleName='container'>
-        <ul styleName='navbar' role="nav">
-          <li>
-            <Link to="/" styleName='item'>
-              <i className="fa fa-clock-o fa-2x" styleName='icon'></i>
-              Recent
-            </Link>
-          </li>
-          <li>
-            <Link to="/children" styleName='item'>
-              <i className="fa fa-child fa-2x" styleName='icon'></i>
-              Children
-            </Link>
-          </li>
-          <li>
-            <Link to="/appointment" styleName='item'>
-              <i className="fa fa-calendar-o fa-2x" styleName='icon'></i>
-              Appts
-            </Link>
-          </li>
-          <li>
-            <Link to="/chat" styleName='item'>
-              <i className="fa fa-commenting-o fa-2x" styleName='icon'></i>
-              Chat
-            </Link>
-          </li>
-          <li>
-            <Link to="/settings" styleName='item'>
-              <i className="fa fa-gear fa-2x" styleName='icon'></i>
-              Settings
-            </Link>
-          </li>
-        </ul>
+        <div styleName='link-container'>
+          <Link to="/appointment" styleName='link'>
+            Schedule a visit
+          </Link>
+        </div>
+        <div styleName='divider'></div>
+        <div styleName='link-container'>
+          <Link to="/" styleName='link'>
+            Message us
+          </Link>
+        </div>
       </div>
     );
   }
