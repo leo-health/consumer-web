@@ -12,6 +12,8 @@
 
 :global .orange { color: #FF5F40; }
 
+:global .white { color: white; }
+
 :global .bold { font-weight: 600; }
 
 :global .unstyled { text-decoration: none; }
@@ -29,13 +31,13 @@
 
 :global .window {
   display: block;
-  max-height: 60vh;
-  width: 70vw;
+  height: 96vh;
+  width: 96vw;
   position: fixed;
   margin: 0 auto;
   z-index: 100;
-  top: 20vh;
-  left: 15vw;
+  top: 2vh;
+  left: 2vw;
   overflow-y: auto;
   text-align: center;
   background-color: white;
