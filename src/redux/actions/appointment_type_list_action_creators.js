@@ -15,10 +15,10 @@ export const AppointmentTypeListActionTypes = {
  For example, selectAppointmentType is related to local user activity, but requestObjects/receiveObjects is an API response
  */
 
-export function selectAppointmentType(selectedObjectID) {
+export function selectAppointmentType(appointmentType) {
   return {
     type: AppointmentTypeListActionTypes.SELECT_APPOINTMENT_TYPE,
-    payload: {selectedObjectID}
+    payload: {appointmentType}
   };
 }
 

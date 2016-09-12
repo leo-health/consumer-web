@@ -45,7 +45,7 @@ Also note that the export command is changed into ```export default CSSModules(H
 Finally, any specific classes will be specified with the ```styleName``` label; any global classes will continue to be specified using ```className```. To specify a global class, use
 
 ```
-:global foo {
+:global .foo {
   ...
 }
 ```

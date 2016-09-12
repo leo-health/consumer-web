@@ -7,17 +7,17 @@ export class ItemSelectionList extends Component {
     this.props.dispatch(this.props.fetchAction());
   }
 
-  selectObject(objectID) {
-    this.props.dispatch(this.props.selectAction(objectID));
+  selectObject(object) {
+    this.props.dispatch(this.props.selectAction(object));
   }
 
-  onClickObject(objectID) {
-    this.selectObject(objectID);
-    this.props.onClickObject(objectID);
+  onClickObject(object) {
+    this.selectObject(object);
+    this.props.onClickObject(object);
   }
 
-  renderIfSelected(objectID) {
-    if (objectID === this.props.selectedObjectID) {
+  renderIfSelected(object) {
+    if (object.get("id") === this.props.selectedObjectID) {
       return <h1>{"Selected"}</h1>;
     }
     return null;
@@ -36,9 +36,9 @@ export class ItemSelectionList extends Component {
         {objectList.map(object=>{
           return (
             <button key={object.get("id")} onClick={()=>
-                this.onClickObject(object.get("id"))
+                this.onClickObject(object)
               }>
-              {this.renderIfSelected(object.get("id"))}
+              {this.renderIfSelected(object)}
               {this.props.renderRow(object)}
             </button>
           );
