@@ -9,20 +9,10 @@ const Recent = React.createClass({
   render: function() {
     return (
       <div className='gray' styleName='container'>
-        <div>
-          <div className='orange' styleName='header'>
-            Welcome back
-          </div>
-          <UpcomingAppointment/>
-          <MissingVaccines/>
-        </div>
-        <div styleName='content-container'>
-          <div className='orange' styleName='header'>
-            Just for you
-          </div>
-          <ContentCard/>
-          <ContentCard/>
-        </div>
+        <UpcomingAppointment/>
+        <MissingVaccines/>
+        <ContentCard/>
+        <ContentCard/>
       </div>
     );
   }
