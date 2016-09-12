@@ -4,9 +4,14 @@ import styles from './cards.css';
 
 const ContentCard = React.createClass({
   render: function() {
+    var contentUrl = require("../../images/form.png");
+
     return (
-      <div styleName='container'>
+      <div styleName='orange-container'>
         <div styleName='content-container'>
+        <div styleName='icon-container'>
+            <img src={contentUrl} alt="Appointments" styleName='icon'/>
+          </div>
           <div styleName='text-container'>
             <div styleName='header'>
               Vitamins essential to Newborn Development

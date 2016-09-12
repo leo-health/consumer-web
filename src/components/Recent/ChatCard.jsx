@@ -4,13 +4,13 @@ import styles from './cards.css';
 
 const ChatCard = React.createClass({
   render: function() {
-    var appointmentUrl = require("../../images/blue-chat.png");
+    var chatUrl = require("../../images/blue-chat.png");
 
     return (
       <div styleName='blue-container'>
         <div styleName='content-container'>
           <div styleName='icon-container'>
-            <img src={appointmentUrl} alt="Appointments" styleName='icon'/>
+            <img src={chatUrl} alt="Appointments" styleName='icon'/>
           </div>
           <div styleName='text-container'>
             <div styleName='blue-name'>
@@ -22,7 +22,8 @@ const ChatCard = React.createClass({
           </div>
         </div>
         <div className='bold' styleName='options-container'>
-          <div styleName="option">Schedule a visit</div>
+          <div styleName="left-option">Reply</div>
+          <div styleName="right-option">Call us</div>
         </div>
       </div>
     );

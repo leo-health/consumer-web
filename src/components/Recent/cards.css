@@ -1,6 +1,8 @@
 .container {
   width: 80vw;
   margin-top: 3vh;
+  margin-left: auto;
+  margin-right: auto;
   display: block;
   box-shadow: 2px 4px 4px -1px rgba(0,0,0,0.4);
   border-left: 0.5px solid rgba(0,0,0,0.2);
@@ -14,6 +16,11 @@
 .blue-container {
   composes: container;
   border-top: 2px solid #01C0E4;
+}
+
+.orange-container {
+  composes: container;
+  border-top: 2px solid #FF5F40;
 }
 
 .content-container {
@@ -49,7 +56,7 @@
 .text-container {
   display: inline-block;
   position: relative;
-  width: 80%;
+  width: 85%;
   margin-left: 25px;
   left: 90px;
 }
@@ -76,6 +83,15 @@
   text-align: center;
 }
 
-.divider {
-
+.option-2 {
+  composes: option;
+  width: 49%;
+  display: inline-block;
 }
+
+.left-option {
+  composes: option-2;
+  border-right: 1px solid #666;
+}
+
+.right-option { composes: option-2; }
