@@ -93,7 +93,7 @@ export function fetchSlots(appointment_type_id) {
 
     const authentication_token = Constants.HARD_CODED_AUTH_TOKEN;
     const start_date = moment()
-    const end_date = start_date.add(6, "months");
+    const end_date = start_date.clone().add(6, "months");
 
     const uri = URI(Constants.API_BASE_URL)
     .segment("appointment_slots") // NOTE: This is a weird method name for appendToPath()

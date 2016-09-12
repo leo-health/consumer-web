@@ -1,0 +1,57 @@
+.container {
+  padding-left: 5%;
+  position: relative;
+  height: 75%;
+}
+
+.option {
+  padding-top: 13%;
+  font-size: 50px;
+  text-align: left;
+  font-weight: 300;
+}
+
+.line {
+  margin-top: 1%;
+  height: 1px;
+  width: 95%;
+  background-color: #666;
+}
+
+.text {
+  margin-top: 15%;
+  font-size: 50px;
+  font-family: 'Open Sans';
+  font-weight: 300;
+  display: block;
+  border: none;
+  width: 90%;
+  height: 10vh;
+  color: #666;
+}
+
+.button {
+  margin-left: -5%;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+  text-transform: uppercase;
+  height: 10%;
+  background-color: #39DE89;
+  color: white;
+  font-weight: 600;
+  font-size: 45px;
+}
+
+.label {
+  position: absolute;
+  top: 20%;
+  text-align: center;
+  width: 100%;
+}
+
+.labelContainer {
+  position: relative;
+  height: 100%;
+}
