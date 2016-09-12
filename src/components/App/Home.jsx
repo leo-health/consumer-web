@@ -9,7 +9,12 @@ export default React.createClass({
   render: function() {
     return (
       <div className="container">
-        {this.props.children}
+        <Header/>
+        <Navbar/>
+          <div className="body">
+            <Recent/>
+            { this.props.children }
+          </div>
       </div>
     );
   }

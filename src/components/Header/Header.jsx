@@ -14,10 +14,10 @@ const Header = React.createClass({
     return (
       <div styleName='container'>
         <div styleName='button-container'>
-          <Link to="/" styleName='settings'>
+          <Link to="/settings" styleName='settings'>
             <img src={settingsUrl} alt="Leo Health" styleName='logo'/>
           </Link>
-          <Link to="/" styleName='phr'>
+          <Link to="/phr" styleName='phr'>
             <img src={phrUrl} alt="Leo Health" styleName='logo'/>
           </Link>
         </div>
