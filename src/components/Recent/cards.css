@@ -85,7 +85,7 @@
 
 .option-2 {
   composes: option;
-  width: 49%;
+  width: 49.5%;
   display: inline-block;
 }
 
