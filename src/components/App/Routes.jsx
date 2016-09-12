@@ -13,19 +13,24 @@ import {PatientListContainer} from '../Appointment/PatientList/PatientList';
 import {AppointmentTypeListContainer} from '../Appointment/AppointmentTypeList/AppointmentTypeList';
 import {SlotListContainer} from '../Appointment/SlotList/SlotList';
 import Settings from '../Settings/Settings';
+import Login from '../Login/Login';
 
-export default
-<Route path="/" component={App}>
-  <Route component={Home}>
-    <IndexRoute/>
-    <Route path="chat" component={Chat}/>
-    <Route path="appointment" component={Appointment}>
-      <IndexRoute component={Scheduler}/>
-      <Route path="patients" component={PatientListContainer}/>
-      <Route path="appointment_types" component={AppointmentTypeListContainer}/>
-      <Route path="slots" component={SlotListContainer}/>
+export default (
+  <Route>
+    <Route path="/login" component={Login}/>
+    <Route path="/" component={App}>
+      <Route component={Home}>
+        <IndexRoute/>
+        <Route path="chat" component={Chat}/>
+        <Route path="appointment" component={Appointment}>
+          <IndexRoute component={Scheduler}/>
+          <Route path="patients" component={PatientListContainer}/>
+          <Route path="appointment_types" component={AppointmentTypeListContainer}/>
+          <Route path="slots" component={SlotListContainer}/>
+        </Route>
+      </Route>
+      <Route path="children" component={Children}/>
+      <Route path="settings" component={Settings}/>
     </Route>
   </Route>
-  <Route path="children" component={Children}/>
-  <Route path="settings" component={Settings}/>
-</Route>;
+);
