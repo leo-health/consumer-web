@@ -8,7 +8,7 @@ const Navbar = React.createClass({
     return (
       <div styleName='container'>
         <div styleName='link-container'>
-          <Link to="/" styleName='link'>
+          <Link to="/appointment" styleName='link'>
             Schedule a visit
           </Link>
         </div>

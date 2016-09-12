@@ -27,7 +27,7 @@ const UpcomingAppointment = React.createClass({
           </div>
         </div>
         <div className='bold' styleName='options-container'>
-          <Link to="/appointment">
+          <Link to="/appointment" className='unstyled gray'>
             <div styleName="option">Schedule a visit</div>
           </Link>
         </div>

@@ -3,7 +3,6 @@
   top: 30vh;
   height: 70vh;
   width: 100vw;
-  z-index: 1;
   overflow-y: auto;
 }
 
@@ -13,5 +12,36 @@
 
 :global .orange { color: #FF5F40; }
 
-:global .bold {font-weight: 600; }
+:global .bold { font-weight: 600; }
 
+:global .unstyled { text-decoration: none; }
+
+:global .overlay {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+}
+
+:global .window {
+  display: block;
+  max-height: 60vh;
+  width: 70vw;
+  position: fixed;
+  margin: 0 auto;
+  z-index: 100;
+  top: 20vh;
+  left: 15vw;
+  overflow-y: auto;
+  text-align: center;
+  background-color: white;
+  font-size: 40px;
+}
+
+:global .window button {
+  font-size: 40px;
+}
