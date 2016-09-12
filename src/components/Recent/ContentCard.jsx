@@ -6,16 +6,19 @@ const ContentCard = React.createClass({
   render: function() {
     return (
       <div styleName='container'>
-        <div styleName='header'>
-          Vitamins essential to Newborn Development
-        </div>
-        <div className='orange' styleName='description'>
-          According to researchers, these are 5 vitamins essential to newborn development.
+        <div styleName='content-container'>
+          <div styleName='text-container'>
+            <div styleName='header'>
+              Vitamins essential to Newborn Development
+            </div>
+            <div className='orange' styleName='description'>
+              According to researchers, these are 5 vitamins essential to newborn development.
+            </div>
+          </div>
         </div>
         <div className='bold' styleName='options-container'>
-          <div styleName='option'>DISMISS</div>
+          <div styleName="option">Dismiss</div>
         </div>
-        <div styleName='divider'></div>
       </div>
     );
   }

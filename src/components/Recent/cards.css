@@ -11,6 +11,11 @@
   border-top: 2px solid #5BD998;
 }
 
+.blue-container {
+  composes: container;
+  border-top: 2px solid #01C0E4;
+}
+
 .content-container {
   margin: 0px 30px;
   padding-top: 50px;
@@ -21,18 +26,23 @@
   color: black;
 }
 
-.green-header {
+.name {
   text-transform: uppercase;
   font-size: 25px;
   font-weight: 600;
+}
+
+.green-name {
+  composes: name;
   color: #5BD998;
 }
 
-.icon-container {
-  display: inline-block;
-  position: relative;
-  top: -75px;
+.blue-name {
+  composes: name;
+  color: #01C0E4;
 }
+
+.icon-container { position: absolute; }
 
 .icon { height: 90px; }
 
@@ -41,6 +51,7 @@
   position: relative;
   width: 80%;
   margin-left: 25px;
+  left: 90px;
 }
 
 .description {
@@ -52,7 +63,7 @@
 
 .options-container {
   margin-top: 50px;
-  border-top: 1px solid #666;
+  border-top: 0.5px solid #666;
   width: 100%;
 }
 

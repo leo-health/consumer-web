@@ -2,7 +2,7 @@ import React from 'react';
 import CSSSModules from 'react-css-modules';
 import styles from './recent.css';
 import UpcomingAppointment from './UpcomingAppointment.jsx';
-import MissingVaccines from './MissingVaccines.jsx';
+import ChatCard from './ChatCard.jsx';
 import ContentCard from './ContentCard.jsx';
 
 const Recent = React.createClass({
@@ -10,7 +10,7 @@ const Recent = React.createClass({
     return (
       <div className='gray' styleName='container'>
         <UpcomingAppointment/>
-        <MissingVaccines/>
+        <ChatCard/>
         <ContentCard/>
         <ContentCard/>
       </div>

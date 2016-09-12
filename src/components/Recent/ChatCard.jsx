@@ -2,25 +2,22 @@ import React from 'react';
 import CSSSModules from 'react-css-modules';
 import styles from './cards.css';
 
-const UpcomingAppointment = React.createClass({
+const ChatCard = React.createClass({
   render: function() {
-    var appointmentUrl = require("../../images/green-calendar.png");
+    var appointmentUrl = require("../../images/blue-chat.png");
 
     return (
-      <div styleName='green-container'>
+      <div styleName='blue-container'>
         <div styleName='content-container'>
           <div styleName='icon-container'>
             <img src={appointmentUrl} alt="Appointments" styleName='icon'/>
           </div>
           <div styleName='text-container'>
-            <div styleName='green-name'>
-              Emily
-            </div>
-            <div styleName='header'>
-              Schedule Emily's First Visit
+            <div styleName='blue-name'>
+              Carol Kester <span className='gray'>RN</span>
             </div>
             <div styleName='description'>
-              Take a tour of the practice and meet with our world class physicians.
+              Welcome to Leo. If you have any questions or comments, you can reach us at any time.
             </div>
           </div>
         </div>
@@ -32,4 +29,4 @@ const UpcomingAppointment = React.createClass({
   }
 });
 
-export default CSSSModules(UpcomingAppointment, styles);
+export default CSSSModules(ChatCard, styles);
