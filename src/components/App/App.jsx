@@ -1,6 +1,13 @@
 import React from 'react';
+import AuthWrapper from './AuthWrapper';
 
-export default ({children}) =>
+const App = ({children}) =>
 <div className="container">
   {children}
-</div>
+</div>;
+
+function authSelector(state) {
+  return state.get("authentication");
+}
+
+export default AuthWrapper(App, authSelector);
