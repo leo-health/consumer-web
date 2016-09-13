@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-export class Login extends Component {
-
-}
+export const Login = () =>
+<div>
+  <input/>
+  <input/>
+</div>

@@ -15,6 +15,21 @@ import {SlotListContainer} from '../Appointment/SlotList/SlotList';
 import Settings from '../Settings/Settings';
 import Login from '../Login/Login';
 
+// ????: should this go into constants.js?
+export const routeURLs = {
+  index: "/",
+  login: "/login",
+  chat: "/chat",
+  appointment: "/appointment",
+  appointment_choose_patient: "/appointment/patients",
+  appointment_choose_appointment_type: "/appointment/appointment_types",
+  appointment_choose_slot: "/appointment/slots", // TODO: should fail if state is not ready to choose a slot
+  children: "/children",
+  settings: "/settings"
+};
+
+// TODO: use above constants here
+
 export default (
   <Route>
     <Route path="/login" component={Login}/>
