@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, IndexRoute} from 'react-router';
+import {Route, IndexRoute, Router, browserHistory} from 'react-router';
 import App from './App';
 import Home from './Home';
 import Header from '../Header/Header';
@@ -13,7 +13,7 @@ import {PatientListContainer} from '../Appointment/PatientList/PatientList';
 import {AppointmentTypeListContainer} from '../Appointment/AppointmentTypeList/AppointmentTypeList';
 import {SlotListContainer} from '../Appointment/SlotList/SlotList';
 import Settings from '../Settings/Settings';
-import Login from '../Login/Login';
+import {Login} from '../Login/Login';
 
 // ????: should this go into constants.js?
 export const routeURLs = {
@@ -28,24 +28,38 @@ export const routeURLs = {
   settings: "/settings"
 };
 
-// TODO: use above constants here
+export function configureRoutes(store) {
 
-export default (
-  <Route>
-    <Route path="/login" component={Login}/>
-    <Route path="/" component={App}>
-      <Route component={Home}>
-        <IndexRoute/>
-        <Route path="chat" component={Chat}/>
-        <Route path="appointment" component={Appointment}>
-          <IndexRoute component={Scheduler}/>
-          <Route path="patients" component={PatientListContainer}/>
-          <Route path="appointment_types" component={AppointmentTypeListContainer}/>
-          <Route path="slots" component={SlotListContainer}/>
+  function authTransition(nextState, replace, callback) {
+    const state = store.getState();
+    const authData = state.get("authentication");
+
+    if (!user.isAuthenticated) {
+      replace('/login');
+    }
+
+    callback();
+  }
+
+  return (
+    <Router history={browserHistory}>
+      <Route>
+        <Route path="/login" component={Login}/>
+        <Route path="/" component={App} onEnter={authTransition}>
+          <Route component={Home}>
+            <IndexRoute/>
+            <Route path="chat" component={Chat}/>
+            <Route path="appointment" component={Appointment}>
+              <IndexRoute component={Scheduler}/>
+              <Route path="patients" component={PatientListContainer}/>
+              <Route path="appointment_types" component={AppointmentTypeListContainer}/>
+              <Route path="slots" component={SlotListContainer}/>
+            </Route>
+          </Route>
+          <Route path="children" component={Children}/>
+          <Route path="settings" component={Settings}/>
         </Route>
       </Route>
-      <Route path="children" component={Children}/>
-      <Route path="settings" component={Settings}/>
-    </Route>
-  </Route>
-);
+    </Router>
+  );
+}

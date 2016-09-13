@@ -6,8 +6,4 @@ const App = ({children}) =>
   {children}
 </div>;
 
-function authSelector(state) {
-  return state.get("authentication");
-}
-
-export default AuthWrapper(App, authSelector);
+export default AuthWrapper(App, state=>state.get("authentication"));

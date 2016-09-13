@@ -38,8 +38,8 @@ export default function wrapAuthenticatedComponent(DecoratedComponent, authSelec
       if (this.authenticated(authData)) {
         return <DecoratedComponent {...otherProps}/>;
       }
-      // We should never get here. let's double check
-      debugger;
+      // We should never get here. let's double check - we do get here when not authenticated
+      // TODO: does it cause a problem that we render this component, then redirect?
       return null; // ????: should we return something else if the user isn't authenticated?
     }
   };
