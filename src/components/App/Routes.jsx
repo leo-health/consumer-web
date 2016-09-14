@@ -12,7 +12,7 @@ import {Scheduler} from '../Appointment/Scheduler/Scheduler';
 import {PatientListContainer} from '../Appointment/PatientList/PatientList';
 import {AppointmentTypeListContainer} from '../Appointment/AppointmentTypeList/AppointmentTypeList';
 import {SlotListContainer} from '../Appointment/SlotList/SlotList';
-import Settings from '../Settings/Settings';
+import {Settings} from '../Settings/Settings';
 import {Login} from '../Login/Login';
 
 // ????: should this go into constants.js?
