@@ -4,12 +4,11 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../../../redux/actions/schedule_action_creators';
 import CSSModules from 'react-css-modules';
 import styles from './scheduler.css';
-
-
-// TODO: find a good pattern for these higher order components
+import {singleEntitySelector} from '../../redux/selectors/entities_selectors';
 
 class _Scheduler extends Component {
 
+  // TODO: use routeURLs constants
   relativeURLConcat(nextPath) {
     return [this.props.location.pathname,nextPath].join("/");
   }
@@ -52,10 +51,13 @@ class _Scheduler extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    // TODO: fill in
-  };
+function propsSelector(state) {
+
+  // currently assuming only one ephemeral appointment
+  // TODO: allow rescheduling
+  const patientID = state.getIn(["scheduling", "patientID"]);
+  const patient = singleEntitySelector(state, "patients", patientID);
+  return {patient};
 }
 
-export const Scheduler = connect(mapStateToProps, actionCreators)(withRouter(_Scheduler));
+export const Scheduler = connect(propsSelector, actionCreators)(withRouter(_Scheduler));

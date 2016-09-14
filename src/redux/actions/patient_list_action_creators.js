@@ -3,8 +3,7 @@ import * as Constants from '../../config/constants';
 
 export const PatientListActionTypes = {
   REQUEST_PATIENTS: 'REQUEST_PATIENTS',
-  RECEIVE_PATIENTS: 'RECEIVE_PATIENTS',
-  FETCH_PATIENTS: 'FETCH_PATIENTS',
+  PATIENT_REQUEST_SUCCESS: 'PATIENT_REQUEST_SUCCESS',
   SELECT_PATIENT: 'SELECT_PATIENT'
 }
 
@@ -23,7 +22,7 @@ export function requestPatients() {
 
 export function receivePatients(objectList) {
   return {
-    type: PatientListActionTypes.RECEIVE_PATIENTS,
+    type: PatientListActionTypes.PATIENT_REQUEST_SUCCESS,
     payload: {objectList}
   };
 }
