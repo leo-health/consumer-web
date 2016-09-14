@@ -34,10 +34,10 @@ const temporaryErrorHandler = (scenario) => (reason) => {
 }
 
 export function fetchPatients() {
-  return function (dispatch) {
+  return function (dispatch, getState) {
     dispatch(requestPatients())
     const base = Constants.API_BASE_URL;
-    const auth = Constants.HARD_CODED_AUTH_TOKEN;
+    const auth = getState().getIn(["authentication","token"]);
     return fetch(`${base}/family?authentication_token=${auth}`)
       .then(response => response.json())
       .then(json => dispatch(receivePatients(json.data.family.patients)))

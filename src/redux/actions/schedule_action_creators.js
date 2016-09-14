@@ -34,7 +34,7 @@ function scheduleParams(state) {
   // TODO: restructure state to use table-like collections - find inspiration in mongodb documents
   // state.get("slots").filter(slot=>slot.id == selectedObjectID)
   return {
-    authentication_token: Constants.HARD_CODED_AUTH_TOKEN,
+    authentication_token: state.getIn(["authentication","token"]),
     start_datetime: state.getIn(["schedulingSlot", "selectedObjectID"]),
     appointment_status_id: 4,
     appointment_type_id: state.getIn(["schedulingAppointmentType", "selectedObjectID"]),
