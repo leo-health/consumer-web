@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import URI from 'urijs';
 import * as Constants from '../../config/constants';
 
 export const LoginActionTypes = {
@@ -16,7 +17,8 @@ export function loginRequest() {
 export function loginSuccess(payload) {
   return {
     type: LoginActionTypes.LOGIN_SUCCESS,
-    payload
+    session: payload.data.session,
+    user: payload.data.user,
   };
 }
 
@@ -24,16 +26,6 @@ export function loginFail(error) {
   return {
     type: LoginActionTypes.LOGIN_FAIL,
     error
-  };
-}
-
-
-
-function loginRequestSelector(state) {
-  const authState = state.get("authentication");
-  return {
-    email: authState.get("email"),
-    password: authState.get("password")
   };
 }
 
@@ -46,14 +38,13 @@ function responseSuccessOrFail(json, successActionCreator, failActionCreator) {
   return successActionCreator(json);
 }
 
-export function submitLoginAsync() {
+export function submitLoginAsync(email, password) {
   return (dispatch, getState) => {
     dispatch(loginRequest())
 
-    const params = loginRequestSelector(getState());
     const uri = URI(Constants.API_BASE_URL)
     .segment("login")
-    .query(params);
+    .query({email, password});
 
     return fetch(uri, {method: "post"})
     .then(response => response.json())

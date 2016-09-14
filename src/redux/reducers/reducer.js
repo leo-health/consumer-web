@@ -1,15 +1,16 @@
 import {fromJS, Map} from 'immutable';
-import {ActionTypes} from '../actions/action_creators';
+import {combineReducers} from 'redux-immutable';
 import {PatientListActionTypes} from '../actions/patient_list_action_creators';
 import {SlotListActionTypes} from '../actions/slot_list_action_creators';
 import {AppointmentTypeListActionTypes} from '../actions/appointment_type_list_action_creators';
-import {combineReducers} from 'redux-immutable';
 import {
   selectObject,
   requestObjects,
   receiveObjects,
   requestFailure
 } from './object_list_reducers.js';
+
+import {authentication} from '../../components/Login/authentication_reducer';
 
 
 // TODO: http://redux.js.org/docs/recipes/ReducingBoilerplate.html
@@ -59,6 +60,7 @@ function schedulingSlot(state = Map(), action) {
 }
 
 export default combineReducers({
+  authentication,
   schedulingPatient,
   schedulingSlot,
   schedulingAppointmentType
