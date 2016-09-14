@@ -15,6 +15,11 @@ class _Login extends React.Component {
     }
   }
 
+  // componentWillMount() {
+  //   // TODO: REMOVE THIS ONCE AUTH TOKEN IS CACHED
+  //   this.onSubmit();
+  // }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.token) {
       this.props.router.push(routeURLs.index);

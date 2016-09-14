@@ -27,11 +27,6 @@ export function receivePatients(objectList) {
   };
 }
 
-
-const temporaryErrorHandler = (scenario) => (reason) => {
-  console.log(`${scenario} - Caught error! ${reason}`);
-}
-
 export function fetchPatients() {
   return function (dispatch, getState) {
     dispatch(requestPatients())
@@ -39,7 +34,6 @@ export function fetchPatients() {
     const auth = getState().getIn(["authentication","token"]);
     return fetch(`${base}/family?authentication_token=${auth}`)
       .then(response => response.json())
-      .then(json => dispatch(receivePatients(json.data.family.patients)))
-      .catch(temporaryErrorHandler("GET /patients"));
+      .then(json => dispatch(receivePatients(json.data.family.patients)));
   }
 }

@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import * as actionCreators from '../../../redux/actions/appointment_type_list_action_creators';
-import {ItemSelectionList} from '../../Generic/ItemSelectionList'
+import {ItemSelectionList} from '../../Generic/ItemSelectionList';
+import {allEntitiesSelector} from '../../../redux/selectors/entities_selectors';
 
 export class AppointmentTypeList extends Component {
 
@@ -23,6 +24,7 @@ export class AppointmentTypeList extends Component {
   }
 
   render() {
+    console.log(this.props);
     return <ItemSelectionList
       fetchAction={()=>this.fetchAction()}
       selectAction={(object)=>this.selectAction(object)}
@@ -33,19 +35,12 @@ export class AppointmentTypeList extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function appointmentTypeListSelector(state) {
   return {
-    objectList: state.get("objectList"),
-    isLoading: state.get("isLoading"),
-    selectedObjectID: state.get("selectedObjectID")
+    objectList: allEntitiesSelector(state, "appointment_types"),
+    isLoading: state.getIn(["schedulingAppointmentType","isLoading"]),
+    selectedObjectID: state.getIn(["schedulingAppointmentType","selectedObjectID"])
   };
 }
 
-const mapFullStateToProps = (statePath) => (fullState) => {
-  const state = fullState.getIn(statePath);
-  return mapStateToProps(state);
-};
-
-export const AppointmentTypeListContainer = connect(
-  mapFullStateToProps(["schedulingAppointmentType"])
-)(withRouter(AppointmentTypeList));
+export const AppointmentTypeListContainer = connect(appointmentTypeListSelector)(withRouter(AppointmentTypeList));

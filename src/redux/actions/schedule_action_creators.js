@@ -47,6 +47,11 @@ function scheduleParams(state) {
 export function schedule() {
   return (dispatch, getState) => {
 
+
+    // TODO: Clear slots on schedule.
+    // ????: When are some other times where we should be clearing state?
+
+
     dispatch(scheduleAppointmentRequest());
 
     const params = scheduleParams(getState());

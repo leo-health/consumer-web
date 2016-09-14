@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import * as actionCreators from '../../../redux/actions/slot_list_action_creators';
-import {ItemSelectionList} from '../../Generic/ItemSelectionList'
-import ErrorMessage from '../../Generic/ErrorMessage'
+import {ItemSelectionList} from '../../Generic/ItemSelectionList';
+import ErrorMessage from '../../Generic/ErrorMessage';
+import {allEntitiesSelector} from '../../../redux/selectors/entities_selectors';
 
 export class SlotList extends Component {
 
@@ -46,7 +47,7 @@ function mapStateToProps(state) {
   const itemSelectionList = state.get("schedulingSlot");
   return {
     appointmentTypeID: state.getIn(["schedulingAppointmentType", "selectedObjectID"]),
-    objectList: itemSelectionList.get("objectList"),
+    objectList: allEntitiesSelector(state, "slots"),
     isLoading: itemSelectionList.get("isLoading"),
     selectedObjectID: itemSelectionList.get("selectedObjectID"),
     apiError: itemSelectionList.get("apiError")
