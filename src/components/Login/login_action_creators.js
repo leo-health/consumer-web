@@ -32,10 +32,14 @@ export function loginFail(error) {
 // TODO: find the right place for utility functions like this
 // TODO: standardize api functions
 function responseSuccessOrFail(json, successActionCreator, failActionCreator) {
-  if (json.status === "error") {
-    return failActionCreator(json);
+  if (!json || json.status === "error") {
+    if (failActionCreator) {
+      return failActionCreator(json);
+    }
   }
-  return successActionCreator(json);
+  if (successActionCreator) {
+    return successActionCreator(json);
+  }
 }
 
 export function submitLoginAsync(email, password) {

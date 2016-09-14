@@ -88,10 +88,10 @@ function randomlyUniqueByTimeSlots(slots) {
 }
 
 export function fetchSlots(appointment_type_id) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
     dispatch(requestSlots())
 
-    const authentication_token = Constants.HARD_CODED_AUTH_TOKEN;
+    const authentication_token = getState().getIn(["authentication","token"]);
     const start_date = moment()
     const end_date = start_date.clone().add(6, "months");
 

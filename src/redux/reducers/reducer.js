@@ -9,12 +9,12 @@ import {
   receiveObjects,
   requestFailure
 } from './object_list_reducers.js';
-
-import {authentication} from '../../components/Login/authentication_reducer';
+import {authentication} from './authentication_reducer';
 
 
 // TODO: http://redux.js.org/docs/recipes/ReducingBoilerplate.html
 
+// TODO: move this stuff into separate files
 
 function schedulingAppointmentType(state = Map(), action) {
   switch (action.type) {
