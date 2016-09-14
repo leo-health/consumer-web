@@ -32,9 +32,9 @@ export function configureRoutes(store) {
 
   function authTransition(nextState, replace, callback) {
     const state = store.getState();
-    const authData = state.get("authentication");
+    const authData = state.getIn(["authentication", "token"]);
 
-    if (!user.isAuthenticated) {
+    if (!authData) {
       replace('/login');
     }
 

@@ -3,6 +3,10 @@ import {connect} from 'react-redux';
 import {routeURLs} from './Routes';
 import {withRouter} from 'react-router';
 
+
+// NOTE: THIS FILE IS CURRENTLY NOT USED
+
+
 // NOTE:AF: I didn't use this library for now, because I want to make sure we fully understand any outside code, given the react/redux environment is fairly new and potentially unstable
 // we may need more complex authentication behavior in the future, in which case we can come back to this library
 // https://github.com/mjrussell/redux-auth-wrapper
