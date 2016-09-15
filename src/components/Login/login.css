@@ -1,0 +1,45 @@
+.container {
+  margin: auto;
+  height: 1000px;
+  width: 100%;
+  padding: 0px 30px;
+  position: absolute;
+}
+
+.header-container {
+  height: 40%;
+  position: relative;
+  margin: 0 0 50px 0;
+}
+
+.header {
+  font-family: 'Raleway';
+  font-size: 90px;
+  font-weight: 200;
+  color: #FC5E48;
+  padding: 5%;
+  bottom: 0px;
+  position: absolute;
+}
+
+.input-field {
+  outline-width: 0px;
+  padding: 5%;
+  margin: 10px 0px 0px;
+  width: 100%;
+  font-family: 'Raleway';
+  font-size: 50px;
+  font-weight: 200;
+}
+
+.button {
+  margin: 10px 0px 0px;
+  width: 100%;
+  height: 130px;
+  font-family: 'Raleway';
+  font-size: 50px;
+  font-weight: 200;
+  color: white;
+  background-color: #FC5E48;
+  border: 0;
+}

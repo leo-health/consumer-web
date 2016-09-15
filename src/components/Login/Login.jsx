@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
+import CSSModules from 'react-css-modules';
+import styles from './login.css';
 import {routeURLs} from '../App/Routes';
 import LoadingSpinner from '../Generic/LoadingSpinner';
 import * as loginActionCreators from './login_action_creators';
@@ -15,11 +17,6 @@ class _Login extends React.Component {
     }
   }
 
-  // componentWillMount() {
-  //   // TODO: REMOVE THIS ONCE AUTH TOKEN IS CACHED
-  //   this.onSubmit();
-  // }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.token) {
       this.props.router.push(routeURLs.index);
@@ -32,31 +29,41 @@ class _Login extends React.Component {
     });
   }
 
-  onSubmit() {
+  onClickLogin() {
     const {email, password} = this.state;
     this.props.submitLoginAsync(email, password);
   }
 
   render() {
-
     if (this.props.isLoading) {
       return <LoadingSpinner/>;
     }
 
     return (
       <div>
-        <p>Login to your account</p>
-        <input type="text"
-          placeholder="Email"
-          onChange={(e)=>this.onChangeInput(e, "email")}
-          value={this.state.email}
-          />
-        <input type="password"
-          placeholder="Password"
-          onChange={(e)=>this.onChangeInput(e, "password")}
-          value={this.state.password}
-          />
-        <button onClick={()=>this.onSubmit()}>Login</button>
+        <div className={styles['container']}>
+          <div className={styles['header-container']}>
+            <div className={styles['header']}>
+              Login to your account
+            </div>
+          </div>
+          <input type="text"
+            placeholder="Email"
+            className={styles['input-field']}
+            onChange={(e)=>this.onChangeInput(e, "email")}
+            value={this.state.email}
+            />
+          <input type="password"
+            placeholder="Password"
+            className={styles['input-field']}
+            onChange={(e)=>this.onChangeInput(e, "password")}
+            value={this.state.password}
+            />
+          <button className={styles['button']}
+            onClick={()=>this.onClickLogin()}>
+            Login
+          </button>
+        </div>
       </div>
     );
   }
@@ -69,4 +76,6 @@ function loginStateSelector(state) {
   };
 }
 
-export const Login = connect(loginStateSelector, loginActionCreators)(withRouter(_Login));
+const Router_Login = withRouter(_Login);
+const Style_Router_Login = CSSModules(Router_Login, styles);
+export const Login = connect(loginStateSelector, loginActionCreators)(Style_Router_Login);
