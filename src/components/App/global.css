@@ -47,3 +47,10 @@
 :global .window button {
   font-size: 40px;
 }
+
+/* @alex ????: is this something good to do? */
+:global * {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
