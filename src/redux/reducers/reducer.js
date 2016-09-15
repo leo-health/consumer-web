@@ -1,19 +1,21 @@
 import {fromJS, Map} from 'immutable';
-import {ActionTypes} from '../actions/action_creators';
+import {combineReducers} from 'redux-immutable';
 import {PatientListActionTypes} from '../actions/patient_list_action_creators';
 import {SlotListActionTypes} from '../actions/slot_list_action_creators';
 import {AppointmentTypeListActionTypes} from '../actions/appointment_type_list_action_creators';
-import {combineReducers} from 'redux-immutable';
 import {
   selectObject,
   requestObjects,
   receiveObjects,
   requestFailure
 } from './object_list_reducers.js';
+import {authentication} from './authentication_reducer';
+import {entities} from './entities_reducers';
 
 
 // TODO: http://redux.js.org/docs/recipes/ReducingBoilerplate.html
 
+// TODO: move this stuff into separate files
 
 function schedulingAppointmentType(state = Map(), action) {
   switch (action.type) {
@@ -33,7 +35,7 @@ function schedulingPatient(state = Map(), action) {
       return selectObject(state, action.payload.patient.get("id"));
     case PatientListActionTypes.REQUEST_PATIENTS:
       return requestObjects(state);
-    case PatientListActionTypes.RECEIVE_PATIENTS:
+    case PatientListActionTypes.PATIENT_REQUEST_SUCCESS:
       return receiveObjects(state, action.payload.objectList);
   }
   return state;
@@ -59,6 +61,8 @@ function schedulingSlot(state = Map(), action) {
 }
 
 export default combineReducers({
+  entities,
+  authentication,
   schedulingPatient,
   schedulingSlot,
   schedulingAppointmentType

@@ -1,21 +1,9 @@
 import React from 'react';
-import Header from '../Header/Header';
-import Navbar from '../Navbar/Navbar';
-import Recent from '../Recent/Recent';
-import styles from './global.css';
+import AuthWrapper from './AuthWrapper';
 
-export default React.createClass({
+const App = ({children}) =>
+<div className="container">
+  {children}
+</div>;
 
-  render: function() {
-    return (
-      <div className="container">
-        <Header/>
-        <Navbar/>
-          <div className="body">
-            <Recent/>
-            { this.props.children }
-          </div>
-      </div>
-    );
-  }
-});
+export default AuthWrapper(App, state=>state.get("authentication"));

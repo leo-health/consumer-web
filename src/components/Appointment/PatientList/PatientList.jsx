@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import * as actionCreators from '../../../redux/actions/patient_list_action_creators';
-import {ItemSelectionList} from '../../Generic/ItemSelectionList'
+import {ItemSelectionList} from '../../Generic/ItemSelectionList';
+import {allEntitiesSelector} from '../../../redux/selectors/entities_selectors';
 
 export class PatientList extends Component {
 
@@ -40,19 +41,12 @@ export class PatientList extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function patientListSelector(state) {
   return {
-    objectList: state.get("objectList"),
-    isLoading: state.get("isLoading"),
-    selectedObjectID: state.get("selectedObjectID")
+    objectList: allEntitiesSelector(state, "patients"),
+    isLoading: state.getIn(["schedulingPatient","isLoading"]),
+    selectedObjectID: state.getIn(["schedulingPatient","selectedObjectID"])
   };
 }
 
-const mapFullStateToProps = (statePath) => (fullState) => {
-  const state = fullState.getIn(statePath);
-  return mapStateToProps(state);
-};
-
-export const PatientListContainer = connect(
-  mapFullStateToProps(["schedulingPatient"])
-)(withRouter(PatientList));
+export const PatientListContainer = connect(patientListSelector)(withRouter(PatientList));
