@@ -1,5 +1,6 @@
 import React from 'react';
 import {Route, IndexRoute, Router, browserHistory} from 'react-router';
+import {loadCachedAuthToken} from '../Login/login_action_creators';
 import App from './App';
 import Home from './Home';
 import Header from '../Header/Header';
@@ -28,24 +29,33 @@ export const routeURLs = {
   settings: "/settings"
 };
 
-export function configureRoutes(store) {
+function authSelector(state) {
+  return state.getIn(["authentication", "token"]);
+}
 
-  function authTransition(nextState, replace, callback) {
-    const state = store.getState();
-    const authData = state.getIn(["authentication", "token"]);
+// TODO: break into other file, something like authHelper.js
+function authTransition(store) {
+  return function(nextState, replace, callback) {
+    const inMemoryAuthToken = authSelector(store.getState());
+    if (!inMemoryAuthToken) {
+      store.dispatch(loadCachedAuthToken());
+    }
 
-    if (!authData) {
+    const onDiskAuthToken = authSelector(store.getState());
+    if (!onDiskAuthToken) {
       replace('/login');
     }
 
     callback();
   }
+}
 
+export function configureRoutes(store) {
   return (
     <Router history={browserHistory}>
       <Route>
         <Route path="/login" component={Login}/>
-        <Route path="/" component={App} onEnter={authTransition}>
+        <Route path="/" component={App} onEnter={authTransition(store)}>
           <Route component={Home}>
             <IndexRoute/>
             <Route path="chat" component={Chat}/>

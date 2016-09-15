@@ -5,7 +5,8 @@ import * as Constants from '../../config/constants';
 export const LoginActionTypes = {
   LOGIN_REQUEST: 'LOGIN_REQUEST',
   LOGIN_SUCCESS: 'LOGIN_SUCCESS',
-  LOGIN_FAIL: 'LOGIN_FAIL'
+  LOGIN_FAIL: 'LOGIN_FAIL',
+  LOAD_CACHED_AUTH_TOKEN: 'LOAD_CACHED_AUTH_TOKEN'
 }
 
 export function loginRequest() {
@@ -26,6 +27,15 @@ export function loginFail(error) {
   return {
     type: LoginActionTypes.LOGIN_FAIL,
     error
+  };
+}
+
+// NOTE: this one may belong in a separate file, if we are using these "modules" to represent only actions triggered by user activity
+// this one is automatic
+// this is also the reason why logout is in settings_action_creators instead of here. Maybe authentication should be app-wide instead of module specific
+export function loadCachedAuthToken() {
+  return {
+    type: LoginActionTypes.LOAD_CACHED_AUTH_TOKEN
   };
 }
 

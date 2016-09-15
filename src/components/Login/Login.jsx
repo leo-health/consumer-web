@@ -17,14 +17,8 @@ class _Login extends React.Component {
     }
   }
 
-  // componentWillMount() {
-  //   // TODO: REMOVE THIS ONCE AUTH TOKEN IS CACHED
-  //   this.onSubmit();
-  // }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.token) {
-      debugger;
       this.props.router.push(routeURLs.index);
     }
   }
@@ -41,7 +35,6 @@ class _Login extends React.Component {
   }
 
   render() {
-
     if (this.props.isLoading) {
       return <LoadingSpinner/>;
     }
