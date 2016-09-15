@@ -24,6 +24,7 @@ class _Login extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.token) {
+      debugger;
       this.props.router.push(routeURLs.index);
     }
   }
@@ -34,7 +35,7 @@ class _Login extends React.Component {
     });
   }
 
-  onSubmit() {
+  onClickLogin() {
     const {email, password} = this.state;
     this.props.submitLoginAsync(email, password);
   }
@@ -66,7 +67,7 @@ class _Login extends React.Component {
             value={this.state.password}
             />
           <button className={styles['button']}
-            onClick={()=>this.onSubmit()}>
+            onClick={()=>this.onClickLogin()}>
             Login
           </button>
         </div>
