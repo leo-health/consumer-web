@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
+import styles from './settings.css';
 import {routeURLs} from '../App/Routes';
 import {logoutAsync} from './settings_action_creators';
 
@@ -13,9 +14,11 @@ class _Settings extends React.Component {
 
   render() {
     return (
-      <div className=''>
-        <button onClick={()=>this.onClickLogout()}>Logout</button>
-      </div>
+      <button
+        onClick={()=>this.onClickLogout()}
+        className={styles['logout-button']}>
+        Logout
+      </button>
     );
   }
 }
