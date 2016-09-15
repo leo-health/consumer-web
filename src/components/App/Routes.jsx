@@ -12,16 +12,19 @@ import {PatientListContainer} from '../Appointment/PatientList/PatientList';
 import {AppointmentTypeListContainer} from '../Appointment/AppointmentTypeList/AppointmentTypeList';
 import {SlotListContainer} from '../Appointment/SlotList/SlotList';
 import Settings from '../Settings/Settings';
+import Phr from '../Phr/Phr';
 
 export default
-<Route path="/" component={App}>
-  <Route path="/chat" component={Chat}/>
-  <Route path="/children" component={Children}/>
-  <Route path="/appointment" component={Appointment}>
-    <IndexRoute component={Scheduler}/>
-    <Route path="patients" component={PatientListContainer}/>
-    <Route path="appointment_types" component={AppointmentTypeListContainer}/>
-    <Route path="slots" component={SlotListContainer}/>
-  </Route>
-  <Route path="/settings" component={Settings}/>
-</Route>;
+//<Route path="/" component={App}>
+//  <Route path="/chat" component={Chat}/>
+//  <Route path="/children" component={Children}/>
+//  <Route path="/appointment" component={Appointment}>
+//    <IndexRoute component={Scheduler}/>
+//    <Route path="patients" component={PatientListContainer}/>
+//    <Route path="appointment_types" component={AppointmentTypeListContainer}/>
+//    <Route path="slots" component={SlotListContainer}/>
+//  </Route>
+//  <Route path="/settings" component={Settings}/>
+//</Route>;
+<Route path="/phr" component={Phr}/>
+
