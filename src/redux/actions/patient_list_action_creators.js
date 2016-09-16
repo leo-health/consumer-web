@@ -3,8 +3,7 @@ import * as Constants from '../../config/constants';
 
 export const PatientListActionTypes = {
   REQUEST_PATIENTS: 'REQUEST_PATIENTS',
-  RECEIVE_PATIENTS: 'RECEIVE_PATIENTS',
-  FETCH_PATIENTS: 'FETCH_PATIENTS',
+  PATIENT_REQUEST_SUCCESS: 'PATIENT_REQUEST_SUCCESS',
   SELECT_PATIENT: 'SELECT_PATIENT'
 }
 
@@ -23,24 +22,18 @@ export function requestPatients() {
 
 export function receivePatients(objectList) {
   return {
-    type: PatientListActionTypes.RECEIVE_PATIENTS,
+    type: PatientListActionTypes.PATIENT_REQUEST_SUCCESS,
     payload: {objectList}
   };
 }
 
-
-const temporaryErrorHandler = (scenario) => (reason) => {
-  console.log(`${scenario} - Caught error! ${reason}`);
-}
-
 export function fetchPatients() {
-  return function (dispatch) {
+  return function (dispatch, getState) {
     dispatch(requestPatients())
     const base = Constants.API_BASE_URL;
-    const auth = Constants.HARD_CODED_AUTH_TOKEN;
+    const auth = getState().getIn(["authentication","token"]);
     return fetch(`${base}/family?authentication_token=${auth}`)
       .then(response => response.json())
-      .then(json => dispatch(receivePatients(json.data.family.patients)))
-      .catch(temporaryErrorHandler("GET /patients"));
+      .then(json => dispatch(receivePatients(json.data.family.patients)));
   }
 }

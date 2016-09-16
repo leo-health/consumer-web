@@ -19,9 +19,7 @@ const Appointment = React.createClass({
               Schedule a visit with the practice
             </div>
           </div>
-          <div>
-            {this.props.children}
-          </div>
+          {this.props.children}
         </div>
       </div>
     );
