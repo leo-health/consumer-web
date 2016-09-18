@@ -4,8 +4,10 @@ import {withRouter} from 'react-router';
 import * as actionCreators from '../../../redux/actions/patient_list_action_creators';
 import {ItemSelectionList} from '../../Generic/ItemSelectionList';
 import {allEntitiesSelector} from '../../../redux/selectors/entities_selectors';
+import CSSModules from 'react-css-modules';
+import styles from './patient-list.css';
 
-export class PatientList extends Component {
+export class _PatientList extends Component {
 
   // TODO: separate this out [using object extension, inheritence?, find the right way]
   // props? propType = function
@@ -25,7 +27,7 @@ export class PatientList extends Component {
   }
 
   renderRow(object) {
-    return <h2>{object.get("first_name")}</h2>
+    return <div styleName='option'>{object.get("first_name")}</div>
   }
 
   // TODO: continue to explore abstraction strategies
@@ -49,4 +51,4 @@ function patientListSelector(state) {
   };
 }
 
-export const PatientListContainer = connect(patientListSelector)(withRouter(PatientList));
+export const PatientListContainer = connect(patientListSelector)(withRouter(CSSModules(_PatientList, styles)));

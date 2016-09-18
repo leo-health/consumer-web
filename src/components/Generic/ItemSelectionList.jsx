@@ -4,6 +4,10 @@ import CSSModules from 'react-css-modules';
 import styles from './item-selection-list.css';
 
 export class _ItemSelectionList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {count: props.initialCount};
+  }
 
   componentDidMount() {
     this.props.dispatch(this.props.fetchAction());
@@ -18,19 +22,17 @@ export class _ItemSelectionList extends React.Component {
     this.props.onClickObject(object);
   }
 
-  renderIfSelected(object) {
+  getOptionClass(object) {
     if (object.get("id") === this.props.selectedObjectID) {
-      return <h1>{"Selected"}</h1>;
+      return "selected";
     }
-    return null;
+    return "option";
   }
 
   render() {
     const {isLoading, objectList} = this.props;
 
-    if (isLoading || !objectList) {
-      return <LoadingSpinner/>;
-    }
+    if (isLoading || !objectList) { return <LoadingSpinner/>; }
 
     return (
       <div>
@@ -39,8 +41,7 @@ export class _ItemSelectionList extends React.Component {
             <div key={object.get("id")} onClick={()=>
                 this.onClickObject(object)
               }>
-              {this.renderIfSelected(object)}
-              <div styleName='option'>
+              <div styleName={this.getOptionClass(object)}>
                 {this.props.renderRow(object)}
                 <div styleName='line'></div>
               </div>

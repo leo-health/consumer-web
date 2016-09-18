@@ -1,9 +1,15 @@
 .option {
+  color: #666;
   margin-left: 5%;
   font-size: 50px;
-  font-weight: 300;
+  font-weight: 200;
   margin-top: 10%;
   text-align: left;
+}
+
+.selected {
+  composes: option;
+  font-weight: 500;
 }
 
 .line {
