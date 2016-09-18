@@ -6,7 +6,6 @@ import URI from 'urijs';
 export const SlotListActionTypes = {
   REQUEST_SLOTS: 'REQUEST_SLOTS',
   RECEIVE_SLOTS: 'RECEIVE_SLOTS',
-  FETCH_SLOTS: 'FETCH_SLOTS',
   SELECT_SLOT: 'SELECT_SLOT',
   SLOT_REQUEST_FAILURE: 'SLOT_REQUEST_FAILURE'
 }
@@ -88,10 +87,10 @@ function randomlyUniqueByTimeSlots(slots) {
 }
 
 export function fetchSlots(appointment_type_id) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
     dispatch(requestSlots())
 
-    const authentication_token = Constants.HARD_CODED_AUTH_TOKEN;
+    const authentication_token = getState().getIn(["authentication","token"]);
     const start_date = moment()
     const end_date = start_date.clone().add(6, "months");
 

@@ -6,7 +6,6 @@ import * as Constants from '../../config/constants';
 export const AppointmentTypeListActionTypes = {
   REQUEST_APPOINTMENT_TYPE: 'REQUEST_APPOINTMENT_TYPE',
   RECEIVE_APPOINTMENT_TYPE: 'RECEIVE_APPOINTMENT_TYPE',
-  FETCH_APPOINTMENT_TYPE: 'FETCH_APPOINTMENT_TYPE',
   SELECT_APPOINTMENT_TYPE: 'SELECT_APPOINTMENT_TYPE'
 }
 
@@ -40,25 +39,10 @@ const temporaryErrorHandler = (scenario) => (reason) => {
 }
 
 export function fetchAppointmentTypes() {
-
-  // Thunk middleware knows how to handle functions.
-  // It passes the dispatch method as an argument to the function,
-  // thus making it able to dispatch actions itself.
-
-  return function (dispatch) {
-
+  return function (dispatch, getState) {
     dispatch(requestAppointmentTypes())
-
-    // The function called by the thunk middleware can return a value,
-    // that is passed on as the return value of the dispatch method.
-
-    // In this case, we return a promise to wait for.
-    // This is not required by thunk middleware, but it is convenient for us.
-
-    // TODO: abstract api requests into separate file
-
     const base = Constants.API_BASE_URL;
-    const auth = Constants.HARD_CODED_AUTH_TOKEN;
+    const auth = getState().getIn(["authentication","token"]);
     return fetch(`${base}/appointment_types?authentication_token=${auth}`)
       .then(response => response.json())
       .then(json => dispatch(receiveAppointmentTypes(json.data)))

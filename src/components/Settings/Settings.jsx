@@ -1,13 +1,26 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
+import styles from './settings.css';
+import {routeURLs} from '../App/Routes';
+import {logoutAsync} from './settings_action_creators';
 
-const Settings = React.createClass({
-  render: function() {
+class _Settings extends React.Component {
+
+  onClickLogout() {
+    this.props.router.push(routeURLs.login);
+    this.props.logoutAsync();
+  }
+
+  render() {
     return (
-      <div className=''>
-        THIS IS THE Settings COMPONENT
-      </div>
+      <button
+        onClick={()=>this.onClickLogout()}
+        className={styles['logout-button']}>
+        Logout
+      </button>
     );
   }
-});
+}
 
-export default Settings;
+export const Settings = connect(null, {logoutAsync})(withRouter(_Settings));

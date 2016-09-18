@@ -13,9 +13,7 @@ export function requestObjects(state) {
 }
 
 export function receiveObjects(state, objectList) {
-  return state
-  .set("objectList", fromJS(objectList))
-  .set("isLoading", false);
+  return state.set("isLoading", false);
 }
 
 export function requestFailure(state, apiError) {
