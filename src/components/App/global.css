@@ -44,6 +44,5 @@
   font-size: 40px;
 }
 
-:global .window button {
-  font-size: 40px;
-}
+:global .window button { font-size: 40px; }
+

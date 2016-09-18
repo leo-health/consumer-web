@@ -5,7 +5,6 @@ import * as actionCreators from '../../../redux/actions/schedule_action_creators
 import CSSModules from 'react-css-modules';
 import styles from './scheduler.css';
 
-
 // TODO: find a good pattern for these higher order components
 
 class _Scheduler extends Component {
@@ -20,29 +19,29 @@ class _Scheduler extends Component {
 
   render() {
     return (
-      <div className={styles.container}>
+      <div styleName='container'>
         <div onClick={()=>this.onClickRelativeURLPush("appointment_types")}
-             className={styles.option}>
+             styleName='option'>
           What are you coming in for?
-          <div className={styles.line}></div>
+          <div styleName='line'></div>
         </div>
         <div onClick={()=>this.onClickRelativeURLPush("patients")}
-             className={styles.option}>
+             styleName='option'>
           Which children need to be seen?
-          <div className={styles.line}></div>
+          <div styleName='line'></div>
         </div>
         <textarea defaultValue='Add any questions or comments you have about the appointment.'
-                  className={styles.text}></textarea>
-        <div className={styles.line}></div>
+                  styleName='text'></textarea>
+        <div styleName='line'></div>
         <div onClick={()=>this.onClickRelativeURLPush("slots")}
-             className={styles.option}>
+             styleName='option'>
           When would you like to come in?
-          <div className={styles.line}></div>
+          <div styleName='line'></div>
         </div>
         <div onClick={()=>this.props.schedule()}
-             className={styles.button}>
-          <div className={styles.labelContainer}>
-            <div className={styles.label}>
+             styleName='button'>
+          <div styleName='labelContainer'>
+            <div styleName='label'>
               Confirm Visit
             </div>
           </div>
@@ -58,4 +57,4 @@ function mapStateToProps(state) {
   };
 }
 
-export const Scheduler = connect(mapStateToProps, actionCreators)(withRouter(_Scheduler));
+export const Scheduler = connect(mapStateToProps, actionCreators)(withRouter(CSSModules(_Scheduler, styles)));
