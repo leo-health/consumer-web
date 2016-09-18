@@ -95,4 +95,4 @@ function propsSelector(state) {
   return {patient, appointmentType, slot};
 }
 
-export const Scheduler = connect(propsSelector, actionCreators)((withRouter(CSSModules(_Scheduler, styles))));
+export const Scheduler = connect(propsSelector, actionCreators)(withRouter(CSSModules(_Scheduler, styles)));

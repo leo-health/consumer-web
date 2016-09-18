@@ -9,8 +9,10 @@
 
 .selected {
   composes: option;
-  font-weight: 500;
+  font-weight: 600;
 }
+
+.selected div { font-weight: 600; }
 
 .line {
   margin-top: 10%;

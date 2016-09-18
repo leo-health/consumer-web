@@ -5,7 +5,7 @@ import * as actionCreators from '../../../redux/actions/patient_list_action_crea
 import {ItemSelectionList} from '../../Generic/ItemSelectionList';
 import {allEntitiesSelector} from '../../../redux/selectors/entities_selectors';
 import CSSModules from 'react-css-modules';
-import styles from './patient-list.css';
+import styles from '../../Generic/item-selection-list.css';
 
 export class _PatientList extends Component {
 

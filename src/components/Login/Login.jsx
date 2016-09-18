@@ -35,34 +35,43 @@ class _Login extends React.Component {
   }
 
   render() {
-    if (this.props.isLoading) {
-      return <LoadingSpinner/>;
-    }
+    if (this.props.isLoading) { return <LoadingSpinner/>; }
+
+    var logoUrl = require("../../images/long-logo.png");
 
     return (
       <div>
-        <div className={styles['container']}>
-          <div className={styles['header-container']}>
-            <div className={styles['header']}>
-              Login to your account
-            </div>
+        <div styleName='container'>
+          <div styleName='logo-container'>
+            <img src={logoUrl} alt="Leo Health"/>
           </div>
-          <input type="text"
-            placeholder="Email"
-            className={styles['input-field']}
-            onChange={(e)=>this.onChangeInput(e, "email")}
-            value={this.state.email}
-            />
-          <input type="password"
-            placeholder="Password"
-            className={styles['input-field']}
-            onChange={(e)=>this.onChangeInput(e, "password")}
-            value={this.state.password}
-            />
-          <button className={styles['button']}
-            onClick={()=>this.onClickLogin()}>
-            Login
-          </button>
+          <div styleName='input-container'>
+            <input type="text"
+              placeholder="Email"
+              styleName='input'
+              onChange={(e)=>this.onChangeInput(e, "email")}
+              value={this.state.email}
+              />
+          </div>
+          <div styleName='input-container'>
+            <input type="password"
+              placeholder="Password"
+              styleName='input'
+              onChange={(e)=>this.onChangeInput(e, "password")}
+              value={this.state.password}
+              />
+            <button styleName='button'
+              onClick={()=>this.onClickLogin()}>
+              Login
+            </button>
+          </div>
+          <div styleName='question'>
+            Not a member yet?
+            <a href="https://provider.leohealth.com/registration"
+               styleName='link'>
+            Join Leo
+          </a>
+          </div>
         </div>
       </div>
     );
@@ -76,6 +85,4 @@ function loginStateSelector(state) {
   };
 }
 
-const Router_Login = withRouter(_Login);
-const Style_Router_Login = CSSModules(Router_Login, styles);
-export const Login = connect(loginStateSelector, loginActionCreators)(Style_Router_Login);
+export const Login = connect(loginStateSelector, loginActionCreators)(withRouter(CSSModules(_Login, styles)));
