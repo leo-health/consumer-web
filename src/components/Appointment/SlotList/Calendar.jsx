@@ -24,6 +24,7 @@ export default class Calendar extends React.Component {
     let i = 0;
     while (i<7) {
       dates.push(moment(startDate).add(1, "days"));
+      i+=1;
     }
     return dates;
   }
