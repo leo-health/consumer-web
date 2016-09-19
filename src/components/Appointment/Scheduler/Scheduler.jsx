@@ -10,8 +10,20 @@ import {routeURLs} from '../../App/Routes';
 // TODO: find a good pattern for these higher order components
 class _Scheduler extends Component {
 
-  componentWillReceiveProps(nextProps) {
+  readyToChooseSlot() {
+    const {appointmentType, patient} = this.props;
+    return appointmentType && patient;
+  }
 
+  onClickSlots() {
+    if (this.readyToChooseSlot()) {
+      this.props.router.push(routeURLs.appointment_choose_slot);
+    }
+  }
+
+  onClickSubmit() {
+    this.routeToHome(); // TODO: only on success
+    this.props.schedule();
   }
 
   routeToHome() {
@@ -21,17 +33,13 @@ class _Scheduler extends Component {
     }
   }
 
-  onClickSubmit() {
-    this.routeToHome(); // TODO: only on success
-    this.props.schedule();
-  }
-
-  slotCopy({appointmentType, patient, slot}) {
+  slotCopy() {
+    const {slot} = this.props;
     if (slot) {
       const formattedTime = slot.get("start_datetime"); // TODO: format correctly
       const formattedDate = slot.get("start_datetime"); // TODO: format correctly
       return `My visit is at ${formattedTime} on ${formattedDate}`;
-    } else if (appointmentType && patient) {
+    } else if (this.readyToChooseSlot()) {
       return "When would you like to be seen?";
     }
     return "Please complete the fields above to select a date and time";
@@ -64,7 +72,7 @@ class _Scheduler extends Component {
         <textarea defaultValue={notesCopy}
                   styleName='text'></textarea>
         <div styleName='line'></div>
-        <div onClick={()=>this.props.router.push(routeURLs.appointment_choose_slot)}
+          <div onClick={()=>this.onClickSlots()}
              styleName='option'>
           {slotCopy}
           <div styleName='line'></div>
