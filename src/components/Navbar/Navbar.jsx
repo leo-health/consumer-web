@@ -6,7 +6,8 @@ import styles from './navbar.css';
 const Navbar = React.createClass({
   render: function() {
     var containerClass = 'expanded-container';
-    if(this.props.scrollPosition > 15) {
+
+    if(!this.props.expanded) {
       containerClass = 'collapsed-container';
     }
 

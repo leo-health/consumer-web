@@ -10,15 +10,19 @@
 .expanded-container {
   composes: container;
   height: 23vh;
+  transition: height 0.5s;
+  -webkit-transition: height 0.5s;
 }
 
 .collapsed-container {
   composes: container;
   height: 10vh;
+  transition: height 0.5s;
+  -webkit-transition: height 0.5s;
 }
 
 .logo-container {
-  margin-top: 1vh;
+  margin-top: 2.5vh;
   text-align: center;
 }
 
@@ -31,6 +35,7 @@
 
 .button-container {
   width: 100vw;
+  margin-top: 1.5vh;
 }
 
 .icon {

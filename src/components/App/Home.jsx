@@ -7,23 +7,26 @@ import styles from './global.css';
 
 export default React.createClass({
   getInitialState() {
-    return {scroll: 0, expanded: true}
+    return {expanded: true}
   },
 
   handleScroll() {
     var node = ReactDom.findDOMNode(this.refs.body);
-    this.setState({scroll: node.scrollTop})
+    if(node.scrollTop > 15) {
+      this.setState({expanded: false})
+    }
+    else {
+      this.setState({expanded: true})
+    }
   },
 
   render() {
     var bodyClass = 'expanded-body';
-    if(this.state.scroll > 15) {
-      bodyClass = 'collapsed-body'
-    }
+    if(!this.state.expanded) { bodyClass = 'collapsed-body' }
     return (
       <div onScroll={this.handleScroll}>
-        <Header scrollPosition={this.state.scroll}/>
-        <Navbar scrollPosition={this.state.scroll}/>
+        <Header expanded={this.state.expanded}/>
+        <Navbar expanded={this.state.expanded}/>
           <div className={bodyClass}
                ref='body'>
             <Recent/>

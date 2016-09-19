@@ -12,7 +12,8 @@ const Header = React.createClass({
     var phrUrl = require("../../images/phr.png");
     var containerClass = 'expanded-container';
     var greetingClass = 'expanded'
-    if(this.props.scrollPosition > 15) {
+
+    if(!this.props.expanded) {
       greetingClass = 'collapsed';
       containerClass = 'collapsed-container';
     }
