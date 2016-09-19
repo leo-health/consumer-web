@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router';
 import styles from './phr.css';
 import PhrNotes from './phrNotes'
+import Allergies from './allergies'
+import Medications from './medications'
+import Immunizations from './immunizations'
 import CSSModules from 'react-css-modules';
 
 const Phr= React.createClass({
@@ -35,7 +38,13 @@ const Phr= React.createClass({
         </div>
 
         <div styleName='lists'>
-
+          <p>
+            As your daughter's data becomes available this section will populate with important facts and figures
+            related to her health and development
+          </p>
+          <Allergies/>
+          <Medications/>
+          <Immunizations/>
           <PhrNotes/>
         </div>
       </div>

@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router';
 import styles from './phr.css';
 import CSSModules from 'react-css-modules';
 
-const PhrNotes= React.createClass({
+const Allergies= React.createClass({
   render: function() {
     return (
       <div>
@@ -15,4 +14,4 @@ const PhrNotes= React.createClass({
   }
 });
 
-export default CSSModules(PhrNotes, styles);
+export default CSSModules(Allergies, styles);
