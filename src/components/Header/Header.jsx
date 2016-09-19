@@ -33,4 +33,3 @@ const Header = React.createClass({
 });
 
 export default CSSModules(Header, styles);
-

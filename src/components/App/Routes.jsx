@@ -34,29 +34,28 @@ function authSelector(state) {
 }
 
 // TODO: break into other file, something like authHelper.js
-//function authTransition(store) {
-//  return function(nextState, replace, callback) {
-//    const inMemoryAuthToken = authSelector(store.getState());
-//    if (!inMemoryAuthToken) {
-//      store.dispatch(loadCachedAuthToken());
-//    }
-//
-//    const onDiskAuthToken = authSelector(store.getState());
-//    if (!onDiskAuthToken) {
-//      replace('/login');
-//    }
-//    callback();
-//  }
-//}
-//<Route path="/" component={App} onEnter={authTransition(store)}>
+function authTransition(store) {
+  return function(nextState, replace, callback) {
+    const inMemoryAuthToken = authSelector(store.getState());
+    if (!inMemoryAuthToken) {
+      store.dispatch(loadCachedAuthToken());
+    }
+
+    const onDiskAuthToken = authSelector(store.getState());
+    if (!onDiskAuthToken) {
+      replace('/login');
+    }
+    callback();
+  }
+}
+
 export function configureRoutes(store) {
   return (
     <Router history={browserHistory}>
       <Route>
         <Route path="/login" component={Login}/>
         <Route path="/" component={App}>
-          <Route path="phr" component={Phr}>
-          </Route>
+          <Route path="phr" component={Phr}/>
           <Route component={Home}>
             <IndexRoute/>
             <Route path="chat" component={Chat}/>
