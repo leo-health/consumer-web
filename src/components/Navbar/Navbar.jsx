@@ -5,8 +5,13 @@ import styles from './navbar.css';
 
 const Navbar = React.createClass({
   render: function() {
+    var containerClass = 'expanded-container';
+    if(this.props.scrollPosition > 15) {
+      containerClass = 'collapsed-container';
+    }
+
     return (
-      <div styleName='container'>
+      <div styleName={containerClass}>
         <div styleName='link-container'>
           <Link to="/appointment" styleName='link'>
             Schedule a visit

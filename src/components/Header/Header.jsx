@@ -10,9 +10,15 @@ const Header = React.createClass({
     var logoUrl = require("../../images/logo.png");
     var settingsUrl = require("../../images/settings.png");
     var phrUrl = require("../../images/phr.png");
+    var containerClass = 'expanded-container';
+    var greetingClass = 'expanded'
+    if(this.props.scrollPosition > 15) {
+      greetingClass = 'collapsed';
+      containerClass = 'collapsed-container';
+    }
 
     return (
-      <div styleName='container'>
+      <div styleName={containerClass}>
         <div styleName='button-container'>
           <Link to="/settings" styleName='settings'>
             <img src={settingsUrl} alt="Leo Health" styleName='logo'/>
@@ -26,7 +32,9 @@ const Header = React.createClass({
             <img src={logoUrl} alt="Leo Health" styleName='logo'/>
           </Link>
         </div>
-        <Greeting/>
+        <div styleName={greetingClass}>
+          <Greeting/>
+        </div>
       </div>
     );
   }

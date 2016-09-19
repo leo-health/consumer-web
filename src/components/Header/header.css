@@ -5,7 +5,16 @@
   top: 0px;
   left: 0px;
   width: 100vw;
+}
+
+.expanded-container {
+  composes: container;
   height: 23vh;
+}
+
+.collapsed-container {
+  composes: container;
+  height: 10vh;
 }
 
 .logo-container {
@@ -45,4 +54,13 @@
   float: right;
   right: 0px;
   margin-right: 10px;
+}
+
+.expanded {
+
+}
+
+.collapsed {
+  position: absolute;
+  top: -100vh;
 }

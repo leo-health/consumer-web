@@ -24,7 +24,6 @@ export class AppointmentTypeList extends Component {
   }
 
   render() {
-    console.log(this.props);
     return <ItemSelectionList
       fetchAction={()=>this.fetchAction()}
       selectAction={(object)=>this.selectAction(object)}
