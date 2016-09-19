@@ -1,7 +1,13 @@
-import React, {Component} from 'react';
+import React from 'react';
 import LoadingSpinner from './LoadingSpinner';
+import CSSModules from 'react-css-modules';
+import styles from './item-selection-list.css';
 
-export class ItemSelectionList extends Component {
+export class _ItemSelectionList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {count: props.initialCount};
+  }
 
   componentDidMount() {
     this.props.dispatch(this.props.fetchAction());
@@ -16,34 +22,35 @@ export class ItemSelectionList extends Component {
     this.props.onClickObject(object);
   }
 
-  renderIfSelected(object) {
+  getOptionClass(object) {
     if (object.get("id") === this.props.selectedObjectID) {
-      return <h1>{"Selected"}</h1>;
+      return "selected";
     }
-    return null;
+    return "option";
   }
 
   render() {
-
     const {isLoading, objectList} = this.props;
 
-    if (isLoading || !objectList) {
-      return <LoadingSpinner/>;
-    }
+    if (isLoading || !objectList) { return <LoadingSpinner/>; }
 
     return (
       <div>
         {objectList.map(object=>{
           return (
-            <button key={object.get("id")} onClick={()=>
+            <div key={object.get("id")} onClick={()=>
                 this.onClickObject(object)
               }>
-              {this.renderIfSelected(object)}
-              {this.props.renderRow(object)}
-            </button>
+              <div styleName={this.getOptionClass(object)}>
+                {this.props.renderRow(object)}
+                <div styleName='line'></div>
+              </div>
+            </div>
           );
         })}
       </div>
     );
   }
 }
+
+export const ItemSelectionList = CSSModules(_ItemSelectionList, styles);

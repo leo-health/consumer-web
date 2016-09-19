@@ -7,6 +7,7 @@ import styles from './scheduler.css';
 import {singleEntitySelector} from '../../../redux/selectors/entities_selectors';
 import {routeURLs} from '../../App/Routes';
 
+// TODO: find a good pattern for these higher order components
 class _Scheduler extends Component {
 
   componentWillReceiveProps(nextProps) {
@@ -49,29 +50,29 @@ class _Scheduler extends Component {
   render() {
     const {appointmentTypeCopy, patientCopy, slotCopy, submitButtonCopy, notesCopy} = this.uiCopy(this.props);
     return (
-      <div className={styles.container}>
+      <div styleName='container'>
         <div onClick={()=>this.props.router.push(routeURLs.appointment_choose_appointment_type)}
-             className={styles.option}>
+             styleName='option'>
           {appointmentTypeCopy}
-          <div className={styles.line}></div>
+          <div styleName='line'></div>
         </div>
         <div onClick={()=>this.props.router.push(routeURLs.appointment_choose_patient)}
-             className={styles.option}>
+             styleName='option'>
           {patientCopy}
-          <div className={styles.line}></div>
+          <div styleName='line'></div>
         </div>
         <textarea defaultValue={notesCopy}
-                  className={styles.text}></textarea>
-        <div className={styles.line}></div>
+                  styleName='text'></textarea>
+        <div styleName='line'></div>
         <div onClick={()=>this.props.router.push(routeURLs.appointment_choose_slot)}
-             className={styles.option}>
+             styleName='option'>
           {slotCopy}
-          <div className={styles.line}></div>
+          <div styleName='line'></div>
         </div>
         <div onClick={()=>this.onClickSubmit()}
-             className={styles.button}>
-          <div className={styles.labelContainer}>
-            <div className={styles.label}>
+             styleName='button'>
+          <div styleName='label-container'>
+            <div styleName='label'>
               {submitButtonCopy}
             </div>
           </div>
@@ -94,4 +95,4 @@ function propsSelector(state) {
   return {patient, appointmentType, slot};
 }
 
-export const Scheduler = connect(propsSelector, actionCreators)(withRouter(_Scheduler));
+export const Scheduler = connect(propsSelector, actionCreators)(withRouter(CSSModules(_Scheduler, styles)));

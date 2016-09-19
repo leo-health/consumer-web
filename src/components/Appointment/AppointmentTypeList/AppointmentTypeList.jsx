@@ -20,7 +20,7 @@ export class AppointmentTypeList extends Component {
   }
 
   renderRow(object) {
-    return <h2>{object.get("name")}</h2>
+    return <div>{object.get("name")}</div>
   }
 
   render() {

@@ -1,45 +1,66 @@
 .container {
+  display: absolute;
   margin: auto;
-  height: 1000px;
-  width: 100%;
-  padding: 0px 30px;
-  position: absolute;
+  height: 100vh;
+  width: 100vw;
 }
 
-.header-container {
-  height: 40%;
+.logo-container {
+  margin-top: 15vh;
+  text-align: center;
+  margin-bottom: 10vh;
+}
+
+.input-container {
+  text-align: center;
+  margin-top: 5vh;
+  width: 100vw;
+}
+
+.input {
+  margin-top: 10vh;
+  display: inline-block;
   position: relative;
-  margin: 0 0 50px 0;
-}
-
-.header {
-  font-family: 'Raleway';
-  font-size: 90px;
-  font-weight: 200;
-  color: #FC5E48;
-  padding: 5%;
-  bottom: 0px;
-  position: absolute;
-}
-
-.input-field {
-  outline-width: 0px;
-  padding: 5%;
+  border: none;
   margin: 10px 0px 0px;
-  width: 100%;
-  font-family: 'Raleway';
+  width: 80vw;
   font-size: 50px;
-  font-weight: 200;
+  font-weight: 300;
+  border-bottom: 1px solid #666;
+}
+
+.input:focus {
+  outline: none;
 }
 
 .button {
-  margin: 10px 0px 0px;
-  width: 100%;
+  width: 80vw;
   height: 130px;
-  font-family: 'Raleway';
-  font-size: 50px;
-  font-weight: 200;
+  margin-top: 5vh;
+  font-size: 40px;
+  text-transform: uppercase;
+  font-weight: 600;
   color: white;
   background-color: #FC5E48;
-  border: 0;
+  border: none;
+  border-radius: 10px;
+}
+
+.question {
+  font-size: 35px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #FC5E48;
+  margin-top: 8vh;
+}
+
+.link {
+  display: block;
+  font-size: 40px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  color: #FC5E48;
 }

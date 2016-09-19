@@ -1,0 +1,22 @@
+.option {
+  color: #666;
+  margin-left: 5%;
+  font-size: 50px;
+  font-weight: 200;
+  margin-top: 10%;
+  text-align: left;
+}
+
+.selected {
+  composes: option;
+  font-weight: 600;
+}
+
+.selected div { font-weight: 600; }
+
+.line {
+  margin-top: 10%;
+  height: 1px;
+  width: 95%;
+  background-color: #666;
+}
