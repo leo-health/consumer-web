@@ -15,8 +15,8 @@ import {AppointmentTypeListContainer} from '../Appointment/AppointmentTypeList/A
 import {SlotListContainer} from '../Appointment/SlotList/SlotList';
 import {Settings} from '../Settings/Settings';
 import {Login} from '../Login/Login';
-import Phr from '../Phr/Phr';
-// ????: should this go into constants.js?
+import Phr from '../Phr/phr';
+
 export const routeURLs = {
   index: "/",
   login: "/login",
@@ -34,27 +34,29 @@ function authSelector(state) {
 }
 
 // TODO: break into other file, something like authHelper.js
-function authTransition(store) {
-  return function(nextState, replace, callback) {
-    const inMemoryAuthToken = authSelector(store.getState());
-    if (!inMemoryAuthToken) {
-      store.dispatch(loadCachedAuthToken());
-    }
-
-    const onDiskAuthToken = authSelector(store.getState());
-    if (!onDiskAuthToken) {
-      replace('/login');
-    }
-    callback();
-  }
-}
-
+//function authTransition(store) {
+//  return function(nextState, replace, callback) {
+//    const inMemoryAuthToken = authSelector(store.getState());
+//    if (!inMemoryAuthToken) {
+//      store.dispatch(loadCachedAuthToken());
+//    }
+//
+//    const onDiskAuthToken = authSelector(store.getState());
+//    if (!onDiskAuthToken) {
+//      replace('/login');
+//    }
+//    callback();
+//  }
+//}
+//<Route path="/" component={App} onEnter={authTransition(store)}>
 export function configureRoutes(store) {
   return (
     <Router history={browserHistory}>
       <Route>
         <Route path="/login" component={Login}/>
-        <Route path="/" component={App} onEnter={authTransition(store)}>
+        <Route path="/" component={App}>
+          <Route path="phr" component={Phr}>
+          </Route>
           <Route component={Home}>
             <IndexRoute/>
             <Route path="chat" component={Chat}/>

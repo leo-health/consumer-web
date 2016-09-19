@@ -1,0 +1,75 @@
+.container {
+    width: 100vw;
+}
+
+.header {
+    height: 23vh;
+    text-align: center;
+    background-color: #FF5F40;
+}
+
+.top {
+    padding: 3vh 0 0 3vw;
+}
+
+.backArrow{
+    float: left;
+}
+
+.patientNames {
+    overflow-x: auto;
+    clear: left;
+    list-style-type:none;
+}
+
+.patientNames::-webkit-scrollbar {
+    display: none;
+}
+
+.patientNames li {
+    font-size: 24pt;
+    display: inline;
+    padding: 0 5vw 0 5vw;
+    color: white;
+}
+
+.whiteLine {
+    margin: 1vh 0 1vh 0;
+    border-bottom: .2vh solid white;
+}
+
+.bottom {
+    padding-left: 5vw;
+}
+
+.round{
+    float: left;
+    display: inline-block;
+    margin-left: 10vw;
+    width: 10vh;
+    height: 10vh;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 4pt solid white;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.greeting {
+    display: inline-block;
+    font-size: 50pt;
+    color: white;
+    position: relative;
+}
+
+.lists {
+    clear: both;
+    font-size: 33pt;
+    padding: 0 5vw 0 5vw;
+}
+
+.greyLine {
+    margin: 1vh 0 1vh 0;
+    border-bottom: .2vh solid grey;
+}
+
