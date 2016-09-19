@@ -12,6 +12,11 @@
   justify-content: center;
 }
 
+.week-item-selected {
+  composes: week-item;
+  background-color: white;
+}
+
 .week-item-content {
   background-color: purple;
 

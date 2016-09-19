@@ -39,8 +39,12 @@ export default function entities(state = Map(), action) {
 
 // selectors
 
-export const getEntities = (state, type) => {
-  return state.get(type);
+export const getAllEntities = (state, type) => {
+  const entityMap = state.getIn(["entities", type]);
+  if (!entityMap) {
+    return undefined;
+  }
+  return entityMap.valueSeq().toList();
 };
 
 export const getById = (state, type, id) => {

@@ -8,7 +8,7 @@ import {DATE_FORMATS} from '../../../config/constants';
 import {filterSlotsByDate} from '../../../redux/actions/slot_list_action_creators';
 import {getSlotFilterDate} from '../../../redux/reducers';
 
-class Calendar extends React.Component {
+export default class Calendar extends React.Component {
 
   // NOTE: needs ES7?
   // static propTypes = {
@@ -16,8 +16,9 @@ class Calendar extends React.Component {
   // };
 
   onClickDate(date) {
-    console.log(`clicked ${date}`);
-    this.props.filterSlotsByDate(date);
+    if (this.props.onClickDate) {
+      this.props.onClickDate(date);
+    }
   }
 
   dateArray() {
@@ -41,11 +42,13 @@ class Calendar extends React.Component {
       <div className={styles['calendar']}>
         {this.dateArray().map((date)=>{
           const dateString = date.format();
-          const selected = dateString === filterDate;
+          const selected = date.isSame(filterDate, "day");
+          const className = selected ? 'week-item-selected' : 'week-item';
+
           return (
             <div key={dateString}
-              className={styles['week-item']}
-              onClick={()=>this.onClickDate(date)}>
+              className={styles[className]}
+              onClick={()=>this.onClickDate(dateString)}>
               <div className={styles['week-item-content']}>
                 <div>
                   {date.format(DATE_FORMATS.DAY_OF_MONTH)}
@@ -62,11 +65,11 @@ class Calendar extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  filterDate: getSlotFilterDate(state),
-  // availableDates: getAvailableSlotDates(state)
-});
-
-
-debugger;
-export default connect(mapStateToProps, {filterSlotsByDate})(Calendar);
+// const mapStateToProps = (state) => ({
+//   filterDate: getSlotFilterDate(state),
+//   // availableDates: getAvailableSlotDates(state)
+// });
+//
+//
+// debugger;
+// export default connect(mapStateToProps, {filterSlotsByDate})(Calendar);
