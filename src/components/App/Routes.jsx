@@ -45,6 +45,7 @@ function authTransition(store) {
     if (!onDiskAuthToken) {
       replace('/login');
     }
+
     callback();
   }
 }
@@ -54,7 +55,7 @@ export function configureRoutes(store) {
     <Router history={browserHistory}>
       <Route>
         <Route path="/login" component={Login}/>
-        <Route path="/" component={App}>
+        <Route path="/" component={App} onEnter={authTransition(store)}>
           <Route path="phr" component={Phr}/>
           <Route component={Home}>
             <IndexRoute/>
