@@ -37,9 +37,7 @@ export class SlotList extends Component {
 
     return (
       <div>
-        <div>
-          <Calendar startDate={this.props.objectList[0] || moment()}/>
-        </div>
+        <Calendar startDate={this.props.objectList[0] || moment()}/>
         <ItemSelectionList
           fetchAction={()=>this.fetchAction()}
           selectAction={(object)=>this.selectAction(object)}
