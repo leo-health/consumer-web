@@ -15,7 +15,9 @@ const Phr= React.createClass({
       <div styleName='container'>
         <div styleName='header'>
           <div styleName='top'>
-            <img styleName='backArrow' src={backUrl}/>
+            <Link to="/">
+              <img styleName='backArrow' src={backUrl}/>
+            </Link>
             <ul styleName='patientNames'>
               <li>Christopher</li>
               <li>Emily</li>
@@ -38,10 +40,8 @@ const Phr= React.createClass({
         </div>
 
         <div styleName='lists'>
-          <p>
-            As your daughter's data becomes available this section will populate with important facts and figures
-            related to her health and development
-          </p>
+          <p>As your daughter's data becomes available this section will populate with important facts and figures
+            related to her health and development</p>
           <Allergies/>
           <Medications/>
           <Immunizations/>
