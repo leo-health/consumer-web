@@ -3,10 +3,22 @@
   width: 100vw;
   left: 0;
   position: fixed;
-  top: 23vh;
   background-color: white;
   border-bottom: 1px solid #666;
+}
 
+.expanded-container {
+  composes: container;
+  top: 23vh;
+  transition: top 0.5s;
+  -webkit-transition: top 0.5s;
+}
+
+.collapsed-container {
+  composes: container;
+  top: 10vh;
+  transition: top 0.5s;
+  -webkit-transition: top 0.5s;
 }
 
 .navbar {

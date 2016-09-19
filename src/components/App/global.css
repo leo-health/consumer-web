@@ -1,9 +1,22 @@
-:global .body {
+:global .expanded-body,
+:global .collapsed-body {
   position: fixed;
-  top: 30vh;
-  height: 70vh;
   width: 100vw;
   overflow-y: auto;
+}
+
+:global .expanded-body {
+  top: 30vh;
+  height: 70vh;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+}
+
+:global .collapsed-body {
+  top: 18vh;
+  height: 82vh;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
 }
 
 :global div { font-family: 'Open Sans'; }
