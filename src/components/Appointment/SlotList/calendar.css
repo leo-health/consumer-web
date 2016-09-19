@@ -1,4 +1,18 @@
 .calendar {
   height: 200px;
   background-color: blue;
+  display: flex;
+}
+
+.week-item {
+  background-color: red;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.week-item-content {
+  background-color: purple;
+
 }

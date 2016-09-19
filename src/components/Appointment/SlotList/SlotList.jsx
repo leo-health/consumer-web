@@ -8,6 +8,7 @@ import ErrorMessage from '../../Generic/ErrorMessage';
 import {allEntitiesSelector} from '../../../redux/selectors/entities_selectors';
 import Calendar from './Calendar';
 import moment from 'moment';
+import {DATE_FORMATS} from '../../../config/constants';
 
 export class SlotList extends Component {
 
@@ -24,7 +25,9 @@ export class SlotList extends Component {
   }
 
   renderRow(object) {
-    const formattedDate = object.get("start_datetime");
+    const dateString = object.get("start_datetime");
+    const datetime = moment(dateString);
+    const formattedDate = datetime.format(DATE_FORMATS.HOUR_MINUTE_AM_PM);
     return <span>{formattedDate}</span>;
   }
 

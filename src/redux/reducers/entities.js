@@ -3,6 +3,13 @@ import {PatientListActionTypes} from '../actions/patient_list_action_creators';
 import {SlotListActionTypes} from '../actions/slot_list_action_creators';
 import {AppointmentTypeListActionTypes} from '../actions/appointment_type_list_action_creators';
 
+import moment from 'moment';
+import {DATE_FORMATS} from '../../config/constants';
+
+// ????: should selectors be in a separate file? or with the reducers?
+import * as entitiesSelectors from '../selectors/entities_selectors';
+
+
 // TODO: reduce boilerplate with https://github.com/acdlite/redux-actions
 
 function mergeEntities(state, key, objectList) {
@@ -16,7 +23,7 @@ function mergeEntities(state, key, objectList) {
   }, Map()));
 }
 
-export function entities(state = Map(), action) {
+export default function entities(state = Map(), action) {
   switch (action.type) {
     case PatientListActionTypes.PATIENT_REQUEST_SUCCESS:
       return mergeEntities(state, "patients", fromJS(action.payload.objectList));
@@ -28,3 +35,16 @@ export function entities(state = Map(), action) {
       return state;
   }
 }
+
+
+// selectors
+
+export const getEntities = (state, type) => {
+  return state.get(type);
+};
+
+export const getById = (state, type, id) => {
+  const allEntities = getEntities(state, type);
+  if (!allEntities) { return undefined; } // return null?
+  return allEntities.get("id");
+};
