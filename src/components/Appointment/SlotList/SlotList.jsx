@@ -14,7 +14,7 @@ export class SlotList extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {}; // TODO: set initial state.filterDate to the date of selected slot
   }
 
   startDate() {
@@ -36,13 +36,13 @@ export class SlotList extends Component {
 
   onClickSlot(slot) {
     const {dispatch, router} = this.props;
-    dispatch(actionCreators.selectSlot(object));
+    dispatch(actionCreators.selectSlot(slot));
     router.goBack();
   }
 
   onClickDate(date) {
     this.setState({
-      filterDate: date
+      filterDate: moment(date).startOf("day").format()
     });
   }
 
@@ -57,6 +57,8 @@ export class SlotList extends Component {
     const {slots} = this.props;
     if (!slots) { return []; }
     const filterDate = this.filterDate();
+
+    console.log(filterDate);
 
     const filteredSlots = slots.filter(slot => {
       const slotTime = moment(slot.get("start_datetime"));

@@ -6,6 +6,8 @@ import CSSModules from 'react-css-modules';
 import styles from './scheduler.css';
 import {singleEntitySelector} from '../../../redux/selectors/entities_selectors';
 import {routeURLs} from '../../App/Routes';
+import moment from 'moment';
+import {DATE_FORMATS} from '../../../config/constants';
 
 // TODO: find a good pattern for these higher order components
 class _Scheduler extends Component {
@@ -36,8 +38,9 @@ class _Scheduler extends Component {
   slotCopy() {
     const {slot} = this.props;
     if (slot) {
-      const formattedTime = slot.get("start_datetime"); // TODO: format correctly
-      const formattedDate = slot.get("start_datetime"); // TODO: format correctly
+      const formattedTime = moment(slot.get("start_datetime")).format(DATE_FORMATS.HOUR_MINUTE_AM_PM);
+      console.log(DATE_FORMATS.FULL_SPELLED_DATE);
+      const formattedDate = moment(slot.get("start_datetime")).format(DATE_FORMATS.FULL_SPELLED_DATE);
       return `My visit is at ${formattedTime} on ${formattedDate}`;
     } else if (this.readyToChooseSlot()) {
       return "When would you like to be seen?";
