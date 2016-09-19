@@ -5,7 +5,7 @@ import {withRouter} from 'react-router';
 import * as actionCreators from '../../../redux/actions/slot_list_action_creators';
 import {ItemSelectionList} from '../../Generic/ItemSelectionList';
 import ErrorMessage from '../../Generic/ErrorMessage';
-import {allEntitiesSelector} from '../../../redux/selectors/entities_selectors';
+import {getFilteredSlots} from '../../../redux/reducers';
 import Calendar from './Calendar';
 import moment from 'moment';
 import {DATE_FORMATS} from '../../../config/constants';
@@ -58,7 +58,7 @@ function mapStateToProps(state) {
   const itemSelectionList = state.get("schedulingSlot");
   return {
     appointmentTypeID: state.getIn(["schedulingAppointmentType", "selectedObjectID"]),
-    objectList: allEntitiesSelector(state, "slots") || fromJS([]),
+    objectList: getFilteredSlots(state, "slots") || fromJS([]),
     isLoading: itemSelectionList.get("isLoading"),
     selectedObjectID: itemSelectionList.get("selectedObjectID"),
     apiError: itemSelectionList.get("apiError")

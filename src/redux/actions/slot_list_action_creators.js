@@ -11,7 +11,7 @@ export const SlotListActionTypes = {
   FILTER_SLOTS_BY_DATE: 'FILTER_SLOTS_BY_DATE'
 }
 
-function filterSlotsByDate(date) {
+export function filterSlotsByDate(date) {
   return {
     type: SlotListActionTypes.FILTER_SLOTS_BY_DATE,
     payload: {date}

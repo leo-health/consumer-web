@@ -67,4 +67,6 @@ const mapStateToProps = (state) => ({
   // availableDates: getAvailableSlotDates(state)
 });
 
+
+debugger;
 export default connect(mapStateToProps, {filterSlotsByDate})(Calendar);
