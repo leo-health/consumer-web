@@ -5,7 +5,7 @@ import {withRouter} from 'react-router';
 import * as actionCreators from '../../../redux/actions/slot_list_action_creators';
 import {ItemSelectionList} from '../../Generic/ItemSelectionList';
 import ErrorMessage from '../../Generic/ErrorMessage';
-import {getAllEntities} from '../../../redux/reducers/entities';
+import {getAllEntities, slotsByDate} from '../../../redux/reducers/entities';
 import Calendar from './Calendar';
 import moment from 'moment';
 import {DATE_FORMATS} from '../../../config/constants';
@@ -20,22 +20,17 @@ export class SlotList extends Component {
     this.state = {}; // TODO: set initial state.filterDate to the date of selected slot
   }
 
-  componentWillReceiveProps(props) {
-
-    // count and filter slots by date
-    // const slotMap = {};
-    debugger;
-
-
-
-  }
-
-  componentDidReceiveProps() {
-    debugger;
-  }
-
   componentDidMount() {
     this.props.dispatch(actionCreators.fetchSlots(this.props.appointmentTypeID));
+  }
+
+  componentWillReceiveProps(props) {
+    if (props.slots !== this.props.slots) {
+      // re-calculate memoized result when slots change
+      // ????: it feels like there should be a better way to do this using redux
+      this.groupedSlotsByDate = null;
+      // this.disabledDates = null;
+    }
   }
 
 
@@ -57,19 +52,19 @@ export class SlotList extends Component {
     }
   }
 
+  getGroupedSlotsByDate() {
+    if (!this.groupedSlotsByDate && this.props.slots) {
+      this.groupedSlotsByDate = slotsByDate(this.props.slots);
+    }
+    return this.groupedSlotsByDate || fromJS({});
+  }
+
+  getSelectableDates() {
+    return new Set(this.getGroupedSlotsByDate().keys());
+  }
+
   getFilteredSlots() {
-
-    // TODO: memoize
-
-    const {slots} = this.props;
-    if (!slots) { return []; }
-    const filterDate = this.filterDate();
-    const filteredSlots = slots.filter(slot => {
-      const slotTime = moment(slot.get("start_datetime"));
-      return slotTime.isSame(filterDate, "day");
-    });
-
-    return filteredSlots;
+    return this.getGroupedSlotsByDate().get(this.filterDate()) || fromJS([]);
   }
 
 
@@ -98,9 +93,6 @@ export class SlotList extends Component {
   }
 
   render() {
-
-    debugger;
-
     if (this.props.apiError) {
       const {apiError} = this.props;
       return <ErrorMessage apiError={apiError}/>;
@@ -112,7 +104,7 @@ export class SlotList extends Component {
           weekStartDate={this.weekStartDate()}
           filterDate={this.filterDate()}
           onClickDate={(date)=>this.onClickDate(date)}
-          disabledDates={new Set()}/>
+          selectableDates={this.getSelectableDates()}/>
         <ItemSelectionList
           objectList={this.getFilteredSlots()}
           onClickObject={(object)=>this.onClickSlot(object)}

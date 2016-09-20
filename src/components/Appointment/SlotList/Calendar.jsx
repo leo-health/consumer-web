@@ -36,18 +36,18 @@ export default class Calendar extends React.Component {
   render() {
 
     // TODO: render selected and disabled dates
-    const {filterDate, disabledDates} = this.props;
+    const {filterDate, selectableDates} = this.props;
 
     return (
       <div className={styles['calendar']}>
         {this.dateArray().map((date)=>{
           const dateString = date.format();
 
-          let className = 'week-item';
+          let className = 'diabled-week-item';
           if (date.isSame(filterDate, "day")) {
             className = 'week-item-selected'; // should append a second css class instead of modifying the class
-          } else if (disabledDates.has(dateString)) {
-            className = 'diabled-week-item'
+          } else if (selectableDates.has(dateString)) {
+            className = 'week-item';
           }
 
           return (
@@ -69,12 +69,3 @@ export default class Calendar extends React.Component {
     );
   }
 }
-
-// const mapStateToProps = (state) => ({
-//   filterDate: getSlotFilterDate(state),
-//   // availableDates: getAvailableSlotDates(state)
-// });
-//
-//
-// debugger;
-// export default connect(mapStateToProps, {filterSlotsByDate})(Calendar);

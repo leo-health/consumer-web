@@ -61,12 +61,20 @@ export const getById = (state, type, id) => {
 export const slotsByDate = (slots) => {
 
   return slots
-  .reduce((map, slot)=>{
+  .reduce((map, slot) => {
 
+    // get the date of the slot
     const dt = moment(slot.get('start_datetime')).startOf("day").format();
+    if (!dt) {
+      console.log(`start_datetime undefined...  ${slot}`);
+      return map;
+    }
 
-    const l = map.get(dt) || List();
-    map.set(dt)
+    // get the list of slots for that date
+    const l = map.get(dt) || [];
+
+    l.push(slot);
+    return map.set(dt, l);
 
   }, Map().asMutable())
   .sort()
