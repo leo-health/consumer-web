@@ -7,7 +7,7 @@ export const LoginActionTypes = {
   LOGIN_SUCCESS: 'LOGIN_SUCCESS',
   LOGIN_FAIL: 'LOGIN_FAIL',
   LOAD_CACHED_AUTH_TOKEN: 'LOAD_CACHED_AUTH_TOKEN'
-}
+};
 
 export function loginRequest() {
   return {
@@ -19,7 +19,7 @@ export function loginSuccess(payload) {
   return {
     type: LoginActionTypes.LOGIN_SUCCESS,
     session: payload.data.session,
-    user: payload.data.user,
+    user: payload.data.user
   };
 }
 
@@ -54,7 +54,7 @@ function responseSuccessOrFail(json, successActionCreator, failActionCreator) {
 
 export function submitLoginAsync(email, password) {
   return (dispatch, getState) => {
-    dispatch(loginRequest())
+    dispatch(loginRequest());
 
     const uri = URI(Constants.API_BASE_URL)
     .segment("login")
