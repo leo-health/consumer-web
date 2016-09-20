@@ -2,8 +2,8 @@ import React from 'react';
 import styles from './phr.css';
 import CSSModules from 'react-css-modules';
 
-const Allergies= React.createClass({
-  render: function() {
+class Allergies extends React.Component{
+  render() {
     return (
       <div>
         <p>ALLERGIES</p>
@@ -12,6 +12,6 @@ const Allergies= React.createClass({
       </div>
     );
   }
-});
+};
 
 export default CSSModules(Allergies, styles);
