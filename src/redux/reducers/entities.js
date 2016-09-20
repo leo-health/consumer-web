@@ -1,4 +1,4 @@
-import {fromJS, Map} from 'immutable';
+import {fromJS, Map, List} from 'immutable';
 import {PatientListActionTypes} from '../actions/patient_list_action_creators';
 import {SlotListActionTypes} from '../actions/slot_list_action_creators';
 import {AppointmentTypeListActionTypes} from '../actions/appointment_type_list_action_creators';
@@ -51,4 +51,24 @@ export const getById = (state, type, id) => {
   const allEntities = getEntities(state, type);
   if (!allEntities) { return undefined; } // return null?
   return allEntities.get("id");
+};
+
+
+
+
+
+
+export const slotsByDate = (slots) => {
+
+  return slots
+  .reduce((map, slot)=>{
+
+    const dt = moment(slot.get('start_datetime')).startOf("day").format();
+
+    const l = map.get(dt) || List();
+    map.set(dt)
+
+  }, Map().asMutable())
+  .sort()
+  .asImmutable();
 };

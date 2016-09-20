@@ -12,7 +12,7 @@ export default class Calendar extends React.Component {
 
   // NOTE: needs ES7?
   // static propTypes = {
-  //   startDate: React.propTypes.string // TODO: can I require this to be a date?
+  //   weekStartDate: React.propTypes.string // TODO: can I require this to be a date?
   // };
 
   onClickDate(date) {
@@ -23,11 +23,11 @@ export default class Calendar extends React.Component {
 
   dateArray() {
     // TODO: memoize this calculation
-    const {startDate} = this.props;
+    const {weekStartDate} = this.props;
     const dates = [];
     let i = 0;
     while (i<7) {
-      dates.push(moment(startDate).add(i, "days"));
+      dates.push(moment(weekStartDate).add(i, "days"));
       i+=1;
     }
     return dates;
@@ -36,14 +36,19 @@ export default class Calendar extends React.Component {
   render() {
 
     // TODO: render selected and disabled dates
-    const {filterDate} = this.props;
+    const {filterDate, disabledDates} = this.props;
 
     return (
       <div className={styles['calendar']}>
         {this.dateArray().map((date)=>{
           const dateString = date.format();
-          const selected = date.isSame(filterDate, "day");
-          const className = selected ? 'week-item-selected' : 'week-item';
+
+          let className = 'week-item';
+          if (date.isSame(filterDate, "day")) {
+            className = 'week-item-selected'; // should append a second css class instead of modifying the class
+          } else if (disabledDates.has(dateString)) {
+            className = 'diabled-week-item'
+          }
 
           return (
             <div key={dateString}

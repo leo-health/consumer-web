@@ -12,27 +12,68 @@ import {DATE_FORMATS} from '../../../config/constants';
 
 export class SlotList extends Component {
 
+
+  // lifecycle
+
   constructor(props) {
     super(props);
     this.state = {}; // TODO: set initial state.filterDate to the date of selected slot
   }
 
-  startDate() {
-    const {slots} = this.props;
-    if (slots && slots.length > 0) {
-      return slots[0].get("start_datetime");
-    }
+  componentWillReceiveProps(props) {
 
-    return moment().format(); // TODO: for safety, ensure all return values are same format
+    // count and filter slots by date
+    // const slotMap = {};
+    debugger;
+
+
+
   }
 
-  filterDate() {
-    return this.state.filterDate || this.startDate();
+  componentDidReceiveProps() {
+    debugger;
   }
 
   componentDidMount() {
     this.props.dispatch(actionCreators.fetchSlots(this.props.appointmentTypeID));
   }
+
+
+  // getters
+
+  weekStartDate() {
+    return moment(this.filterDate()).startOf("week").format();
+  }
+
+  filterDate() {
+    const today = moment().format();
+    return this.state.filterDate || this.firstSlotDate() || today;
+  }
+
+  firstSlotDate() {
+    const {slots} = this.props;
+    if (slots && slots.length > 0) {
+      return moment(slots[0].get("start_datetime")).startOf("day").format();
+    }
+  }
+
+  getFilteredSlots() {
+
+    // TODO: memoize
+
+    const {slots} = this.props;
+    if (!slots) { return []; }
+    const filterDate = this.filterDate();
+    const filteredSlots = slots.filter(slot => {
+      const slotTime = moment(slot.get("start_datetime"));
+      return slotTime.isSame(filterDate, "day");
+    });
+
+    return filteredSlots;
+  }
+
+
+  // event handlers
 
   onClickSlot(slot) {
     const {dispatch, router} = this.props;
@@ -42,9 +83,12 @@ export class SlotList extends Component {
 
   onClickDate(date) {
     this.setState({
-      filterDate: moment(date).startOf("day").format()
+      filterDate: moment(date).startOf("day").format() // do we need startOf here?
     });
   }
+
+
+  // renderers
 
   renderRow(object) {
     const dateString = object.get("start_datetime");
@@ -53,22 +97,9 @@ export class SlotList extends Component {
     return <span>{formattedDate}</span>;
   }
 
-  getFilteredSlots() {
-    const {slots} = this.props;
-    if (!slots) { return []; }
-    const filterDate = this.filterDate();
-
-    console.log(filterDate);
-
-    const filteredSlots = slots.filter(slot => {
-      const slotTime = moment(slot.get("start_datetime"));
-      return slotTime.isSame(filterDate, "day");
-    });
-
-    return filteredSlots;
-  }
-
   render() {
+
+    debugger;
 
     if (this.props.apiError) {
       const {apiError} = this.props;
@@ -78,9 +109,10 @@ export class SlotList extends Component {
     return (
       <div>
         <Calendar
-          startDate={this.startDate()}
+          weekStartDate={this.weekStartDate()}
           filterDate={this.filterDate()}
-          onClickDate={(date)=>this.onClickDate(date)}/>
+          onClickDate={(date)=>this.onClickDate(date)}
+          disabledDates={new Set()}/>
         <ItemSelectionList
           objectList={this.getFilteredSlots()}
           onClickObject={(object)=>this.onClickSlot(object)}
@@ -90,6 +122,9 @@ export class SlotList extends Component {
     );
   }
 }
+
+
+
 // TODO: ????: reduce boilerplate - slice subset of immutable Map
 function mapStateToProps(state) {
   const itemSelectionList = state.get("schedulingSlot");
