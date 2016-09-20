@@ -15,8 +15,8 @@ import {AppointmentTypeListContainer} from '../Appointment/AppointmentTypeList/A
 import {SlotListContainer} from '../Appointment/SlotList/SlotList';
 import {Settings} from '../Settings/Settings';
 import {Login} from '../Login/Login';
+import Phr from '../Phr/phr';
 
-// ????: should this go into constants.js?
 export const routeURLs = {
   index: "/",
   login: "/login",
@@ -56,6 +56,7 @@ export function configureRoutes(store) {
       <Route>
         <Route path="/login" component={Login}/>
         <Route path="/" component={App} onEnter={authTransition(store)}>
+          <Route path="phr" component={Phr}/>
           <Route component={Home}>
             <IndexRoute/>
             <Route path="chat" component={Chat}/>
