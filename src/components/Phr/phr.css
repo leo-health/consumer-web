@@ -77,3 +77,20 @@
     margin: 1vh 0 1vh 0;
     border-bottom: .2vh solid rgb(124, 124, 124);
 }
+
+.allergy {
+    margin-bottom: 5vh;
+}
+
+.allergy .allergen {
+    float: left;
+}
+
+.allergy .severity {
+    float: right;
+}
+
+.allergy .note {
+    font: 12.5pt;
+    clear: both;
+}

@@ -7,9 +7,7 @@ function fetchPhrRequest(state, action) {
 }
 
 function fetchPhrRequestSuccess(state, action) {
-  debugger
   return state.set('allergies', action.allergies);
-
 }
 
 function fetchPhrRequestFail(state, action) {
@@ -24,6 +22,7 @@ export function phrList(state = Map(), action) {
       return fetchPhrRequestSuccess(state, action);
     case PhrListActionTypes.FETCH_PHRS_REQUEST_FAIL:
       return fetchPhrRequestFail(state, action);
+    default:
+      return state;
   }
-  return state;
 }

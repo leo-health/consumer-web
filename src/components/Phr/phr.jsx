@@ -13,7 +13,6 @@ import {withRouter} from 'react-router';
 class _Phr extends React.Component{
   constructor() {
     super();
-    this.state = {allergies: []}
   }
 
   componentDidMount() {
@@ -27,7 +26,7 @@ class _Phr extends React.Component{
         <div styleName='lists'>
           <p>As your daughter's data becomes available this section will populate with important facts and figures
             related to her health and development</p>
-          <Allergies allergies={this.state.allergies}/>
+          <Allergies allergies={this.props.allergies}/>
           <Medications/>
           <Immunizations/>
           <PhrNotes/>
@@ -39,8 +38,7 @@ class _Phr extends React.Component{
 
 function phrStateSelector(state) {
   return {
-    token: state.getIn(["authentication", "token"]),
-    isLoading: state.getIn(["authentication", "isLoading"])
+    allergies: state.getIn(["phrList", "allergies"])
   };
 }
 
