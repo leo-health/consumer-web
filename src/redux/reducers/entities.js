@@ -53,6 +53,13 @@ export const getById = (state, type, id) => {
   return allEntities.get("id");
 };
 
+export const getAllSlotsSorted = (state) => {
+  const allSlots = getAllEntities(state, "slots");
+  if (!allSlots) {
+    return undefined;
+  }
+  return allSlots.sort();
+}
 
 
 

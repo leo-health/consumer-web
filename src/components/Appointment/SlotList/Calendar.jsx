@@ -43,7 +43,7 @@ export default class Calendar extends React.Component {
         {this.dateArray().map((date)=>{
           const dateString = date.format();
 
-          let className = 'diabled-week-item';
+          let className = 'week-item-disabled';
           if (date.isSame(filterDate, "day")) {
             className = 'week-item-selected'; // should append a second css class instead of modifying the class
           } else if (selectableDates.has(dateString)) {

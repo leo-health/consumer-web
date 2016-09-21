@@ -5,7 +5,7 @@ import {withRouter} from 'react-router';
 import * as actionCreators from '../../../redux/actions/slot_list_action_creators';
 import {ItemSelectionList} from '../../Generic/ItemSelectionList';
 import ErrorMessage from '../../Generic/ErrorMessage';
-import {getAllEntities, slotsByDate} from '../../../redux/reducers/entities';
+import {getAllSlotsSorted, slotsByDate} from '../../../redux/reducers/entities';
 import Calendar from './Calendar';
 import moment from 'moment';
 import {DATE_FORMATS} from '../../../config/constants';
@@ -42,16 +42,21 @@ export class SlotList extends Component {
 
   filterDate() {
     const today = moment().format();
+
+    console.log(this.state.filterDate, this.firstSlotDate());
+
     return this.state.filterDate || this.firstSlotDate() || today;
   }
 
   firstSlotDate() {
     const {slots} = this.props;
-    if (slots && slots.length > 0) {
-      return moment(slots[0].get("start_datetime")).startOf("day").format();
+    if (slots && slots.size > 0) {
+      return moment(slots.get(0).get("start_datetime")).startOf("day").format();
     }
   }
 
+  // NOTE: these should be selectors
+  // what's the best way to memoize?
   getGroupedSlotsByDate() {
     if (!this.groupedSlotsByDate && this.props.slots) {
       this.groupedSlotsByDate = slotsByDate(this.props.slots);
@@ -77,9 +82,11 @@ export class SlotList extends Component {
   }
 
   onClickDate(date) {
-    this.setState({
-      filterDate: moment(date).startOf("day").format() // do we need startOf here?
-    });
+    if (this.getSelectableDates().has(date)) {
+      this.setState({
+        filterDate: moment(date).startOf("day").format() // do we need startOf here?
+      });
+    }
   }
 
 
@@ -122,7 +129,7 @@ function mapStateToProps(state) {
   const itemSelectionList = state.get("schedulingSlot");
   return {
     appointmentTypeID: state.getIn(["schedulingAppointmentType", "selectedObjectID"]),
-    slots: getAllEntities(state, "slots"),
+    slots: getAllSlotsSorted(state),
     isLoading: itemSelectionList.get("isLoading"),
     selectedObjectID: itemSelectionList.get("selectedObjectID"),
     apiError: itemSelectionList.get("apiError")

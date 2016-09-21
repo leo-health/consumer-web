@@ -99,7 +99,7 @@ export function fetchSlots(appointment_type_id) {
     dispatch(requestSlots())
 
     const authentication_token = getState().getIn(["authentication","token"]);
-    const start_date = moment()
+    const start_date = moment();
     const end_date = start_date.clone().add(6, "months");
 
     const uri = URI(Constants.API_BASE_URL)

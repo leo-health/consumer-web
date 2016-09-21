@@ -12,6 +12,11 @@
   justify-content: center;
 }
 
+.week-item-disabled {
+  composes: week-item;
+  background-color: green;
+}
+
 .week-item-selected {
   composes: week-item;
   background-color: white;
