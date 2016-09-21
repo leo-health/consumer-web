@@ -3,16 +3,13 @@ import {Map} from 'immutable';
 import {combineReducers} from 'redux-immutable';
 import moment from 'moment';
 
-// reducers
+// reducers & selectors
 import authentication from './authentication';
-import entities from './entities';
-import schedulingSlot from './schedulingSlot';
+import entities, * as fromEntities from './entities';
+import schedulingSlot, * as fromSchedulingSlot from './schedulingSlot';
 import schedulingPatient from './schedulingPatient';
 import schedulingAppointmentType from './schedulingAppointmentType';
 import {phrList} from './phrListReducer';
-
-// selectors
-import {getEntities} from './entities';
 
 export default combineReducers({
   entities,
@@ -22,3 +19,12 @@ export default combineReducers({
   schedulingSlot,
   schedulingAppointmentType
 });
+
+export const getGroupedSlotsByDate = state => {
+  const slotIDs = fromSchedulingSlot.getGroupedSlotIDsByDate(state.get("schedulingSlot"));
+  return slotIDs.mapEntries(([date, slotIDs]) => {
+    return [date, slotIDs.map(slotID => {
+      return fromEntities.getById(state, "slots", slotID)
+    })]
+  });
+};

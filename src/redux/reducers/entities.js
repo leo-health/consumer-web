@@ -39,8 +39,12 @@ export default function entities(state = Map(), action) {
 
 // selectors
 
-export const getAllEntities = (state, type) => {
-  const entityMap = state.getIn(["entities", type]);
+export const getAllEntitiesMap = (state, type) => {
+  return state.getIn(["entities", type]);
+}
+
+export const getAllEntitiesList = (state, type) => {
+  const entityMap = getAllEntitiesMap
   if (!entityMap) {
     return undefined;
   }
@@ -48,35 +52,7 @@ export const getAllEntities = (state, type) => {
 };
 
 export const getById = (state, type, id) => {
-  const allEntities = getEntities(state, type);
+  const allEntities = getAllEntitiesMap(state, type);
   if (!allEntities) { return undefined; } // return null?
-  return allEntities.get("id");
-};
-
-export const getAllSlotsSorted = (state) => {
-  const allSlots = getAllEntities(state, "slots");
-  if (!allSlots) {
-    return undefined;
-  }
-  return allSlots.sort();
-}
-
-export const slotsByDate = (slots) => {
-  return slots
-  .reduce((map, slot) => {
-
-    // get the date of the slot
-    const date = moment(slot.get('start_datetime')).startOf("day").format();
-    if (!date) {
-      console.log(`start_datetime undefined...  ${slot}`);
-      return map;
-    }
-
-    // append the slot to the list of slots for that date
-    const slotList = map.get(date) || [];
-    slotList.push(slot);
-    return map.set(date, slotList);
-  }, Map().asMutable())
-  .sort()
-  .asImmutable();
+  return allEntities.get(id);
 };

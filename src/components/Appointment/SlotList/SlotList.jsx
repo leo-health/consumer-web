@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import * as actionCreators from '../../../redux/actions/slot_list_action_creators';
 import {ItemSelectionList} from '../../Generic/ItemSelectionList';
+import {getGroupedSlotsByDate} from '../../../redux/reducers';
 import ErrorMessage from '../../Generic/ErrorMessage';
-import {getAllSlotsSorted, slotsByDate} from '../../../redux/reducers/entities';
 import Calendar from './Calendar';
 import moment from 'moment';
 import {DATE_FORMATS} from '../../../config/constants';
@@ -24,15 +24,6 @@ export class SlotList extends Component {
     this.props.dispatch(actionCreators.fetchSlots(this.props.appointmentTypeID));
   }
 
-  componentWillReceiveProps(props) {
-    if (props.slots !== this.props.slots) {
-      // re-calculate memoized result when slots change
-      // ????: it feels like there should be a better way to do this using redux
-      // TODO: use https://github.com/reactjs/reselect
-      this.groupedSlotsByDate = null;
-    }
-  }
-
 
   // getters/selectors
 
@@ -41,32 +32,22 @@ export class SlotList extends Component {
   }
 
   filterDate() {
-    const today = moment().format();
-    return this.state.filterDate || this.firstSlotDate() || today;
+    return this.state.filterDate || this.initialSelectedDate();
   }
 
-  firstSlotDate() {
-    const {slots} = this.props;
-    if (slots && slots.size > 0) {
-      return moment(slots.get(0).get("start_datetime")).startOf("day").format();
+  initialSelectedDate() {
+    const {groupedSlotsByDate} = this.props;
+    if (groupedSlotsByDate) {
+      return groupedSlotsByDate.keySeq().first();
     }
-  }
-
-  // NOTE: these should be selectors
-  // what's the best way to memoize?
-  getGroupedSlotsByDate() {
-    if (!this.groupedSlotsByDate && this.props.slots) {
-      this.groupedSlotsByDate = slotsByDate(this.props.slots);
-    }
-    return this.groupedSlotsByDate || fromJS({});
   }
 
   getSelectableDates() {
-    return new Set(this.getGroupedSlotsByDate().keys());
+    return new Set(this.props.groupedSlotsByDate.keys());
   }
 
   getFilteredSlots() {
-    return this.getGroupedSlotsByDate().get(this.filterDate()) || fromJS([]);
+    return this.props.groupedSlotsByDate.get(this.filterDate()) || fromJS([]);
   }
 
 
@@ -80,11 +61,8 @@ export class SlotList extends Component {
 
   onClickDate(date) {
     if (this.getSelectableDates().has(date)) {
-
-      console.log(date);
-
       this.setState({
-        filterDate: moment(date).startOf("day").format() // do we need startOf here?
+        filterDate: date
       });
     }
   }
@@ -129,7 +107,7 @@ function mapStateToProps(state) {
   const itemSelectionList = state.get("schedulingSlot");
   return {
     appointmentTypeID: state.getIn(["schedulingAppointmentType", "selectedObjectID"]),
-    slots: getAllSlotsSorted(state),
+    groupedSlotsByDate: getGroupedSlotsByDate(state),
     isLoading: itemSelectionList.get("isLoading"),
     selectedObjectID: itemSelectionList.get("selectedObjectID"),
     apiError: itemSelectionList.get("apiError")
