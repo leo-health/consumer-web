@@ -34,25 +34,30 @@ export default class Calendar extends React.Component {
       <div className={styles['calendar']}>
         {this.dateArray().map((date)=>{
           const dateString = date.format();
+          const dateIsSelected = date.isSame(filterDate, "day");
+          const dateIsSelectable = selectableDates.has(dateString);
 
-          let className = 'week-item-disabled';
-          if (date.isSame(filterDate, "day")) {
-            className = 'week-item-selected'; // ????: should append a second css class instead of modifying the class
-          } else if (selectableDates.has(dateString)) {
-            className = 'week-item';
+          let weekItemStyle = 'week-item-disabled';
+          if (dateIsSelected) {
+            weekItemStyle = 'week-item-selected'; // ????: should append a second css class instead of modifying the class
+          } else if (dateIsSelectable) {
+            weekItemStyle = 'week-item';
           }
+
+          const lineStyle = dateIsSelected ? 'line' : 'line-hidden';
 
           return (
             <div key={dateString}
-              className={styles[className]}
+              className={styles[weekItemStyle]}
               onClick={()=>this.onClickDate(dateString)}>
               <div className={styles['week-item-content']}>
-                <div>
+                <div className={styles['date-number']}>
                   {date.format(DATE_FORMATS.DAY_OF_MONTH)}
                 </div>
-                <div>
-                  {date.format(DATE_FORMATS.DAY_OF_WEEK_3_LETTER)}
+                <div className={styles['day-of-week-abbreviation']}>
+                  {date.format(DATE_FORMATS.DAY_OF_WEEK_3_LETTER).toUpperCase()}
                 </div>
+                <div className={styles[lineStyle]}></div>
               </div>
             </div>
           );

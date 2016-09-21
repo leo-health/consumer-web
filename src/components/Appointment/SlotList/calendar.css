@@ -1,28 +1,58 @@
 .calendar {
   height: 200px;
-  background-color: blue;
   display: flex;
 }
 
+.week-item-content {
+  font-family: 'Raleway';
+}
+
+.date-number {
+  font-size: 50px;
+  font-weight: 700;
+}
+
+.day-of-week-abbreviation {
+  font-size: 30px;
+  font-weight: 300;
+}
+
 .week-item {
-  background-color: red;
+  background-color: #39DE89;
   flex-grow: 1;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.week-item .week-item-content {
+  color: #4A4A4A;
+}
+
 .week-item-disabled {
   composes: week-item;
-  background-color: green;
+}
+
+.week-item-disabled .week-item-content {
+  color: #9FE7BC;
 }
 
 .week-item-selected {
   composes: week-item;
+}
+
+.week-item-selected .week-item-content {
+  color: white;
+}
+
+
+.line {
+  height: 1vh;
+  margin-top: 2vh;
   background-color: white;
 }
 
-.week-item-content {
-  background-color: purple;
-
+.line-hidden {
+  composes: line;
+  visibility: hidden;
 }
