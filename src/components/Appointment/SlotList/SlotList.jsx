@@ -28,13 +28,13 @@ export class SlotList extends Component {
     if (props.slots !== this.props.slots) {
       // re-calculate memoized result when slots change
       // ????: it feels like there should be a better way to do this using redux
+      // TODO: use https://github.com/reactjs/reselect
       this.groupedSlotsByDate = null;
-      // this.disabledDates = null;
     }
   }
 
 
-  // getters
+  // getters/selectors
 
   weekStartDate() {
     return moment(this.filterDate()).startOf("week").format();
@@ -42,9 +42,6 @@ export class SlotList extends Component {
 
   filterDate() {
     const today = moment().format();
-
-    console.log(this.state.filterDate, this.firstSlotDate());
-
     return this.state.filterDate || this.firstSlotDate() || today;
   }
 
@@ -83,6 +80,9 @@ export class SlotList extends Component {
 
   onClickDate(date) {
     if (this.getSelectableDates().has(date)) {
+
+      console.log(date);
+
       this.setState({
         filterDate: moment(date).startOf("day").format() // do we need startOf here?
       });

@@ -1,12 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import * as actionCreators from '../../../redux/actions/slot_list_action_creators';
 import moment from 'moment';
 import styles from './calendar.css';
 import {DATE_FORMATS} from '../../../config/constants';
-
-import {filterSlotsByDate} from '../../../redux/actions/slot_list_action_creators';
-import {getSlotFilterDate} from '../../../redux/reducers';
 
 export default class Calendar extends React.Component {
 
@@ -34,10 +29,7 @@ export default class Calendar extends React.Component {
   }
 
   render() {
-
-    // TODO: render selected and disabled dates
     const {filterDate, selectableDates} = this.props;
-
     return (
       <div className={styles['calendar']}>
         {this.dateArray().map((date)=>{
@@ -45,7 +37,7 @@ export default class Calendar extends React.Component {
 
           let className = 'week-item-disabled';
           if (date.isSame(filterDate, "day")) {
-            className = 'week-item-selected'; // should append a second css class instead of modifying the class
+            className = 'week-item-selected'; // ????: should append a second css class instead of modifying the class
           } else if (selectableDates.has(dateString)) {
             className = 'week-item';
           }

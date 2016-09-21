@@ -39,7 +39,6 @@ class _Scheduler extends Component {
     const {slot} = this.props;
     if (slot) {
       const formattedTime = moment(slot.get("start_datetime")).format(DATE_FORMATS.HOUR_MINUTE_AM_PM);
-      console.log(DATE_FORMATS.FULL_SPELLED_DATE);
       const formattedDate = moment(slot.get("start_datetime")).format(DATE_FORMATS.FULL_SPELLED_DATE);
       return `My visit is at ${formattedTime} on ${formattedDate}`;
     } else if (this.readyToChooseSlot()) {
