@@ -15,7 +15,7 @@ import {AppointmentTypeListContainer} from '../Appointment/AppointmentTypeList/A
 import {SlotListContainer} from '../Appointment/SlotList/SlotList';
 import {Settings} from '../Settings/Settings';
 import {Login} from '../Login/Login';
-import Phr from '../Phr/phr';
+import {Phr} from '../Phr/phr';
 
 export const routeURLs = {
   index: "/",

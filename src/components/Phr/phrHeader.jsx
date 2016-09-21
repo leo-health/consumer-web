@@ -29,7 +29,7 @@ class PhrHeader extends React.Component {
         <div styleName='whiteLine'></div>
 
         <div styleName='bottom'>
-          <div styleName="round" style={{backgroundImage: 'url(http://cdns.yournewswire.com/wp-content/uploads/2015/08/hillary-clinton-twitter-followers-620x264.jpg)'}}></div>
+          <div styleName="round" style={{backgroundImage: 'url(http://vignette1.wikia.nocookie.net/nickelodeon/images/2/25/Spongebob-spongebob-squarepants-33210737-2392-2187.jpg/revision/latest?cb=20131006193851)'}}></div>
           <div styleName='greeting'>Emily Charmichel</div>
         </div>
       </div>
