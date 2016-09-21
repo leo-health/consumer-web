@@ -27,8 +27,8 @@ class _Phr extends React.Component{
           <p>As your daughter's data becomes available this section will populate with important facts and figures
             related to her health and development</p>
           <Allergies allergies={this.props.allergies}/>
-          <Medications/>
-          <Immunizations/>
+          <Medications medications={this.props.medications}/>
+          <Immunizations immunizations={this.props.immunizations}/>
           <PhrNotes/>
         </div>
       </div>
@@ -38,7 +38,9 @@ class _Phr extends React.Component{
 
 function phrStateSelector(state) {
   return {
-    allergies: state.getIn(["phrList", "allergies"])
+    allergies: state.getIn(["phrList", "allergies"]),
+    medications: state.getIn(["phrList", "medications"]),
+    immunizations: state.getIn(["phrList", "immunizations"])
   };
 }
 

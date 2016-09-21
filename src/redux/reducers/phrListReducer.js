@@ -7,7 +7,9 @@ function fetchPhrRequest(state, action) {
 }
 
 function fetchPhrRequestSuccess(state, action) {
-  return state.set('allergies', action.allergies);
+  return state.set('allergies', action.allergies)
+  .set('medications', action.medications)
+  .set('immunizations', action.immunizations)
 }
 
 function fetchPhrRequestFail(state, action) {
