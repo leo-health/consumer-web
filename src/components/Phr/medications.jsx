@@ -6,7 +6,7 @@ class Medications extends React.Component {
   render() {
     return (
       <div>
-        <p>MEDICATIONS</p>
+        <p styleName='sectionTitle'>MEDICATIONS</p>
         <div styleName='greyLine'></div>
         <p>No active medication</p>
       </div>

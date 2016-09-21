@@ -6,7 +6,7 @@ class Allergies extends React.Component{
   render() {
     return (
       <div>
-        <p>ALLERGIES</p>
+        <p styleName='sectionTitle'>ALLERGIES</p>
         <div styleName='greyLine'></div>
         <p>No known allergies</p>
       </div>

@@ -6,10 +6,14 @@ import Allergies from './allergies';
 import Medications from './medications';
 import Immunizations from './immunizations';
 import CSSModules from 'react-css-modules';
+import * as loginActionCreators from './phrListActionCreator';
 
 class Phr extends React.Component{
+  componentDidMount() {
+
+  }
+
   render() {
-    var backUrl = require("../../images/back_arrow@3x.png");
     return (
       <div styleName='container'>
         <PhrHeader/>

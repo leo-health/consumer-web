@@ -6,7 +6,7 @@ class Immunizaitions extends React.Component{
   render() {
     return (
       <div>
-        <p>IMMUNIZATIONS</p>
+        <p styleName='sectionTitle'>IMMUNIZATIONS</p>
         <div styleName='greyLine'></div>
         <p>Immunizaition history is not available at this time.</p>
       </div>
