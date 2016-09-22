@@ -7,15 +7,7 @@ export const SlotListActionTypes = {
   REQUEST_SLOTS: 'REQUEST_SLOTS',
   RECEIVE_SLOTS: 'RECEIVE_SLOTS',
   SELECT_SLOT: 'SELECT_SLOT',
-  SLOT_REQUEST_FAILURE: 'SLOT_REQUEST_FAILURE',
-  FILTER_SLOTS_BY_DATE: 'FILTER_SLOTS_BY_DATE'
-}
-
-export function filterSlotsByDate(date) {
-  return {
-    type: SlotListActionTypes.FILTER_SLOTS_BY_DATE,
-    payload: {date}
-  };
+  SLOT_REQUEST_FAILURE: 'SLOT_REQUEST_FAILURE'
 }
 
 export function selectSlot(slot) {
