@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import styles from './calendar.css';
-import {DATE_FORMATS} from '../../../config/constants';
+import {DATE_FORMATS} from 'config/constants';
 
 export default class Calendar extends React.Component {
 
@@ -16,9 +16,8 @@ export default class Calendar extends React.Component {
     }
   }
 
-  dateArray() {
+  dateArray(weekStartDate) {
     // TODO: memoize this calculation
-    const {weekStartDate} = this.props;
     const dates = [];
     let i = 0;
     while (i<7) {
@@ -29,12 +28,12 @@ export default class Calendar extends React.Component {
   }
 
   render() {
-    const {filterDate, selectableDates} = this.props;
+    const {selectedDate, selectableDates} = this.props;
     return (
       <div className={styles['calendar']}>
-        {this.dateArray().map((date)=>{
+        {this.dateArray(this.props.weekStartDate).map((date)=>{
           const dateString = date.format();
-          const dateIsSelected = date.isSame(filterDate, "day");
+          const dateIsSelected = date.isSame(selectedDate, "day");
           const dateIsSelectable = selectableDates.has(dateString);
 
           let weekItemStyle = 'week-item-disabled';
