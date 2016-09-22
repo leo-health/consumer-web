@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import {fromJS} from 'immutable';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
-import * as actionCreators from '../../../redux/actions/slot_list_action_creators';
-import {ItemSelectionList} from '../../Generic/ItemSelectionList';
-import {getGroupedSlotsByDate} from '../../../redux/reducers';
-import ErrorMessage from '../../Generic/ErrorMessage';
-import Calendar from './Calendar';
 import moment from 'moment';
-import {DATE_FORMATS} from '../../../config/constants';
+import * as actionCreators from 'redux/actions/slot_list_action_creators';
+import {ItemSelectionList} from 'components/Generic/ItemSelectionList';
+import {getGroupedSlotsByDate} from 'redux/reducers';
+import ErrorMessage from 'components/Generic/ErrorMessage';
+import Calendar from 'components/Appointment/SlotList/Calendar';
+import {DATE_FORMATS} from 'config/constants';
 
 export class SlotList extends Component {
 
