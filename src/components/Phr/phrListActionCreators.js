@@ -17,7 +17,12 @@ export function fetchPhrsRequest() {
 export function fetchPhrsRequestSuccess(payload){
   return {
     type: PhrListActionTypes.FETCH_PHRS_REQUEST_SUCCESS,
-    allergies: payload.allergies
+    allergies: payload.allergies,
+    medications: payload.medications,
+    immunizations: payload.immunizations,
+    heights: payload.heights,
+    weights: payload.weights,
+    bmis: payload.bmis
   };
 }
 

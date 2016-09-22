@@ -1,3 +1,7 @@
+body{
+    margin: 0;
+}
+
 .container {
     width: 100vw;
 }
@@ -78,19 +82,22 @@
     border-bottom: .2vh solid rgb(124, 124, 124);
 }
 
-.allergy {
+.phrSection {
     margin-bottom: 5vh;
 }
 
-.allergy .allergen {
+.phrSection .title {
     float: left;
+    max-width: 70%;
+    word-wrap: break-word;
 }
 
-.allergy .severity {
+.phrSection .description {
     float: right;
+    max-width: 30%;
 }
 
-.allergy .note {
-    font: 12.5pt;
+.phrSection .sideNote {
+    font-size: 15pt;
     clear: both;
 }

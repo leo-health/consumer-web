@@ -33,13 +33,15 @@ export class _PatientList extends Component {
   // TODO: continue to explore abstraction strategies
   // The following is still duplicated across ItemSelectionList containers.
   render() {
-    return <ItemSelectionList
-      fetchAction={()=>this.fetchAction()}
-      selectAction={(object)=>this.selectAction(object)}
-      onClickObject={(object)=>this.onClickObject(object)}
-      renderRow={(object)=>this.renderRow(object)}
-      {...this.props}
-      />
+    return(
+      <ItemSelectionList
+        fetchAction={()=>this.fetchAction()}
+        selectAction={(object)=>this.selectAction(object)}
+        onClickObject={(object)=>this.onClickObject(object)}
+        renderRow={(object)=>this.renderRow(object)}
+        {...this.props}
+        />
+    )
   }
 }
 

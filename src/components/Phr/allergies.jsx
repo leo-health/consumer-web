@@ -9,10 +9,10 @@ class Allergies extends React.Component{
     if( allergies.length > 0 ){
       allergies = allergies.map(function(allergy, i){
         return (
-          <div styleName='allergy'>
-            <div styleName='allergen'>{allergy.allergen}</div>
-            <div styleName='severity'>{allergy.severity}</div>
-            <div styleName='note'>{allergy.note}</div>
+          <div styleName='phrSection' key={i}>
+            <div styleName='title'>{allergy.allergen}</div>
+            <div styleName='description'>{allergy.severity}</div>
+            <div styleName='sideNote'>{allergy.note}</div>
           </div>
         )
       })

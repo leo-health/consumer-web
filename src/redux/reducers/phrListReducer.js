@@ -10,6 +10,9 @@ function fetchPhrRequestSuccess(state, action) {
   return state.set('allergies', action.allergies)
   .set('medications', action.medications)
   .set('immunizations', action.immunizations)
+  .set('heights', action.heights)
+  .set('weights', action.weights)
+  .set('bmis', action.bmis)
 }
 
 function fetchPhrRequestFail(state, action) {

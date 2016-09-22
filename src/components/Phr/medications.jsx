@@ -9,17 +9,15 @@ class Medications extends React.Component {
     if( medications.length > 0 ){
       medications = medications.map(function(medication, i){
         return (
-          <div styleName='medication'>
-            <div styleName='allergen'>{medication.allergen}</div>
-            <div styleName='severity'>{medication.severity}</div>
-            <div styleName='note'>{medication.note}</div>
+          <div styleName='phrSection' key={i}>
+            <div styleName='title'>{medication.medication}</div>
+            <div styleName='sideNote'>{medication.sig}</div>
           </div>
         )
       })
     }else{
       medications =  <p>No active medication</p>
     }
-
     return medications
   }
 
