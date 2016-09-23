@@ -4,39 +4,21 @@ import {combineReducers} from 'redux-immutable';
 import moment from 'moment';
 
 const initialState = {
-  groupedSlotsByDate: Map(),
+  // groupedSlotsByDate: Map(),
   selectedObjectID: null,
   selectedProviderID: null,
   apiError: null,
   isLoading: false
 };
 
-function groupedSlotIDsByDate(state = initialState.groupedSlotsByDate, action) {
-  switch (action.type) {
-    case SlotListActionTypes.RECEIVE_SLOTS:
-      const slots = fromJS(action.payload.objectList);
-      const sortedAndGrouped = slots.reduce((groupedSlots, slot) => {
-
-        // get the date of the slot
-        const slotDateTimeString = slot.get('start_datetime');
-        if (!slotDateTimeString) {
-          console.log(`start_datetime undefined...  ${slot}`);
-          return groupedSlots;
-        }
-        const slotDate = moment(slotDateTimeString).startOf("day").format();
-
-        // append the slot to the list of slots for that date
-        const slotIDList = groupedSlots.get(slotDate) || [];
-        slotIDList.push(slotDateTimeString);
-        return groupedSlots.set(slotDate, slotIDList);
-      }, Map().asMutable()).sort();
-
-      // convert map values from Array => List
-      return sortedAndGrouped.asImmutable().mapEntries(([k,v])=>[k,List(v.sort())]);
-    default:
-      return state;
-  }
-}
+// function groupedSlotIDsByDate(state = initialState.groupedSlotsByDate, action) {
+//   switch (action.type) {
+//     case SlotListActionTypes.RECEIVE_SLOTS:
+//
+//     default:
+//       return state;
+//   }
+// }
 
 function selectedObjectID(state = initialState.selectedObjectID, action) {
   switch (action.type) {
@@ -81,11 +63,11 @@ function isLoading(state = initialState.isLoading, action) {
 }
 
 export default combineReducers({
-  groupedSlotIDsByDate,
+  // groupedSlotIDsByDate,
   selectedObjectID,
   selectedProviderID,
   apiError,
   isLoading
 });
 
-export const getGroupedSlotIDsByDate = state => state.get("groupedSlotIDsByDate");
+// export const getGroupedSlotIDsByDate = state => state.get("groupedSlotIDsByDate");

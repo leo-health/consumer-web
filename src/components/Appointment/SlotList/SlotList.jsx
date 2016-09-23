@@ -5,11 +5,10 @@ import {withRouter} from 'react-router';
 import moment from 'moment';
 import * as actionCreators from 'redux/actions/slot_list_action_creators';
 import {ItemSelectionList} from 'components/Generic/ItemSelectionList';
-import {getGroupedSlotsByDate} from 'redux/reducers';
+import {getSlotDatesGroupedByWeek, getSlotsGroupedByDate} from 'redux/selectors/slotViewModelSelector';
 import ErrorMessage from 'components/Generic/ErrorMessage';
 import Calendar from 'components/Appointment/SlotList/Calendar';
 import {DATE_FORMATS} from 'config/constants';
-import virtualize from 'react-swipeable-views/lib/virtualize';
 import SwipeableViews from 'react-swipeable-views';
 
 export class SlotList extends Component {
@@ -19,43 +18,72 @@ export class SlotList extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {}; // TODO: set initial state.filterDate to the date of selected slot
+    if (props.selectedObjectID) {
+      this.state = {
+        filterDate: moment(props.selectedObjectID).startOf("day").format()
+      };
+    } else {
+      this.state = {};
+    }
   }
 
   componentDidMount() {
     this.props.dispatch(actionCreators.fetchSlots(this.props.appointmentTypeID));
   }
 
-
-  // getters/selectors
-
-  getSelectableDates() {
-    return new Set(this.props.groupedSlotsByDate.keys());
+  componentWillReceiveProps(nextProps) {
+    // TODO: this doesn't belong in the view layer. move filterDate to redux/reselect
+    const loadedNewSlots = this.props.slotDatesGroupedByWeek.size == 0 && nextProps.slotDatesGroupedByWeek.size > 0;
+    if (loadedNewSlots) {
+      // NOTE: using setState here does not trigger a re-render
+      this.setState({
+        filterDate: nextProps.slotDatesGroupedByWeek.first().first()
+      });
+    }
   }
+
+
+  // selectors from local state
 
   getFilteredSlots() {
     const {filterDate} = this.state;
     if (!filterDate) {
       return List();
     }
-    return this.props.groupedSlotsByDate.get(filterDate) || List();
+    return this.props.slotsGroupedByDate.get(filterDate) || List();
+  }
+
+  selectedDateForWeekStartDate(weekStartDate, slotDates) {
+    const {filterDate} = this.state;
+    if (moment(filterDate).isSame(weekStartDate, "week")) {
+      return filterDate;
+    }
+    return slotDates.first();
   }
 
 
   // event handlers
 
-  onClickSlot(slot) {
-    const {dispatch, router} = this.props;
-    dispatch(actionCreators.selectSlot(slot));
-    router.goBack();
+  onChangeIndex(index, latestIndex) {
+    const firstAvailableDateInCurrentWeek = this.props.slotDatesGroupedByWeek
+      .valueSeq()
+      .get(index, List())
+      .first();
+    this.setState({filterDate: firstAvailableDateInCurrentWeek});
   }
 
   onClickDate(date) {
-    if (this.getSelectableDates().has(date)) {
+    if (this.props.slotsGroupedByDate.has(date)) {
       this.setState({
         filterDate: date
       });
     }
+  }
+
+  onClickSlot(slot) {
+    const {dispatch, router} = this.props;
+    dispatch(actionCreators.selectSlot(slot));
+    router.goBack();
   }
 
 
@@ -68,70 +96,6 @@ export class SlotList extends Component {
     return <span>{formattedDate}</span>;
   }
 
-  onChangeIndex(index, latestIndex) {
-    console.log(`onChangeIndex ${index}  ${latestIndex}`);
-
-    if (this.calendarViewModel) {
-      const currentCalendarViewModel = this.calendarViewModel[index];
-      if (currentCalendarViewModel) {
-        this.setState({
-          filterDate: currentCalendarViewModel.selectedDate
-        });
-      }
-    }
-  }
-
-  renderWeekCalendars() {
-    const {groupedSlotsByDate} = this.props;
-    if (!groupedSlotsByDate) {
-      debugger;
-      return null;
-    }
-
-    const availableSlotDateSet = this.getSelectableDates();
-    const lastSlotDate = moment(groupedSlotsByDate.keySeq().last());
-    const lastWeekSlotDate = lastSlotDate.startOf("week");
-
-    const dateIsAvailable = (date)=>availableSlotDateSet.has(date.format());
-    const dateIsPartOfWeek = (date, weekStart)=>weekStart.isSame(date, "week");
-
-    // construct an array of calendar components for every week between the first and last slot
-    this.calendarViewModel = [];
-    let weekStartDate = moment(groupedSlotsByDate.keySeq().first()).startOf("week");
-
-    while (weekStartDate.isBefore(lastSlotDate)) {
-
-      // get the first available date in the current week
-      let nextDay = weekStartDate.clone();
-      while (dateIsPartOfWeek(nextDay, weekStartDate)) {
-        if (dateIsAvailable(nextDay)) {
-          break;
-        }
-        nextDay.add(1, "day");
-      }
-
-      // don't select a date if there are no available slots in that week
-      let selectedDate = dateIsPartOfWeek(nextDay, weekStartDate) ? nextDay.format() : null;
-
-      // render the user-selected date if it is in the current week
-      const {filterDate} = this.state;
-      if (filterDate && dateIsPartOfWeek(filterDate, weekStartDate)) {
-        selectedDate = filterDate;
-      }
-
-      this.calendarViewModel.push({
-        key: weekStartDate.format(),
-        weekStartDate: weekStartDate.format(),
-        selectedDate: selectedDate
-      });
-
-      weekStartDate.add(1, "week");
-    }
-
-    return this.calendarViewModel;
-  }
-
-
   render() {
     if (this.props.apiError) {
       const {apiError} = this.props;
@@ -141,14 +105,14 @@ export class SlotList extends Component {
     return (
       <div>
         <SwipeableViews onChangeIndex={this.onChangeIndex.bind(this)}>
-          {this.renderWeekCalendars().map(({key, weekStartDate, selectedDate}) => (
-            <Calendar
-              key={key}
+          {this.props.slotDatesGroupedByWeek.entrySeq().map(([weekStartDate, slotDates]) => {
+            return <Calendar
+              key={weekStartDate}
               weekStartDate={weekStartDate}
-              selectedDate={selectedDate}
+              selectedDate={this.selectedDateForWeekStartDate(weekStartDate, slotDates)}
               onClickDate={(date)=>this.onClickDate(date)}
-              selectableDates={this.getSelectableDates()}/>
-          ))}
+              selectableDates={new Set(slotDates)}/>
+          })}
         </SwipeableViews>
         <ItemSelectionList
           objectList={this.getFilteredSlots()}
@@ -161,17 +125,16 @@ export class SlotList extends Component {
 }
 
 
+function mapStateToProps(state) {
+  const itemSelectionList = state.get("schedulingSlot");
+  return {
+    appointmentTypeID: state.getIn(["schedulingAppointmentType", "selectedObjectID"]),
+    slotsGroupedByDate: getSlotsGroupedByDate(state),
+    slotDatesGroupedByWeek: getSlotDatesGroupedByWeek(state),
+    isLoading: itemSelectionList.get("isLoading"),
+    selectedObjectID: itemSelectionList.get("selectedObjectID"),
+    apiError: itemSelectionList.get("apiError")
+  };
+}
 
-  // TODO: ????: reduce boilerplate - slice subset of immutable Map
-  function mapStateToProps(state) {
-    const itemSelectionList = state.get("schedulingSlot");
-    return {
-      appointmentTypeID: state.getIn(["schedulingAppointmentType", "selectedObjectID"]),
-      groupedSlotsByDate: getGroupedSlotsByDate(state),
-      isLoading: itemSelectionList.get("isLoading"),
-      selectedObjectID: itemSelectionList.get("selectedObjectID"),
-      apiError: itemSelectionList.get("apiError")
-    };
-  }
-
-  export const SlotListContainer = connect(mapStateToProps)(withRouter(SlotList));
+export const SlotListContainer = connect(mapStateToProps)(withRouter(SlotList));

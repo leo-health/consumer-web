@@ -1,4 +1,4 @@
-import {fromJS, Map, List} from 'immutable';
+import {fromJS, Map, OrderedMap, List} from 'immutable';
 import {PatientListActionTypes} from '../actions/patient_list_action_creators';
 import {SlotListActionTypes} from '../actions/slot_list_action_creators';
 import {AppointmentTypeListActionTypes} from '../actions/appointment_type_list_action_creators';
@@ -13,14 +13,13 @@ import * as entitiesSelectors from '../selectors/entities_selectors';
 // TODO: reduce boilerplate with https://github.com/acdlite/redux-actions
 
 function mergeEntities(state, key, objectList) {
-
   // TODO: merge, not replace
   // TODO: clean up the idMap parsing. https://github.com/paularmstrong/normalizr
   return state.set(key, objectList.reduce((idMap, nextObject)=>{
     if (nextObject.get && nextObject.get("id")) {
       return idMap.set(nextObject.get("id"), nextObject);
     }
-  }, Map()));
+  }, OrderedMap()));
 }
 
 export default function entities(state = Map(), action) {
@@ -44,7 +43,7 @@ export const getAllEntitiesMap = (state, type) => {
 }
 
 export const getAllEntitiesList = (state, type) => {
-  const entityMap = getAllEntitiesMap
+  const entityMap = getAllEntitiesMap(state, type);
   if (!entityMap) {
     return undefined;
   }

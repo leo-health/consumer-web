@@ -29,6 +29,7 @@ export default class Calendar extends React.Component {
 
   render() {
     const {selectedDate, selectableDates} = this.props;
+    
     return (
       <div className={styles['calendar']}>
         {this.dateArray(this.props.weekStartDate).map((date)=>{
