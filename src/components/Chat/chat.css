@@ -1,0 +1,15 @@
+.header-container {
+  height: 10%;
+  background-color: #01AAE5;
+  position: relative;
+}
+
+.header {
+  color: white;
+  font-family: 'Raleway';
+  font-size: 70px;
+  font-weight: 200;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 3.5%;
+}

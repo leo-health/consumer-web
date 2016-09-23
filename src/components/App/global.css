@@ -57,4 +57,11 @@
   font-size: 40px;
 }
 
+:global .window-close {
+  position: absolute;
+  right: 0;
+  margin-right: 3%;
+  margin-top: 3%;
+}
+
 :global .window button { font-size: 40px; }

@@ -20,7 +20,7 @@ const Navbar = React.createClass({
         </div>
         <div styleName='divider'></div>
         <div styleName='link-container'>
-          <Link to="/" styleName='link'>
+          <Link to="/chat" styleName='link'>
             Message us
           </Link>
         </div>
