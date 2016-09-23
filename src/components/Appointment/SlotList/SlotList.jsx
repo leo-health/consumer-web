@@ -71,8 +71,14 @@ export class SlotList extends Component {
   onChangeIndex(index, latestIndex) {
     console.log(`onChangeIndex ${index}  ${latestIndex}`);
 
-    // setState( filterDate: first available slot  )
-
+    if (this.calendarViewModel) {
+      const currentCalendarViewModel = this.calendarViewModel[index];
+      if (currentCalendarViewModel) {
+        this.setState({
+          filterDate: currentCalendarViewModel.selectedDate
+        });
+      }
+    }
   }
 
   renderWeekCalendars() {
@@ -90,7 +96,7 @@ export class SlotList extends Component {
     const dateIsPartOfWeek = (date, weekStart)=>weekStart.isSame(date, "week");
 
     // construct an array of calendar components for every week between the first and last slot
-    const calendarViewModel = [];
+    this.calendarViewModel = [];
     let weekStartDate = moment(groupedSlotsByDate.keySeq().first()).startOf("week");
 
     while (weekStartDate.isBefore(lastSlotDate)) {
@@ -113,7 +119,7 @@ export class SlotList extends Component {
         selectedDate = filterDate;
       }
 
-      calendarViewModel.push({
+      this.calendarViewModel.push({
         key: weekStartDate.format(),
         weekStartDate: weekStartDate.format(),
         selectedDate: selectedDate
@@ -122,7 +128,7 @@ export class SlotList extends Component {
       weekStartDate.add(1, "week");
     }
 
-    return calendarViewModel;
+    return this.calendarViewModel;
   }
 
 
