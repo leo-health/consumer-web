@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import CSSModules from 'react-css-modules';
 import styles from './chat.css';
+import ChatInput from './Input/ChatInput';
 
 const Chat = React.createClass({
   render: function() {
@@ -18,6 +19,12 @@ const Chat = React.createClass({
             <div styleName='header'>
               Chat with Leo
             </div>
+          </div>
+          <div styleName='message-container'>
+
+          </div>
+          <div styleName='input-container'>
+            <ChatInput/>
           </div>
         </div>
       </div>
