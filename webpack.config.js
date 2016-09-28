@@ -1,9 +1,14 @@
 var webpack = require('webpack');
 // var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const LOCAL_CLIENT_SERVER = "http://localhost:8080";
+const NGROK_CLIENT_SERVER = "http://lcw.ngrok.io";
+
+const CLIENT_SERVER = NGROK_CLIENT_SERVER;
+
 module.exports = {
   entry: [
-    'webpack-dev-server/client?http://localhost:8080',
+    `webpack-dev-server/client?${CLIENT_SERVER}`,
     'webpack/hot/only-dev-server',
     './src/index.jsx'
   ],

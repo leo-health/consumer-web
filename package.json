@@ -8,7 +8,8 @@
     "test:watch": "npm run test -- --watch",
     "build": "./node_modules/.bin/webpack",
     "start": "./node_modules/.bin/webpack-dev-server",
-    "c": ".node_modules/.bin/babel-node"
+    "c": ".node_modules/.bin/babel-node",
+    "ngrok": "ngrok http 8080 -subdomain=lcw"
   },
   "private": true,
   "keywords": [],
