@@ -34,7 +34,10 @@ export const getSlotDatesGroupedByWeek = createSelector(
   }
 );
 
-
+export const getSlotWeeks = createSelector(
+  getSlotDatesGroupedByWeek,
+  slotDatesGroupedByWeek => slotDatesGroupedByWeek.keySeq().toList()
+);
 
 // We don't actually need this at the moment, but it could be a useful concept later
 // TODO: implement a generic combineSelectors method that works like combineReducers
