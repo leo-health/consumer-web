@@ -31,14 +31,8 @@ class _PhrHeader extends React.Component {
   }
 
   selectPatient(){
-    if(!this.props.params.id || !this.props.patients) return;
-    var patientName;
-    this.props.patients.forEach(function(patient){
-      if(patient.id === parseInt(this.props.params.id)){
-        patientName =  patient.first_name + ' ' + patient.last_name
-      }}.bind(this)
-    );
-    return patientName
+    var patient = this.props.currentPatient;
+    if(patient) return patient.first_name + ' ' + patient.last_name
   }
 
   render() {

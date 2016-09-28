@@ -33,17 +33,9 @@ class _Phr extends React.Component{
   }
 
   renderSelector(){
-    if(this.props.allergies === 0 && this.props.medications === 0 && this.props.heights === 0
-        && this.props.weights === 0 && this.props.medications === 0 && this.props.immuizations === 0){
-      return(
-        <div styleName='lists'>
-          <div styleName='greyLine'></div>
-          <p>As your daughter's data becomes available this section will populate with important facts and figures
-            related to her health and development</p>
-          <PhrNotes/>
-        </div>
-      )
-    }else{
+    var phrs= ['allergies', 'medications', 'heights', 'weights', 'immunizations']; var isPhr = false;
+    phrs.forEach(function(item){ if(this.props[item] && this.props[item].length > 0) isPhr = true }.bind(this));
+    if(isPhr){
       return(
         <div styleName='lists'>
           <Vitals heights={this.props.heights} weights={this.props.weights}/>
@@ -53,13 +45,40 @@ class _Phr extends React.Component{
           <PhrNotes/>
         </div>
       )
+    }else{
+      return(
+        <div styleName='lists'>
+          <div styleName='greyLine'></div>
+          <p>As your {this.checkPatientGender()} data becomes available this section will populate with important facts and figures
+            related to her health and development</p>
+          <PhrNotes/>
+        </div>
+      )
     }
+  }
+
+  checkPatientGender(){
+    var patient = this.currentPatient();
+    if(!patient) return;
+    return patient.sex === "M" ? "son's" : "daughter's"
+  }
+
+  currentPatient(){
+    var selectedPatient;
+    if(this.props.patients && this.props.params.id){
+      this.props.patients.forEach(function(patient){
+        if(patient.id === parseInt(this.props.params.id)) selectedPatient = patient
+      }.bind(this))
+    }
+    return selectedPatient;
   }
 
   render() {
     return (
       <div styleName='container'>
-        <PhrHeader params={this.props.params} fetchPhrsAsync={this.props.fetchPhrsAsync}/>
+        <PhrHeader params={this.props.params}
+                   fetchPhrsAsync={this.props.fetchPhrsAsync}
+                   currentPatient={this.currentPatient()} />
         {this.renderSelector()}
       </div>
     );
@@ -67,7 +86,7 @@ class _Phr extends React.Component{
 }
 
 _Phr.contextTypes = {
-  router: React.PropTypes.func.isRequired
+  router: React.PropTypes.object
 };
 
 function phrStateSelector(state) {
