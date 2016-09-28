@@ -7,6 +7,10 @@ import {withRouter} from 'react-router';
 import * as patientListActionCreators from '../../redux/actions/patient_list_action_creators';
 
 class _PhrHeader extends React.Component {
+  constructor() {
+    super();
+  }
+
   componentDidMount() {
     this.props.fetchPatients();
   }
@@ -26,6 +30,17 @@ class _PhrHeader extends React.Component {
     return patients
   }
 
+  selectPatient(){
+    if(!this.props.params.id || !this.props.patients) return;
+    var patientName;
+    this.props.patients.forEach(function(patient){
+      if(patient.id === parseInt(this.props.params.id)){
+        patientName =  patient.first_name + ' ' + patient.last_name
+      }}.bind(this)
+    );
+    return patientName
+  }
+
   render() {
     var backUrl = require("../../images/back_arrow@3x.png");
     return (
@@ -41,7 +56,7 @@ class _PhrHeader extends React.Component {
         <div styleName='whiteLine'></div>
         <div styleName='bottom'>
           <div styleName="round" style={{backgroundImage: 'url(http://vignette1.wikia.nocookie.net/nickelodeon/images/2/25/Spongebob-spongebob-squarepants-33210737-2392-2187.jpg/revision/latest?cb=20131006193851)'}}></div>
-          <div styleName='greeting'>Emily Charmichel</div>
+          <div styleName='greeting'>{this.selectPatient()}</div>
         </div>
       </div>
     );
