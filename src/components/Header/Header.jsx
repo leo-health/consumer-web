@@ -24,7 +24,7 @@ const Header = React.createClass({
           <Link to="/settings" styleName='settings'>
             <img src={settingsUrl} alt="Leo Health" styleName='logo'/>
           </Link>
-          <Link to="/phr" styleName='phr'>
+          <Link to="/phr/default" styleName='phr'>
             <img src={phrUrl} alt="Leo Health" styleName='logo'/>
           </Link>
         </div>

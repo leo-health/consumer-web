@@ -10,6 +10,7 @@ body{
     height: 23vh;
     text-align: center;
     background-color: #FF5F40;
+    margin-bottom: 5vh;
 }
 
 .top {
@@ -30,11 +31,15 @@ body{
     display: none;
 }
 
+.patientNameLink {
+    text-decoration: none;
+}
+
 .patientNames li {
     font-size: 24pt;
     display: inline;
     padding: 0 5vw 0 5vw;
-    color: white;
+    color: rgb(255 255 255);
 }
 
 .whiteLine {
@@ -98,6 +103,6 @@ body{
 }
 
 .phrSection .sideNote {
-    font-size: 15pt;
+    font-size: 20pt;
     clear: both;
 }

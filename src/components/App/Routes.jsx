@@ -56,7 +56,7 @@ export function configureRoutes(store) {
       <Route>
         <Route path="/login" component={Login}/>
         <Route path="/" component={App} onEnter={authTransition(store)}>
-          <Route path="phr" component={Phr}/>
+          <Route path="phr/:id" component={Phr}/>
           <Route component={Home}>
             <IndexRoute/>
             <Route path="chat" component={Chat}/>

@@ -16,7 +16,11 @@ class _PhrHeader extends React.Component {
     var patients = this.props.patients;
     if(patients.length > 0){
       patients = patients.map(function(patient, i){
-        return <li key={i}>{patient.first_name}</li>
+        return(
+          <Link styleName='patientNameLink' key={i} to={`/phr/${patient.id}`}>
+            <li>{patient.first_name} {patient.last_name}</li>
+          </Link>
+        )
       })
     }
     return patients

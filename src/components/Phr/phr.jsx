@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactRouter from 'react-router'
 import styles from './phr.css';
 import {PhrHeader} from './phrHeader';
 import PhrNotes from './phrNotes';
@@ -13,8 +14,22 @@ import {allEntitiesSelector} from '../../redux/selectors/entities_selectors';
 import {withRouter} from 'react-router';
 
 class _Phr extends React.Component{
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {
-    this.props.fetchPhrsAsync({id: 1})
+    if(this.props.params.id != 'default') this.props.fetchPhrsAsync({id: this.props.params.id})
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.params.id != this.props.params.id && nextProps.params.id != 'default'){
+      this.props.fetchPhrsAsync({id: nextProps.params.id});
+    }
+
+    if(this.props.params.id === 'default' && nextProps.patients){
+      this.context.router.push(`/phr/${nextProps.patients[0].id}`);
+    }
   }
 
   renderSelector(){
@@ -31,8 +46,7 @@ class _Phr extends React.Component{
     }else{
       return(
         <div styleName='lists'>
-          <Vitals heights={this.props.heights}
-                  weights={this.props.weights}/>
+          <Vitals heights={this.props.heights} weights={this.props.weights}/>
           <Allergies allergies={this.props.allergies}/>
           <Medications medications={this.props.medications}/>
           <Immunizations immunizations={this.props.immunizations}/>
@@ -45,15 +59,20 @@ class _Phr extends React.Component{
   render() {
     return (
       <div styleName='container'>
-        <PhrHeader/>
+        <PhrHeader params={this.props.params} fetchPhrsAsync={this.props.fetchPhrsAsync}/>
         {this.renderSelector()}
       </div>
     );
   }
 }
 
+_Phr.contextTypes = {
+  router: React.PropTypes.func.isRequired
+};
+
 function phrStateSelector(state) {
   return {
+    patients: state.getIn(["schedulingPatient", "patients"]),
     allergies: state.getIn(["phrList", "allergies"]),
     medications: state.getIn(["phrList", "medications"]),
     immunizations: state.getIn(["phrList", "immunizations"]),
