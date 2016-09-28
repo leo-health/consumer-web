@@ -4,7 +4,7 @@ import {Map, OrderedMap, List} from 'immutable';
 import moment from 'moment';
 
 // TODO: refactor reducers to include default state for all expected entities
-export const getAllSlotsList = state => (getAllEntitiesList(state, "slots") || List());
+export const getAllSlotsList = getAllEntitiesList("slots");
 
 export const getAllSlotsListSorted = createSelector(getAllSlotsList, slots=>slots.sort());
 

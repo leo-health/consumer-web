@@ -6,6 +6,8 @@ import {AppointmentTypeListActionTypes} from '../actions/appointment_type_list_a
 import moment from 'moment';
 import {DATE_FORMATS} from '../../config/constants';
 
+import {createSelector} from 'reselect';
+
 // ????: should selectors be in a separate file? or with the reducers?
 import * as entitiesSelectors from '../selectors/entities_selectors';
 
@@ -36,19 +38,23 @@ export default function entities(state = Map(), action) {
 }
 
 
-// selectors
+// base selectors
 
 export const getAllEntitiesMap = (state, type) => {
   return state.getIn(["entities", type]);
 }
 
-export const getAllEntitiesList = (state, type) => {
-  const entityMap = getAllEntitiesMap(state, type);
-  if (!entityMap) {
-    return undefined;
+// calculated selectors
+export const getAllEntitiesList = (type) => createSelector(
+  state => getAllEntitiesMap(state, type),
+  entityMap => {
+    if (!entityMap) {
+      return List();
+    }
+    return entityMap.valueSeq().toList();
   }
-  return entityMap.valueSeq().toList();
-};
+)
+
 
 export const getById = (state, type, id) => {
   const allEntities = getAllEntitiesMap(state, type);
