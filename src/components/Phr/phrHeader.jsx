@@ -2,8 +2,26 @@ import React from 'react';
 import styles from './phr.css';
 import CSSModules from 'react-css-modules';
 import { Link } from 'react-router';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
+import * as patientListActionCreators from '../../redux/actions/patient_list_action_creators';
 
-class PhrHeader extends React.Component {
+class _PhrHeader extends React.Component {
+  componentDidMount() {
+    this.props.fetchPatients();
+  }
+
+  renderPatients(){
+    if(!this.props.patients) return;
+    var patients = this.props.patients;
+    if(patients.length > 0){
+      patients = patients.map(function(patient, i){
+        return <li key={i}>{patient.first_name}</li>
+      })
+    }
+    return patients
+  }
+
   render() {
     var backUrl = require("../../images/back_arrow@3x.png");
     return (
@@ -13,15 +31,7 @@ class PhrHeader extends React.Component {
             <img styleName='backArrow' src={backUrl}/>
           </Link>
           <ul styleName='patientNames'>
-            <li>Christopher</li>
-            <li>Emily</li>
-            <li>Jaco</li>
-            <li>Hayden</li>
-            <li>Hover</li>
-            <li>Wayne</li>
-            <li>Tracy</li>
-            <li>Hilary</li>
-            <li>Jasmine</li>
+            {this.renderPatients()}
           </ul>
         </div>
         <div styleName='whiteLine'></div>
@@ -32,6 +42,12 @@ class PhrHeader extends React.Component {
       </div>
     );
   }
-};
+}
 
-export default CSSModules(PhrHeader, styles);
+function patientsSelector(state){
+  return {
+    patients: state.getIn(["schedulingPatient", "patients"])
+  }
+}
+
+export const PhrHeader = connect(patientsSelector, patientListActionCreators)(withRouter(CSSModules(_PhrHeader, styles)));

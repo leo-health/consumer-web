@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './phr.css';
-import PhrHeader from './phrHeader';
+import {PhrHeader} from './phrHeader';
 import PhrNotes from './phrNotes';
 import Allergies from './allergies';
 import Vitals from './vitals';
@@ -13,12 +13,7 @@ import {allEntitiesSelector} from '../../redux/selectors/entities_selectors';
 import {withRouter} from 'react-router';
 
 class _Phr extends React.Component{
-  constructor() {
-    super();
-  }
-
   componentDidMount() {
-    //this.props.fetchPatients();
     this.props.fetchPhrsAsync({id: 1})
   }
 
@@ -50,7 +45,7 @@ class _Phr extends React.Component{
   render() {
     return (
       <div styleName='container'>
-        <PhrHeader patients={this.props.patients}/>
+        <PhrHeader/>
         {this.renderSelector()}
       </div>
     );
@@ -63,8 +58,7 @@ function phrStateSelector(state) {
     medications: state.getIn(["phrList", "medications"]),
     immunizations: state.getIn(["phrList", "immunizations"]),
     heights: state.getIn(["phrList", "heights"]),
-    weights: state.getIn(["phrList", "weights"]),
-    patients: allEntitiesSelector(state, "patients")
+    weights: state.getIn(["phrList", "weights"])
   };
 }
 

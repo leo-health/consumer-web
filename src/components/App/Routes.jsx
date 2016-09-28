@@ -2,7 +2,7 @@ import React from 'react';
 import {Route, IndexRoute, Router, browserHistory} from 'react-router';
 import {loadCachedAuthToken} from '../Login/login_action_creators';
 import App from './App';
-import Home from './Home';
+import {Home} from './Home';
 import Header from '../Header/Header';
 import Navbar from '../Navbar/Navbar';
 import Recent from '../Recent/Recent';

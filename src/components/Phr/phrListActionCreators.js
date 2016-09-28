@@ -38,7 +38,7 @@ export function fetchPhrsAsync(params) {
     dispatch(fetchPhrsRequest());
     var base = Constants.API_BASE_URL;
     var auth = getState().getIn(["authentication","token"]);
-    var uri = `${base}/patients/${params.id}/phr?authentication_token=${auth}`
+    var uri = `${base}/patients/${params.id}/phr?authentication_token=${auth}`;
     return fetch(uri, {method: "get"})
     .then(response => response.json())
     .then(json => dispatch(responseSuccessOrFail(json.data, fetchPhrsRequestSuccess, fetchPhrsRequestFail)))

@@ -13,7 +13,7 @@ export function requestObjects(state) {
 }
 
 export function receiveObjects(state, objectList) {
-  return state.set("isLoading", false);
+  return state.set("isLoading", false).set("patients", objectList);
 }
 
 export function requestFailure(state, apiError) {

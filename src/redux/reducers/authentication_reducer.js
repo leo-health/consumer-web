@@ -4,7 +4,6 @@ import {SettingsActionTypes} from '../../components/Settings/settings_action_cre
 import localStorageHelper from '../../utils/localStorageHelper';
 
 function loginRequest(state, action) {
-  debugger
   return state.set("isLoading", true);
 }
 

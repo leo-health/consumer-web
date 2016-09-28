@@ -5,7 +5,7 @@ export const PatientListActionTypes = {
   REQUEST_PATIENTS: 'REQUEST_PATIENTS',
   PATIENT_REQUEST_SUCCESS: 'PATIENT_REQUEST_SUCCESS',
   SELECT_PATIENT: 'SELECT_PATIENT'
-}
+};
 
 export function selectPatient(patient) {
   return {
@@ -28,12 +28,13 @@ export function receivePatients(objectList) {
 }
 
 export function fetchPatients() {
-  return function (dispatch, getState) {
-    dispatch(requestPatients())
-    const base = Constants.API_BASE_URL;
-    const auth = getState().getIn(["authentication","token"]);
-    return fetch(`${base}/family?authentication_token=${auth}`)
-      .then(response => response.json())
-      .then(json => dispatch(receivePatients(json.data.family.patients)));
+  return (dispatch, getState) => {
+    dispatch(requestPatients());
+    var base = Constants.API_BASE_URL;
+    var auth = getState().getIn(["authentication","token"]);
+    var uri = `${base}/family?authentication_token=${auth}`;
+    return fetch(uri, {method: "get"})
+        .then(response => response.json())
+        .then(json => dispatch(receivePatients(json.data.family.patients)))
   }
 }
