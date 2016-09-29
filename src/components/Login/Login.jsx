@@ -35,8 +35,7 @@ class _Login extends React.Component {
   }
 
   render() {
-    if (this.props.isLoading) return <LoadingSpinner/>
-
+    if (this.props.isLoading) return <LoadingSpinner/>;
     var logoUrl = require("../../images/long-logo.png");
 
     return (

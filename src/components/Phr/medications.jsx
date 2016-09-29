@@ -6,7 +6,9 @@ class Medications extends React.Component {
   renderMedications() {
     if(!this.props.medications) return;
     var medications = this.props.medications;
-    if( medications.length > 0 ){
+    if( medications.length === 0 ){
+      medications =  <p>No active medication</p>
+    }else{
       medications = medications.map(function(medication, i){
         return (
           <div styleName='phrSection' key={i}>
@@ -15,8 +17,6 @@ class Medications extends React.Component {
           </div>
         )
       })
-    }else{
-      medications =  <p>No active medication</p>
     }
     return medications
   }

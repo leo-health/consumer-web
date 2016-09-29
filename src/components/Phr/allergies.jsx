@@ -6,7 +6,9 @@ class Allergies extends React.Component{
   renderAllergies() {
     if(!this.props.allergies) return;
     var allergies = this.props.allergies;
-    if( allergies.length > 0 ){
+    if( allergies.length === 0 ){
+      allergies =  <p>No known allergies</p>
+    }else{
       allergies = allergies.map(function(allergy, i){
         return (
           <div styleName='phrSection' key={i}>
@@ -16,8 +18,6 @@ class Allergies extends React.Component{
           </div>
         )
       })
-    }else{
-      allergies =  <p>No known allergies</p>
     }
 
     return allergies
