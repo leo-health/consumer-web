@@ -12,7 +12,7 @@ const Appointment = React.createClass({
         </Link>
         <div className='window'>
           <div styleName='header-container'>
-            <Link to="/" styleName='cancel'>
+            <Link to="/" className='window-close'>
               <i className="fa fa-remove fa-lg white"></i>
             </Link>
             <div styleName='header'>
