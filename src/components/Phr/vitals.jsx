@@ -6,7 +6,7 @@ import VitalsTable from './vitalsTable';
 class Vitals extends React.Component {
   renderVitals() {
     if(!this.props.heights || !this.props.weights) return;
-    var heights = this.props.heights; var weights = this.props.weights;
+    const {heights, weights} = this.props;
     if ( heights.length === 0 && weights.length === 0 ){
       return <p>NO Vitals Measurements</p>
     }else if(heights.length > 1 || weights.length > 1){

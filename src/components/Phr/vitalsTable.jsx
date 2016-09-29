@@ -3,25 +3,13 @@ import styles from './phr.css';
 import CSSModules from 'react-css-modules';
 
 class VitalsTable extends React.Component {
-  renderWeight(){
-    var weight = this.props.weight;
-    if(weight){
+  renderVital(title){
+    var vital = this.props[title.toLowerCase()];
+    if(vital){
       return(
         <div styleName='phrSection'>
-          <div styleName='title'>Weight</div>
-          <div styleName='sideNote'>{weight.formatted_value_with_units}, {weight.percentile}th percentile</div>
-        </div>
-      )
-    }
-  }
-
-  renderHeight(){
-    var height = this.props.height;
-    if(height){
-      return(
-        <div styleName='phrSection'>
-          <div styleName='title'>Height</div>
-          <div styleName='sideNote'>{height.formatted_value_with_units}, {height.percentile}th percentile</div>
+          <div styleName='title'>{title}</div>
+          <div styleName='sideNote'>{vital.formatted_value_with_units}, {vital.percentile}th percentile</div>
         </div>
       )
     }
@@ -30,8 +18,8 @@ class VitalsTable extends React.Component {
   render() {
     return (
       <div>
-        {this.renderWeight()}
-        {this.renderHeight()}
+        {this.renderVital('Weight')}
+        {this.renderVital('Height')}
       </div>
     )
   }

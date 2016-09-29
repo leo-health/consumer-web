@@ -1,6 +1,5 @@
 import {fromJS, Map} from 'immutable';
 import {PhrListActionTypes} from '../../components/Phr/phrListActionCreators';
-import localStorageHelper from '../../utils/localStorageHelper';
 
 function fetchPhrRequest(state, action) {
   return state.set("isLoading", true);
