@@ -16,13 +16,19 @@ export function fetchPhrsRequest() {
 
 export function fetchPhrsRequestSuccess(payload){
   return {
-    type: LoginActionTypes.FETCH_PHRS_REQUEST_SUCCESS
+    type: PhrListActionTypes.FETCH_PHRS_REQUEST_SUCCESS,
+    allergies: payload.allergies,
+    medications: payload.medications,
+    immunizations: payload.immunizations,
+    heights: payload.heights,
+    weights: payload.weights,
+    bmis: payload.bmis
   };
 }
 
 export function fetchPhrsRequestFail(error) {
   return {
-    type: LoginActionTypes.LOGIN_FAIL,
+    type: PhrListActionTypes.FETCH_PHRS_REQUEST_FAIL,
     error
   }
 }
@@ -30,11 +36,12 @@ export function fetchPhrsRequestFail(error) {
 export function fetchPhrsAsync(params) {
   return (dispatch, getState) => {
     dispatch(fetchPhrsRequest());
-    const base = Constants.API_BASE_URL;
-    const auth = getState().getIn(["authentication","token"]);
-    return fetch(`${base}/patients/${params.id}/phr?authentication_token=${auth}`)
+    var base = Constants.API_BASE_URL;
+    var auth = getState().getIn(["authentication","token"]);
+    var uri = `${base}/patients/${params.id}/phr?authentication_token=${auth}`;
+    return fetch(uri, {method: "get"})
     .then(response => response.json())
-    .then(json => dispatch(responseSuccessOrFail(json.data)))
+    .then(json => dispatch(responseSuccessOrFail(json.data, fetchPhrsRequestSuccess, fetchPhrsRequestFail)))
   }
 }
 

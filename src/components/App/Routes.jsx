@@ -2,7 +2,7 @@ import React from 'react';
 import {Route, IndexRoute, Router, browserHistory} from 'react-router';
 import {loadCachedAuthToken} from '../Login/login_action_creators';
 import App from './App';
-import Home from './Home';
+import {Home} from './Home';
 import Header from '../Header/Header';
 import Navbar from '../Navbar/Navbar';
 import Recent from '../Recent/Recent';
@@ -15,7 +15,7 @@ import {AppointmentTypeListContainer} from '../Appointment/AppointmentTypeList/A
 import {SlotListContainer} from '../Appointment/SlotList/SlotList';
 import {Settings} from '../Settings/Settings';
 import {Login} from '../Login/Login';
-import Phr from '../Phr/phr';
+import {Phr} from '../Phr/phr';
 
 export const routeURLs = {
   index: "/",
@@ -56,7 +56,7 @@ export function configureRoutes(store) {
       <Route>
         <Route path="/login" component={Login}/>
         <Route path="/" component={App} onEnter={authTransition(store)}>
-          <Route path="phr" component={Phr}/>
+          <Route path="phr/:id" component={Phr}/>
           <Route component={Home}>
             <IndexRoute/>
             <Route path="chat" component={Chat}/>

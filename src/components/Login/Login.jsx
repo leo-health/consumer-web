@@ -10,7 +10,7 @@ import * as loginActionCreators from './login_action_creators';
 class _Login extends React.Component {
 
   constructor() {
-    super()
+    super();
     this.state = {
       email: "adam+1997@leohealth.com",
       password: "password"
@@ -35,8 +35,7 @@ class _Login extends React.Component {
   }
 
   render() {
-    if (this.props.isLoading) { return <LoadingSpinner/>; }
-
+    if (this.props.isLoading) return <LoadingSpinner/>;
     var logoUrl = require("../../images/long-logo.png");
 
     return (

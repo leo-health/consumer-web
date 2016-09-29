@@ -1,5 +1,4 @@
 import {fromJS, Map} from 'immutable';
-import {combineReducers} from 'redux-immutable';
 import {LoginActionTypes} from '../../components/Login/login_action_creators';
 import {SettingsActionTypes} from '../../components/Settings/settings_action_creators';
 import localStorageHelper from '../../utils/localStorageHelper';
