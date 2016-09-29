@@ -24,6 +24,9 @@ export function requestSlots() {
 }
 
 export function receiveSlots(objectList) {
+
+  debugger;
+
   return {
     type: SlotListActionTypes.RECEIVE_SLOTS,
     payload: {objectList}
@@ -54,10 +57,12 @@ function flattenSlots(provider_nested_slots) {
   // TODO: update backend to return this simpler, flat api response
   return provider_nested_slots.reduce((all_slots, provider_slots)=>{
     return [...all_slots, ...provider_slots.slots.map((slot)=>{
+      const start_datetime = moment(slot.start_datetime).format(); // format for consistency
       return {
-        id: slot.start_datetime,
+        ...slot,
+        id: start_datetime,
         provider_id: provider_slots.provider_id,
-        ...slot
+        start_datetime
       };
     })];
   }, []);

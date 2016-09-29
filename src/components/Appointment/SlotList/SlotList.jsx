@@ -87,9 +87,10 @@ export class SlotList extends Component {
   onChangeIndex(index, latestIndex) {
     const weekStartDate = this.props.slotWeeks.get(index);
     const selectedDate = this.props.selectedObjectID;
-    const filterDate = selectedDate && moment(selectedDate).isSame(weekStartDate, "week")
-      ? selectedDate
-      : this.props.slotDatesGroupedByWeek.get(week, List()).first();
+    const selectedMoment = moment(selectedDate);
+    const filterDate = selectedDate && selectedMoment.isSame(weekStartDate, "week")
+      ? selectedMoment.startOf("day").format()
+      : this.props.slotDatesGroupedByWeek.get(weekStartDate, List()).first();
 
     this.setState({
       weekIndex: index,
