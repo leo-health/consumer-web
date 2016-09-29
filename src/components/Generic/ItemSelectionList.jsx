@@ -10,16 +10,19 @@ export class _ItemSelectionList extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(this.props.fetchAction());
-  }
-
-  selectObject(object) {
-    this.props.dispatch(this.props.selectAction(object));
+    if (this.props.fetchAction) {
+      this.props.dispatch(this.props.fetchAction());
+    }
   }
 
   onClickObject(object) {
-    this.selectObject(object);
-    this.props.onClickObject(object);
+    const {selectAction, dispatch} = this.props;
+    if (selectAction) {
+      dispatch(selectAction(object));
+    }
+    if (this.props.onClickObject) {
+      this.props.onClickObject(object);
+    }
   }
 
   getOptionClass(object) {

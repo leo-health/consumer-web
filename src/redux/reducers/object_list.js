@@ -1,5 +1,4 @@
-import {fromJS, Map} from 'immutable';
-
+import {fromJS} from 'immutable';
 
 // ????: These are not really "reducers" if a reducer is (state, action) => state
 // more like reducer helpers, or something like that

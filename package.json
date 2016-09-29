@@ -8,7 +8,8 @@
     "test:watch": "npm run test -- --watch",
     "build": "./node_modules/.bin/webpack",
     "start": "./node_modules/.bin/webpack-dev-server",
-    "c": ".node_modules/.bin/babel-node"
+    "c": ".node_modules/.bin/babel-node",
+    "ngrok": "ngrok http 8080 -subdomain=lcw"
   },
   "private": true,
   "keywords": [],
@@ -45,12 +46,15 @@
     "react": "^15.3.1",
     "react-css-modules": "^3.7.10",
     "react-dom": "^15.3.1",
+    "react-motion": "^0.4.4",
     "react-redux": "^4.4.5",
     "react-router": "^2.7.0",
+    "react-swipeable-views": "^0.7.6",
     "redux": "^3.5.2",
     "redux-immutable": "^3.0.8",
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.1.0",
+    "reselect": "^2.5.4",
     "style-loader": "^0.13.1",
     "urijs": "^1.18.1"
   }

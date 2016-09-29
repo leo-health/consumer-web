@@ -6,7 +6,7 @@ const Message = React.createClass({
   render: function() {
     return (
       <div>
-
+        {this.props.data.message}
       </div>
     );
   }

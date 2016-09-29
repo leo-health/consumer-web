@@ -54,10 +54,12 @@ function flattenSlots(provider_nested_slots) {
   // TODO: update backend to return this simpler, flat api response
   return provider_nested_slots.reduce((all_slots, provider_slots)=>{
     return [...all_slots, ...provider_slots.slots.map((slot)=>{
+      const start_datetime = moment(slot.start_datetime).format(); // format for consistency
       return {
-        id: slot.start_datetime,
+        ...slot,
+        id: start_datetime,
         provider_id: provider_slots.provider_id,
-        ...slot
+        start_datetime
       };
     })];
   }, []);
@@ -91,7 +93,7 @@ export function fetchSlots(appointment_type_id) {
     dispatch(requestSlots())
 
     const authentication_token = getState().getIn(["authentication","token"]);
-    const start_date = moment()
+    const start_date = moment();
     const end_date = start_date.clone().add(6, "months");
 
     const uri = URI(Constants.API_BASE_URL)
