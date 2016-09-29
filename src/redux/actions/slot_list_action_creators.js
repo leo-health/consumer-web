@@ -24,9 +24,6 @@ export function requestSlots() {
 }
 
 export function receiveSlots(objectList) {
-
-  debugger;
-
   return {
     type: SlotListActionTypes.RECEIVE_SLOTS,
     payload: {objectList}
