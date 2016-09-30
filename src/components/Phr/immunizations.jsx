@@ -7,14 +7,14 @@ class Immunizations extends React.Component{
     if(!this.props.immunizations) return;
     var immunizations = this.props.immunizations;
     if( immunizations.length === 0 ){
-      immunizations =  <p>No active immunization</p>
+      immunizations =  <p styleName='emptyText'>No active immunization</p>
     }else{
       immunizations = immunizations.map(function(immunization, i){
         return (
           <div styleName='phrSection' key={i}>
-            <div styleName='title'>{immunization.vaccine}</div>
-            <div styleName='description'>{immunization.administered_at}</div>
-            <div styleName='sideNote'></div>
+            <p styleName='title'>{immunization.vaccine}</p>
+            <p styleName='description'>{immunization.administered_at}</p>
+            <p styleName='sideNote'></p>
           </div>
         )
       })

@@ -49,7 +49,7 @@ class _Phr extends React.Component{
       return(
         <div styleName='lists'>
           <div styleName='greyLine'></div>
-          <p>As your {this.checkPatientGender()} data becomes available this section will populate with important facts and figures
+          <p styleName='emptyText'>As your {this.checkPatientGender()} data becomes available this section will populate with important facts and figures
             related to her health and development</p>
           <PhrNotes/>
         </div>

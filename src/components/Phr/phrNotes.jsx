@@ -6,8 +6,8 @@ import CSSModules from 'react-css-modules';
 class PhrNotes extends React.Component{
   render() {
     return (
-      <div styleName='sectionTitle'>
-        <p>NOTES</p>
+      <div>
+        <p styleName='sectionTitle'>NOTES</p>
         <div styleName='greyLine'></div>
         <p>Let us know if there are any special instructions not included in the form.</p>
       </div>

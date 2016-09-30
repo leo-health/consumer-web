@@ -8,7 +8,7 @@ class Vitals extends React.Component {
     if(!this.props.heights || !this.props.weights) return;
     const {heights, weights} = this.props;
     if ( heights.length === 0 && weights.length === 0 ){
-      return <p>NO Vitals Measurements</p>
+      return <p styleName='emptyText'>No Vitals Measurements</p>
     }else if(heights.length > 1 || weights.length > 1){
       return 'graph'
     }else{

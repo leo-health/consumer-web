@@ -22,7 +22,7 @@ class _PhrHeader extends React.Component {
       patients = patients.map(function(patient, i){
         return(
           <Link styleName='patientNameLink' key={i} to={`/phr/${patient.id}`}>
-            <li>{patient.first_name} {patient.last_name}</li>
+            {patient.first_name} {patient.last_name}
           </Link>
         )
       })
@@ -43,14 +43,18 @@ class _PhrHeader extends React.Component {
           <Link to="/">
             <img styleName='backArrow' src={backUrl}/>
           </Link>
-          <ul styleName='patientNames'>
+          <div styleName='patientNames'>
             {this.renderPatients()}
-          </ul>
+          </div>
         </div>
         <div styleName='whiteLine'></div>
         <div styleName='bottom'>
-          <div styleName="round" style={{backgroundImage: 'url(http://vignette1.wikia.nocookie.net/nickelodeon/images/2/25/Spongebob-spongebob-squarepants-33210737-2392-2187.jpg/revision/latest?cb=20131006193851)'}}></div>
-          <div styleName='greeting'>{this.selectPatient()}</div>
+          <div styleName='wrapper'>
+            <div styleName="round" style={{backgroundImage: 'url(http://vignette1.wikia.nocookie.net/nickelodeon/images/2/25/Spongebob-spongebob-squarepants-33210737-2392-2187.jpg/revision/latest?cb=20131006193851)'}}></div>
+          </div>
+          <div styleName='wrapper'>
+            <div styleName='greeting'>{this.selectPatient()}</div>
+          </div>
         </div>
       </div>
     );

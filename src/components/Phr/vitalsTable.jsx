@@ -8,8 +8,8 @@ class VitalsTable extends React.Component {
     if(vital){
       return(
         <div styleName='phrSection'>
-          <div styleName='title'>{title}</div>
-          <div styleName='sideNote'>{vital.formatted_value_with_units}, {vital.percentile}th percentile</div>
+          <p styleName='title'>{title}</p>
+          <p styleName='sideNote'>{vital.formatted_value_with_units}, {vital.percentile}th percentile</p>
         </div>
       )
     }
