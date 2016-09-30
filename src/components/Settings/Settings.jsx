@@ -1,9 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router';
+import {withRouter, Link} from 'react-router';
+import CSSModules from 'react-css-modules';
 import styles from './settings.css';
 import {routeURLs} from '../App/Routes';
 import {logoutAsync} from './settings_action_creators';
+import Account from './Sections/Account';
+import Children from './Sections/Children';
 
 class _Settings extends React.Component {
 
@@ -14,13 +17,25 @@ class _Settings extends React.Component {
 
   render() {
     return (
-      <button
-        onClick={()=>this.onClickLogout()}
-        className={styles['logout-button']}>
-        Logout
-      </button>
+      <div>
+        <div styleName='header'>
+          <Link to="/" styleName='back'>
+            <i className='fa fa-arrow-left fa-lg'></i>
+          </Link>
+          Settings
+        </div>
+        <Account/>
+        <Children/>
+        <div styleName='logout-container'>
+          <button
+            onClick={()=>this.onClickLogout()}
+            styleName='logout'>
+            Logout
+          </button>
+        </div>
+      </div>
     );
   }
 }
 
-export const Settings = connect(null, {logoutAsync})(withRouter(_Settings));
+export const Settings = connect(null, {logoutAsync})(withRouter(CSSModules(_Settings, styles)));
