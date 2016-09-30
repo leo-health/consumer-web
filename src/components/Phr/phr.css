@@ -1,12 +1,11 @@
 body{
     margin: 0;
-    text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    -moz-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
 }
 
-.container { width: 100vw }
+.container {
+    width: 100vw;
+    height: 100vh;
+}
 
 .header {
     color: white;
@@ -51,6 +50,7 @@ body{
 .bottom {
     padding: 2vh 6vw 2vh 6vw;
 }
+
 .bottom .wrapper {
     display: inline-block;
     vertical-align: middle;
@@ -84,7 +84,15 @@ body{
 }
 
 .lists .sectionTitle{
+    display: inline-block;
     font-weight: bolder;
+}
+
+.lists .sectionTitleRight{
+    font-weight: bolder;
+    color: #FF5F40;
+    float: right;
+    text-decoration: none;
 }
 
 .lists .emptyText{
@@ -115,4 +123,51 @@ body{
 .phrSection .sideNote {
     clear: both;
     color: #7C7C7C;
+}
+
+.container .noteHeader{
+    padding: 0 2vw 0 2vw;
+    color: white;
+    height: 8vh;
+    background-color: #FF5F40;
+    font-size: 35px;
+    width: 100%;
+    text-align: center;
+}
+
+.container .notePrompt{
+    padding-left: 2vw;
+    color: #7C7C7C;
+    font-size: 35px;
+}
+
+.noteHeader p {
+    display: inline-block;
+    margin: 0;
+    font-size: 62px;
+    height: 100%;
+    line-height: 8vh;
+}
+
+.noteHeader .noteButton{
+    color: white;
+    font-weight: bolder;
+    text-decoration: none;
+    line-height: 8vh;
+    position: absolute;
+    right: 0;
+    padding-right: 2vw;
+}
+
+.container textarea{
+    padding: 2vh 2vw 0 2vw;
+    text-align: left;
+    width: 100vw;
+    height: 92vh;
+    font-size: 35px;
+    border-style: none;
+}
+
+.container textarea:focus {
+    outline: none !important;
 }

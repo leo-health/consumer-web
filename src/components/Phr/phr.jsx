@@ -42,7 +42,8 @@ class _Phr extends React.Component{
           <Allergies allergies={this.props.allergies}/>
           <Medications medications={this.props.medications}/>
           <Immunizations immunizations={this.props.immunizations}/>
-          <PhrNotes/>
+          <PhrNotes currentPatient={this.currentPatient()}
+                    params={this.props.params}/>
         </div>
       )
     }else{
@@ -51,7 +52,8 @@ class _Phr extends React.Component{
           <div styleName='greyLine'></div>
           <p styleName='emptyText'>As your {this.checkPatientGender()} data becomes available this section will populate with important facts and figures
             related to her health and development</p>
-          <PhrNotes/>
+          <PhrNotes currentPatient={this.currentPatient()}
+                    params={this.props.params}/>
         </div>
       )
     }

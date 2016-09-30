@@ -30,10 +30,20 @@ class Immunizations extends React.Component{
     return immunizations
   }
 
+  renderExportButton() {
+    if (!this.props.immunizations) return;
+    if (this.props.immunizations.length > 0) return <p styleName='sectionTitleRight' onClick={this.renderPdf}>EXPORT</p>;
+  }
+
+  renderPdf(){
+
+  }
+
   render() {
     return (
         <div>
           <p styleName='sectionTitle'>IMMUNIZATIONS</p>
+          {this.renderExportButton()}
           <div styleName='greyLine'></div>
           {this.renderImmunizations()}
         </div>
