@@ -124,7 +124,6 @@ export class SlotList extends Component {
 
   renderSwipableCalendar() {
     if (this.props.slotWeeks.size === 0) return null;
-
     return <VirtualizeSwipeableViews
       slideRenderer={this.renderWeekSlide.bind(this)}
       slideCount={this.props.slotWeeks.size}

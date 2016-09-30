@@ -71,7 +71,7 @@ class _Scheduler extends Component {
           {patientCopy}
           <div styleName='line'></div>
         </div>
-        <textarea defaultValue={notesCopy}
+        <textarea placeholder={notesCopy}
                   styleName='text'></textarea>
         <div styleName='line'></div>
           <div onClick={()=>this.onClickSlots()}
