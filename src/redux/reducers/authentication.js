@@ -34,7 +34,7 @@ function setAuthToken(state, token) {
   return state.set("token", token);
 }
 
-export function authentication(state = Map(), action) {
+export default function authentication(state = Map(), action) {
   switch (action.type) {
     case SettingsActionTypes.LOGOUT_REQUEST:
       return logoutRequest(state, action);

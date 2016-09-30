@@ -15,7 +15,7 @@ function fetchPhrRequestSuccess(state, action) {
 }
 
 function fetchPhrRequestFail(state, action) {
- debugger
+ return state;
 }
 
 export function phrList(state = Map(), action) {

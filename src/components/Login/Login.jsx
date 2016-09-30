@@ -39,38 +39,36 @@ class _Login extends React.Component {
     var logoUrl = require("../../images/long-logo.png");
 
     return (
-      <div>
-        <div styleName='container'>
-          <div styleName='logo-container'>
-            <img src={logoUrl} alt="Leo Health"/>
-          </div>
-          <div styleName='input-container'>
-            <input type="text"
-              placeholder="Email"
-              styleName='input'
-              onChange={(e)=>this.onChangeInput(e, "email")}
-              value={this.state.email}
-              />
-          </div>
-          <div styleName='input-container'>
-            <input type="password"
-              placeholder="Password"
-              styleName='input'
-              onChange={(e)=>this.onChangeInput(e, "password")}
-              value={this.state.password}
-              />
-            <button styleName='button'
-              onClick={()=>this.onClickLogin()}>
-              Login
-            </button>
-          </div>
-          <div styleName='question'>
-            Not a member yet?
-            <a href="https://provider.leohealth.com/registration"
-               styleName='link'>
-            Join Leo
-          </a>
-          </div>
+      <div styleName='container'>
+        <div styleName='logo-container'>
+          <img src={logoUrl} alt="Leo Health"/>
+        </div>
+        <div styleName='input-container'>
+          <input type="text"
+            placeholder="Email"
+            styleName='input'
+            onChange={(e)=>this.onChangeInput(e, "email")}
+            value={this.state.email}
+            />
+        </div>
+        <div styleName='input-container'>
+          <input type="password"
+            placeholder="Password"
+            styleName='input'
+            onChange={(e)=>this.onChangeInput(e, "password")}
+            value={this.state.password}
+            />
+          <button styleName='button'
+            onClick={()=>this.onClickLogin()}>
+            Login
+          </button>
+        </div>
+        <div styleName='question'>
+          Not a member yet?
+          <a href="https://provider.leohealth.com/registration"
+             styleName='link'>
+          Join Leo
+        </a>
         </div>
       </div>
     );
