@@ -1,0 +1,47 @@
+.message {
+  margin-top: 2vh;
+  padding: 2vh;
+  width: 75vw;
+  border-radius: 30px;
+  text-align: left;
+}
+
+.provider-message {
+  composes: message;
+  background-color: #E3E3E3;
+}
+
+.sender {
+  color: #01C0E4;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.date {
+  display: inline-block;
+  color: #666;
+}
+
+.content-container {
+  display: block;
+  position: relative;
+  margin-left: 150px;
+  margin-top: 2vh;
+}
+
+.provider-content-container {
+  composes: content-container;
+  text-align: left;
+}
+
+.avatar-container {
+  display: block;
+}
+
+.avatar {
+  width: 125px;
+  border-radius: 70px;
+  border: 1px solid #01AAE5;
+  float: left;
+  margin-left: 2vw;
+}

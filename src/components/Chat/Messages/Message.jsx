@@ -6,7 +6,20 @@ const Message = React.createClass({
   render: function() {
     return (
       <div>
-        {this.props.data.message}
+        <div styleName='avatar-container'>
+          <img src={this.props.data.avatar} alt="User Avatar" styleName='avatar'/>
+        </div>
+        <div styleName='provider-content-container'>
+          <div styleName="sender">
+            {this.props.data.sender}
+          </div>
+          <div styleName="date">
+            · {this.props.data.timestamp}
+          </div>
+          <div styleName='provider-message'>
+            {this.props.data.message}
+          </div>
+        </div>
       </div>
     );
   }
