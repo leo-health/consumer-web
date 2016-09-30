@@ -1,4 +1,10 @@
-body{ margin: 0 }
+body{
+    margin: 0;
+    text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
 
 .container { width: 100vw }
 
@@ -70,18 +76,19 @@ body{ margin: 0 }
 }
 
 .lists {
+    max-height: 999999px;
     clear: both;
     padding: 0 6vw 0 6vw;
-    color: #7C7C7C;
-    font-size: 22px;
+    color: #575757;
+    font-size: 32px;
 }
 
 .lists .sectionTitle{
-    font-weight: bold;
+    font-weight: bolder;
 }
 
 .lists .emptyText{
-    font-size: 19px;
+    font-size: 28px;
     padding-bottom: 2vh;
 }
 
@@ -92,13 +99,12 @@ body{ margin: 0 }
 
 .phrSection {
     margin-bottom: 5vh;
-    font-size: 19px !important;
 }
 
 .phrSection .title {
     float: left;
-    max-width: 70%;
     word-wrap: break-word;
+    max-width: 70%;
 }
 
 .phrSection .description {
@@ -107,6 +113,6 @@ body{ margin: 0 }
 }
 
 .phrSection .sideNote {
-    font-size: 20px;
     clear: both;
+    color: #7C7C7C;
 }
