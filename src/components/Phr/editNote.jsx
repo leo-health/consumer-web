@@ -7,25 +7,32 @@ import * as phrListActionCreators from './phrListActionCreators';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 
-class _EditNote extends React.Component{
-  constructor(props) {
-    super(props);
+class _EditNote extends React.Component {
+
+  constructor() {
+    super();
+    this.state = { note: '' }
   }
 
-  handleNoteChange(){
+  handleNoteChange(e){
+    this.setState({ note: e.target.value.trim() })
+  }
 
+  submitNote(){
+    this.props.postNoteAsync({ id: this.props.params.id, note: this.state.note })
   }
 
   render() {
     return (
-        <div styleName='container'>
-          <div styleName='noteHeader'>
-              <p>Coco</p>
-              <Link styleName='noteButton' to={`/phr/${this.props.params.id}`}>DONE</Link>
-          </div>
-          <p styleName='notePrompt'>Please enter some notes about your child</p>
-          <textarea autoFocus></textarea>
+      <div styleName='container'>
+        <div styleName='noteHeader'>
+          <p>Coco</p>
+          <Link styleName='noteButton' onClick={()=>this.submitNote()} to={`/phr/${this.props.params.id}`}>DONE</Link>
         </div>
+        <p styleName='notePrompt'>Please enter some notes about your child</p>
+        <textarea onChange={(e)=>this.handleNoteChange(e)} autoFocus>
+        </textarea>
+      </div>
     );
   }
 }

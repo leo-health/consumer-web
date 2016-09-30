@@ -11,7 +11,7 @@ import {
 } from './object_list_reducers.js';
 import {authentication} from './authentication_reducer';
 import {entities} from './entities_reducers';
-import {phrList} from './phrListReducer'
+import {phrList, patientNote} from './phrListReducer'
 
 
 // TODO: http://redux.js.org/docs/recipes/ReducingBoilerplate.html
@@ -65,6 +65,7 @@ export default combineReducers({
   entities,
   authentication,
   phrList,
+  patientNote,
   schedulingPatient,
   schedulingSlot,
   schedulingAppointmentType

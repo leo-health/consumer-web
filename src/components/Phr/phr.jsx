@@ -18,13 +18,18 @@ class _Phr extends React.Component{
     super(props);
   }
 
+  fetchNoteAndPhr(){
+    this.props.fetchPhrsAsync({id: this.props.params.id});
+    this.props.fetchNoteAsync({id: this.props.params.id})
+  }
+
   componentDidMount() {
-    if(this.props.params.id != 'default') this.props.fetchPhrsAsync({id: this.props.params.id})
+    if(this.props.params.id != 'default') this.fetchNoteAndPhr()
   }
 
   componentWillReceiveProps(nextProps){
     if(nextProps.params.id != this.props.params.id && nextProps.params.id != 'default'){
-      this.props.fetchPhrsAsync({id: nextProps.params.id});
+      this.fetchNoteAndPhr()
     }
 
     if(this.props.params.id === 'default' && nextProps.patients){
@@ -43,6 +48,7 @@ class _Phr extends React.Component{
           <Medications medications={this.props.medications}/>
           <Immunizations immunizations={this.props.immunizations}/>
           <PhrNotes currentPatient={this.currentPatient()}
+                    notes={this.props.notes}
                     params={this.props.params}/>
         </div>
       )
@@ -98,7 +104,8 @@ function phrStateSelector(state) {
     medications: state.getIn(["phrList", "medications"]),
     immunizations: state.getIn(["phrList", "immunizations"]),
     heights: state.getIn(["phrList", "heights"]),
-    weights: state.getIn(["phrList", "weights"])
+    weights: state.getIn(["phrList", "weights"]),
+    notes: state.getIn(["patientNote", "notes"])
   };
 }
 
