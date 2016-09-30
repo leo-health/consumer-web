@@ -1,9 +1,10 @@
 .message {
   margin-top: 2vh;
-  padding: 2vh;
+  padding: 1.5vh;
   width: 70vw;
   border-radius: 30px;
   text-align: left;
+  font-weight: 300;
 }
 
 .provider-message {
@@ -25,7 +26,7 @@
 .content-container {
   display: block;
   position: relative;
-  margin-left: 150px;
+  margin-left: 160px;
   margin-top: 1vh;
   margin-bottom: 1vh;
 }
@@ -35,9 +36,7 @@
   text-align: left;
 }
 
-.avatar-container {
-  display: block;
-}
+.avatar-container { display: block; }
 
 .avatar {
   width: 125px;
