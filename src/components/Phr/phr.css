@@ -4,27 +4,32 @@ body{
 
 .container {
     width: 100vw;
+    height: 100vh;
 }
 
 .header {
-    height: 23vh;
-    text-align: center;
+    color: white;
+    height: 28vh;
     background-color: #FF5F40;
     margin-bottom: 5vh;
+    font-size: 32px;
 }
 
 .top {
-    padding: 3vh 0 0 3vw;
+    padding: 3vh 4vw 0 4vw;
 }
 
-.backArrow{
+.top .backArrow{
     float: left;
 }
 
 .patientNames {
+    padding-top: 2vh;
+    padding-bottom: 1vh;
     overflow-x: auto;
+    overflow-y: hidden;
     clear: left;
-    list-style-type:none;
+    white-space:nowrap
 }
 
 .patientNames::-webkit-scrollbar {
@@ -33,30 +38,29 @@ body{
 
 .patientNameLink {
     text-decoration: none;
-}
-
-.patientNames li {
-    font-size: 24pt;
-    display: inline;
-    padding: 0 5vw 0 5vw;
+    display: inline-block;
+    padding-right: 5vw;
     color: 	#FFFFFF;
 }
 
-.whiteLine {
-    margin: 1vh 0 1vh 0;
+.header .whiteLine {
     border-bottom: .2vh solid white;
 }
 
 .bottom {
-    padding-left: 5vw;
+    padding: 2vh 6vw 2vh 6vw;
 }
 
-.round{
+.bottom .wrapper {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.bottom .round{
     float: left;
     display: inline-block;
-    margin-left: 10vw;
-    width: 10vh;
-    height: 10vh;
+    width: 9vh;
+    height: 9vh;
     overflow: hidden;
     border-radius: 50%;
     border: 4pt solid white;
@@ -64,26 +68,40 @@ body{
     background-repeat: no-repeat;
 }
 
-.greeting {
+.bottom .greeting {
+    padding-left: 5vw;
+    float: left;
     display: inline-block;
-    font-size: 50pt;
-    color: white;
-    position: relative;
+    font-size: 70px;
 }
 
 .lists {
+    max-height: 999999px;
     clear: both;
-    font-size: 33pt;
-    padding: 0 5vw 0 5vw;
-    color: #7C7C7C;
+    padding: 0 6vw 0 6vw;
+    color: #575757;
+    font-size: 32px;
 }
 
 .lists .sectionTitle{
-    font-size: 10pt;
+    display: inline-block;
+    font-weight: bolder;
 }
 
-.lists .greyLine {
-    margin: 1vh 0 1vh 0;
+.lists .sectionTitleRight{
+    font-weight: bolder;
+    color: #FF5F40;
+    float: right;
+    text-decoration: none;
+}
+
+.lists .emptyText{
+    font-size: 28px;
+    padding-bottom: 2vh;
+}
+
+.greyLine {
+    margin: 2vh 0 2vh 0;
     border-bottom: .2vh solid #7C7C7C;
 }
 
@@ -93,8 +111,8 @@ body{
 
 .phrSection .title {
     float: left;
-    max-width: 70%;
     word-wrap: break-word;
+    max-width: 70%;
 }
 
 .phrSection .description {
@@ -103,6 +121,53 @@ body{
 }
 
 .phrSection .sideNote {
-    font-size: 20pt;
     clear: both;
+    color: #7C7C7C;
+}
+
+.container .noteHeader{
+    padding: 0 2vw 0 2vw;
+    color: white;
+    height: 8vh;
+    background-color: #FF5F40;
+    font-size: 35px;
+    width: 100%;
+    text-align: center;
+}
+
+.container .notePrompt{
+    padding-left: 2vw;
+    color: #7C7C7C;
+    font-size: 35px;
+}
+
+.noteHeader p {
+    display: inline-block;
+    margin: 0;
+    font-size: 62px;
+    height: 100%;
+    line-height: 8vh;
+}
+
+.noteHeader .noteButton{
+    color: white;
+    font-weight: bolder;
+    text-decoration: none;
+    line-height: 8vh;
+    position: absolute;
+    right: 0;
+    padding-right: 2vw;
+}
+
+.container textarea{
+    padding: 2vh 2vw 0 2vw;
+    text-align: left;
+    width: 100vw;
+    height: 92vh;
+    font-size: 35px;
+    border-style: none;
+}
+
+.container textarea:focus {
+    outline: none !important;
 }

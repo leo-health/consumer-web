@@ -30,3 +30,29 @@ export function phrList(state = Map(), action) {
       return state;
   }
 }
+
+
+function fetchPatientNoteRequest(state, action) {
+  return state.set("isLoading", true);
+}
+
+function fetchPatientNoteRequestSuccess(state, action) {
+  return state.set('notes', action.notes)
+}
+
+function fetchPatientNoteRequestFail(state, action) {
+  debugger
+}
+
+export function patientNote(state = Map(), action) {
+  switch (action.type) {
+    case PhrListActionTypes.FETCH_NOTE_REQUEST:
+      return fetchPatientNoteRequest(state, action);
+    case PhrListActionTypes.FETCH_NOTE_REQUEST_SUCCESS:
+      return fetchPatientNoteRequestSuccess(state, action);
+    case PhrListActionTypes.FETCH_NOTE_REQUEST_FAIL:
+      return fetchPatientNoteRequestFail(state, action);
+    default:
+      return state;
+  }
+}
