@@ -171,3 +171,18 @@ body{
 .container textarea:focus {
     outline: none !important;
 }
+
+.vitalGraph .selectionBar{
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+}
+
+
+.vitalGraph .dashboard{
+    display: inline-block;
+    width: 33%;
+    height: 10vh;
+    text-align: center;
+}
+
