@@ -2,7 +2,69 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import styles from './phr.css';
 import CSSModules from 'react-css-modules';
-import {Line} from 'react-chartjs';
+import {Line} from 'react-chartjs-2';
+
+const data = {
+  datasets: [{
+    fill: false,
+    lineTension: 0,
+    backgroundColor: "#FF5F40",
+    pointBorderColor: "#FF5F40",
+    pointBackgroundColor: "#fff",
+    pointBorderWidth: 1,
+    pointHoverRadius: 7,
+    pointHoverBackgroundColor: "#FF5F40",
+    pointHoverBorderColor: "#FF5F40",
+    pointHoverBorderWidth: 2,
+    pointRadius: 7,
+    pointHitRadius: 10,
+    data: [{
+      x: -10,
+      y: 0
+    }, {
+      x: 0,
+      y: 10
+    }, {
+      x: 10,
+      y: 5
+    }]
+  }]
+};
+
+const options = {
+  legend: {
+    display: false
+  },
+
+  scales: {
+    xAxes: [{
+      display: true,
+      type: "linear",
+      position: "bottom",
+      scaleLabel: {
+        display: true,
+        labelString: 'AGE'
+      },
+      ticks: {
+        display: false
+      },
+      gridLines:{
+        display: false
+      }
+    }],
+
+    yAxes: [{
+      display: true,
+      scaleLabel: {
+        display: true,
+        labelString: 'HEIGHT'
+      },
+      ticks: {
+        display: false
+      }
+    }]
+  }
+};
 
 class VitalsGraph extends React.Component {
   constructor(props) {
@@ -15,42 +77,7 @@ class VitalsGraph extends React.Component {
     this.setState({ dataType: dataType })
   }
 
-  lineData(){
-    var data = this.props[this.state.dataType];
-    data.forEach(function(entry){
-      height: entry.formatted_value_with_units
-    })
-  }
 
-
-  chartData(){
-    return {
-      datasets: [{
-        label: 'Scatter Dataset',
-        data: [{
-          x: -10,
-          y: 0
-        }, {
-          x: 0,
-          y: 10
-        }, {
-          x: 10,
-          y: 5
-        }]
-      }]
-    }
-  }
-
-  chartOptions(){
-    return {q
-      scales: {
-        xAxes: [{
-          type: 'linear',
-          position: 'bottom'
-        }]
-      }
-    }
-  }
   render() {
     //<p styleName='sideNote'>{vital.formatted_value_with_units}, {vital.percentile}th percentile</p>
     return (
@@ -67,7 +94,7 @@ class VitalsGraph extends React.Component {
         <div styleName='dashboard'>
           PERCENTILE
         </div>
-        <Line  data={this.chartData()} options={this.chartOptions()}/>
+        <Line data={data} options={options}/>
       </div>
     )
   }
