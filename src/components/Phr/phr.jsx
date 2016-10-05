@@ -18,19 +18,19 @@ class _Phr extends React.Component{
     super(props);
   }
 
-  fetchNoteAndPhr(){
-    this.props.fetchPhrsAsync({id: this.props.params.id});
-    this.props.fetchNoteAsync({id: this.props.params.id})
+  fetchNoteAndPhr(id){
+    this.props.fetchPhrsAsync({id: id});
+    this.props.fetchNoteAsync({id: id})
   }
 
   componentDidMount() {
-    if(this.props.params.id != 'default') this.fetchNoteAndPhr()
+    var id = this.props.params.id;
+    if(id != 'default') this.fetchNoteAndPhr(id)
   }
 
   componentWillReceiveProps(nextProps){
-    if(nextProps.params.id != this.props.params.id && nextProps.params.id != 'default'){
-      this.fetchNoteAndPhr()
-    }
+    var nextId = nextProps.params.id;
+    if(nextId != this.props.params.id && nextId != 'default') this.fetchNoteAndPhr(nextId);
 
     if(this.props.params.id === 'default' && nextProps.patients){
       this.context.router.push(`/phr/${nextProps.patients[0].id}`);
