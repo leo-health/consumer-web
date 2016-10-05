@@ -172,10 +172,20 @@ body{
     outline: none !important;
 }
 
+.vitalGraph {
+    margin: 0 -4vw 0 -4vw;
+}
+
 .vitalGraph .selectionBar{
     display: inline-block;
     width: 50%;
     text-align: center;
+    padding-bottom: 0.5vh;
+}
+
+.vitalGraph .active{
+    color: #FF5F40;
+    border-bottom: 2px solid #FF5F40;
 }
 
 
@@ -184,5 +194,5 @@ body{
     width: 33%;
     height: 10vh;
     text-align: center;
+    padding-top: 1vh;
 }
-

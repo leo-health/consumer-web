@@ -4,10 +4,15 @@ import styles from './phr.css';
 import CSSModules from 'react-css-modules';
 import {Line} from 'react-chartjs-2';
 import moment from 'moment';
+import classnames from 'classnames';
 
 const options = {
   legend: {
     display: false
+  },
+
+  tooltips: {
+    enabled: false
   },
 
   elements: {
@@ -58,6 +63,8 @@ const options = {
   }
 };
 
+const cx = classnames.bind(styles);
+
 class VitalsGraph extends React.Component {
   constructor(props) {
     super(props);
@@ -89,9 +96,9 @@ class VitalsGraph extends React.Component {
     var birthDate = this.props.currentPatient.birth_date;
     var diffDuration = moment.duration(moment(this.state.currentVital.taken_at).diff(birthDate));
     if(diffDuration.years() === 0){
-      return `${diffDuration.months()} months ${diffDuration.days()} days old`
+      return `${diffDuration.months()} months ${diffDuration.days()} days`
     }else{
-      return `${diffDuration.years()} years ${diffDuration.months()} months old`
+      return `${diffDuration.years()} years ${diffDuration.months()} months`
     }
   }
 
@@ -104,20 +111,20 @@ class VitalsGraph extends React.Component {
   render() {
     return (
       <div styleName='vitalGraph'>
-        <div styleName='selectionBar' onClick={() => this.switchData('weights')}>WEIGHT</div>
-        <div styleName='selectionBar' onClick={() => this.switchData('heights')}>HEIGHT</div>
+        <div styleName={cx('selectionBar', { active: this.state.dataType === 'weights' })} onClick={() => this.switchData('weights')}>WEIGHT</div>
+        <div styleName={cx('selectionBar', { active: this.state.dataType === 'heights' })} onClick={() => this.switchData('heights')}>HEIGHT</div>
 
         <div styleName='dashboard'>
-          <p>WEIGHT</p>
           {this.state.currentVital.formatted_value_with_units}
+          <p>WEIGHT</p>
         </div>
         <div styleName='dashboard'>
-          <p>TAKEN AT</p>
           {this.formatTakenAt()}
+          <p>TAKEN AT</p>
         </div>
         <div styleName='dashboard'>
-          <p>PERCENTILE</p>
           {this.state.currentVital.percentile}
+          <p>PERCENTILE</p>
         </div>
         <Line data={this.generateData()}
               options={options}
@@ -127,4 +134,4 @@ class VitalsGraph extends React.Component {
   }
 }
 
-export default CSSModules(VitalsGraph, styles);
+export default CSSModules(VitalsGraph, styles, {allowMultiple: true} );
