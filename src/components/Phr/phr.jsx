@@ -43,7 +43,9 @@ class _Phr extends React.Component{
     if(isPhr){
       return(
         <div styleName='lists'>
-          <Vitals heights={this.props.heights} weights={this.props.weights}/>
+          <Vitals heights={this.props.heights}
+                  weights={this.props.weights}
+                  currentPatient={this.currentPatient()}/>
           <Allergies allergies={this.props.allergies}/>
           <Medications medications={this.props.medications}/>
           <Immunizations immunizations={this.props.immunizations}/>

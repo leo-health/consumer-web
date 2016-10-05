@@ -3,37 +3,29 @@ import ReactDOM from 'react-dom';
 import styles from './phr.css';
 import CSSModules from 'react-css-modules';
 import {Line} from 'react-chartjs-2';
-
-const data = {
-  datasets: [{
-    fill: false,
-    lineTension: 0,
-    backgroundColor: "#FF5F40",
-    pointBorderColor: "#FF5F40",
-    pointBackgroundColor: "#fff",
-    pointBorderWidth: 1,
-    pointHoverRadius: 7,
-    pointHoverBackgroundColor: "#FF5F40",
-    pointHoverBorderColor: "#FF5F40",
-    pointHoverBorderWidth: 2,
-    pointRadius: 7,
-    pointHitRadius: 10,
-    data: [{
-      x: -10,
-      y: 0
-    }, {
-      x: 0,
-      y: 10
-    }, {
-      x: 10,
-      y: 5
-    }]
-  }]
-};
+import moment from 'moment';
 
 const options = {
   legend: {
     display: false
+  },
+
+  elements: {
+    line: {
+      fill: false,
+      backgroundColor: "#FF5F40",
+      tension: 0
+    },
+
+    point: {
+      borderColor: "#FF5F40",
+      backgroundColor: "#fff",
+      borderWidth: 1,
+      hoverRadius: 7,
+      hoverBorderWidth: 2,
+      radius: 7,
+      hitRadius: 10
+    }
   },
 
   scales: {
@@ -69,32 +61,67 @@ const options = {
 class VitalsGraph extends React.Component {
   constructor(props) {
     super(props);
-    //this.state={ dataType: 'weights' }
+    this.state={ dataType: 'weights', currentVital: this.props.weights[this.props.weights.length - 1 ] }
   }
 
   switchData(dataType){
     if(dataType === this.state.dataType) return;
-    this.setState({ dataType: dataType })
+    this.setState({ dataType: dataType,  currentVital: this.props[dataType][this.props.weights.length - 1 ]})
   }
 
+  generateData(){
+    var vitals = this.props[this.state.dataType];
+    var birthDate = moment(this.props.currentPatient.birth_date);
+    var convertedVitals = [];
+    vitals.forEach(function(vital){
+      var age = moment(vital.taken_at).diff(birthDate, 'months', true);
+      convertedVitals.push({x: age, y: vital.value})
+    });
+
+    return { datasets: [{
+      data: convertedVitals,
+      pointHoverBackgroundColor: "#FF5F40",
+      pointHoverBorderColor: "#FF5F40"
+    }] }
+  }
+
+  formatTakenAt(){
+    var birthDate = this.props.currentPatient.birth_date;
+    var diffDuration = moment.duration(moment(this.state.currentVital.taken_at).diff(birthDate));
+    if(diffDuration.years() === 0){
+      return `${diffDuration.months()} months ${diffDuration.days()} days old`
+    }else{
+      return `${diffDuration.years()} years ${diffDuration.months()} months old`
+    }
+  }
+
+  renderActiveVital(vitals) {
+    this.setState({
+      currentVital: this.props[this.state.dataType][vitals[0]._index]
+    })
+  }
 
   render() {
-    //<p styleName='sideNote'>{vital.formatted_value_with_units}, {vital.percentile}th percentile</p>
     return (
       <div styleName='vitalGraph'>
-        <div styleName='selectionBar' onClick={this.switchData}>WEIGHT</div>
-        <div styleName='selectionBar' onClick={this.switchData}>HEIGHT</div>
+        <div styleName='selectionBar' onClick={() => this.switchData('weights')}>WEIGHT</div>
+        <div styleName='selectionBar' onClick={() => this.switchData('heights')}>HEIGHT</div>
 
         <div styleName='dashboard'>
-          WEIGHT
+          <p>WEIGHT</p>
+          {this.state.currentVital.formatted_value_with_units}
         </div>
         <div styleName='dashboard'>
-          TAKEN AT
+          <p>TAKEN AT</p>
+          {this.formatTakenAt()}
         </div>
         <div styleName='dashboard'>
-          PERCENTILE
+          <p>PERCENTILE</p>
+          {this.state.currentVital.percentile}
         </div>
-        <Line data={data} options={options}/>
+        <Line data={this.generateData()}
+              options={options}
+              onElementsClick={this.renderActiveVital.bind(this)}/>
       </div>
     )
   }

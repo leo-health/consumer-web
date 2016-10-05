@@ -18,7 +18,9 @@ class Vitals extends React.Component {
     if(!this.props.heights || !this.props.weights) return;
     const {heights, weights} = this.props;
     if(heights.length > 1 || weights.length > 1){
-      return <VitalsGraph heights={heights} weights={weights}/>
+      return <VitalsGraph heights={heights}
+                          weights={weights}
+                          currentPatient={this.props.currentPatient}/>
     }else{
       return (
         <div>
