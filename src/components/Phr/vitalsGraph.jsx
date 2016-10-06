@@ -107,9 +107,12 @@ class VitalsGraph extends React.Component {
     })
   }
 
+  componentDidMount(){
+
+  }
+
   render() {
     return (
-
       <div styleName='vitalGraph'>
         <div styleName={cx('selectionBar', { active: this.state.dataType === 'weights' })} onClick={() => this.switchData('weights')}>WEIGHT</div>
         <div styleName={cx('selectionBar', { active: this.state.dataType === 'heights' })} onClick={() => this.switchData('heights')}>HEIGHT</div>
@@ -128,6 +131,7 @@ class VitalsGraph extends React.Component {
         </div>
         <Line data={this.generateData()}
               options={options}
+              ref='chart'
               onElementsClick={this.renderActiveVital.bind(this)}/>
       </div>
     )
