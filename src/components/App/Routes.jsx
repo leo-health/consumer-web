@@ -17,6 +17,7 @@ import {Settings} from '../Settings/Settings';
 import {Login} from '../Login/Login';
 import {Phr} from '../Phr/phr';
 import {EditNote} from '../Phr/editNote';
+import {ExportPdf} from '../Phr/exportPdf';
 
 export const routeURLs = {
   index: "/",
@@ -59,6 +60,7 @@ export function configureRoutes(store) {
         <Route path="/" component={App} onEnter={authTransition(store)}>
           <Route path="phr/:id" component={Phr}/>
           <Route path="phr/:id/editNote" component={EditNote}/>
+          <Route path="phr/:id/exportPdf" component={ExportPdf}/>
           <Route component={Home}>
             <IndexRoute/>
             <Route path="chat" component={Chat}/>

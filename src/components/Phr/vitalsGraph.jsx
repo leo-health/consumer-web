@@ -28,7 +28,7 @@ const options = {
       hoverRadius: 7,
       hoverBorderWidth: 2,
       radius: 7,
-      hitRadius: 10
+      hitRadius: 100
     }
   },
 
@@ -113,26 +113,75 @@ class VitalsGraph extends React.Component {
     })
   }
 
+  generateVitalName(vital){
+    if(vital.includes("lbs")){
+      return <p>WEIGHT</p>
+    }else if(vital.includes("months")){
+      return <p>TAKEN AT</p>
+    }else{
+     return <p>HEIGHT</p>
+    }
+  }
+
+  renderWeight(vital){
+    var vitalArr = vital.split(" ");
+    if(vitalArr.length === 4){
+     return (
+       <div styleName='dashboard'>
+         <div styleName='item'>
+           <div styleName='left'>
+             {vitalArr[0]}
+           </div>
+           <div styleName='right'>
+             <p>{vitalArr[1]}</p>
+             <p>{vitalArr[2]} {vitalArr[3]}</p>
+           </div>
+         </div>
+         {this.generateVitalName(vital)}
+       </div>
+     )
+    }else{
+      return (
+        <div styleName='dashboard'>
+          <div styleName='left'>
+            {vitalArr[0]}
+          </div>
+          <div styleName='right'>
+            {vitalArr[1]}
+          </div>
+          {this.generateVitalName(vital)}
+        </div>
+      )
+    }
+  }
+
+  //handleClick(){
+  //}
+  //
+  //componentDidMount(){
+  //  var canvas = this.refs.chart.chart_instance.chart.canvas
+  //
+  //}
+
   render() {
     return (
       <div styleName='vitalGraph'>
         <div styleName={cx('selectionBar', { active: this.state.dataType === 'weights' })} onClick={() => this.switchData('weights')}>WEIGHT</div>
         <div styleName={cx('selectionBar', { active: this.state.dataType === 'heights' })} onClick={() => this.switchData('heights')}>HEIGHT</div>
+        {this.renderWeight(this.state.currentVital.formatted_value_with_units)}
+        {this.renderWeight(this.formatTakenAt())}
         <div styleName='dashboard'>
-          {this.state.currentVital.formatted_value_with_units.slice(0,2)}
-          <p>WEIGHT</p>
-        </div>
-        <div styleName='dashboard'>
-          {this.formatTakenAt()}
-          <p>TAKEN AT</p>
-        </div>
-        <div styleName='dashboard'>
-          {this.state.currentVital.percentile}{this.props.convertPercentile(this.state.currentVital.percentile)}
+          <div styleName='item'>
+            <div styleName='left'>
+              {this.state.currentVital.percentile}{this.props.convertPercentile(this.state.currentVital.percentile)}
+            </div>
+          </div>
           <p>PERCENTILE</p>
         </div>
         <Line data={this.generateData()}
               options={options}
               ref='chart'
+              onClick={this.handleClick}
               onElementsClick={this.renderActiveVital.bind(this)}/>
       </div>
     )
@@ -142,3 +191,8 @@ class VitalsGraph extends React.Component {
 
 export default CSSModules(VitalsGraph, styles, {allowMultiple: true} );
 
+/*var activePoint = scatterChart.getElementAtEvent(evt);*/
+/*var selectedPoint = activePoint[0];*/
+/*selectedPoint.custom = this.selectedPoint.custom || {};*/
+/*selectedPoint.custom.backgroundColor = 'rgba(128,128,128,1)';*/
+/*selectedPoint.custom.radius = 7;*/

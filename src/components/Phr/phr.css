@@ -193,7 +193,38 @@ body{
 .vitalGraph .dashboard{
     display: inline-block;
     width: 33%;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    box-sizing: border-box;
     height: 10vh;
     text-align: center;
-    padding-top: 1vh;
+}
+
+.dashboard .item {
+    margin: 0 auto;
+}
+
+.dashboard p {
+    font-size: 15pt;
+    color: #7C7C7C;
+}
+
+.item .left {
+    display: inline-block;
+    width: 40%;
+    text-align: right;
+    font-size: 35pt;
+    padding-right: 5%;
+}
+
+.item .right {
+    text-align: left;
+    width: 55%;
+    font-size: 15pt;
+    display: inline-block;
+}
+
+.item p {
+    margin: 0;
+    clear: both;
 }

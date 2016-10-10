@@ -41,7 +41,7 @@ function fetchPatientNoteRequestSuccess(state, action) {
 }
 
 function fetchPatientNoteRequestFail(state, action) {
-  debugger
+  debugger;
 }
 
 export function patientNote(state = Map(), action) {
@@ -56,3 +56,29 @@ export function patientNote(state = Map(), action) {
       return state;
   }
 }
+
+function fetchPdfRequest(state, action) {
+  return state.set("isLoading", true);
+}
+
+function fetchPdfRequestSuccess(state, action) {
+  return state.set('pdf', action.pdf)
+}
+
+function fetchPdfRequestFail(state, action) {
+  debugger
+}
+
+export function immunizationPdf(state = Map(), action) {
+  switch (action.type) {
+    case PhrListActionTypes.FETCH_PDF_REQUEST:
+      return fetchPdfRequest(state, action);
+    case PhrListActionTypes.FETCH_PDF_REQUEST_SUCCESS:
+      return fetchPdfRequestSuccess(state, action);
+    case PhrListActionTypes.FETCH_PDF_REQUEST_FAIL:
+      return fetchPdfRequestFail(state, action);
+    default:
+      return state;
+  }
+}
+

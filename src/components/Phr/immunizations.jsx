@@ -1,4 +1,6 @@
 import React from 'react';
+import ReactRouter from 'react-router'
+import { Link } from 'react-router';
 import styles from './phr.css';
 import CSSModules from 'react-css-modules';
 
@@ -32,21 +34,25 @@ class Immunizations extends React.Component{
 
   renderExportButton() {
     if (!this.props.immunizations) return;
-    if (this.props.immunizations.length > 0) return <p styleName='sectionTitleRight' onClick={this.renderPdf}>EXPORT</p>;
-  }
-
-  renderPdf(){
-
+    if (this.props.immunizations.length > 0){
+      return (
+        <Link styleName='sectionTitleRight'
+              onClick={() => this.renderPdf()}
+              to={`/phr/${this.props.params.id}/exportPdf`}>
+          EXPORT
+        </Link>
+      )
+    }
   }
 
   render() {
     return (
-        <div>
-          <p styleName='sectionTitle'>IMMUNIZATIONS</p>
-          {this.renderExportButton()}
-          <div styleName='greyLine'></div>
-          {this.renderImmunizations()}
-        </div>
+      <div>
+        <p styleName='sectionTitle'>IMMUNIZATIONS</p>
+        {this.renderExportButton()}
+        <div styleName='greyLine'></div>
+        {this.renderImmunizations()}
+      </div>
     )
   }
 }

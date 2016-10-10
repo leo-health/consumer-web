@@ -43,15 +43,14 @@ class _Phr extends React.Component{
     if(isPhr){
       return(
         <div styleName='lists'>
-          <Vitals heights={this.props.heights}
-                  weights={this.props.weights}
-                  currentPatient={this.currentPatient()}/>
+          <Vitals heights={this.props.heights} weights={this.props.weights} currentPatient={this.currentPatient()}/>
           <Allergies allergies={this.props.allergies}/>
           <Medications medications={this.props.medications}/>
-          <Immunizations immunizations={this.props.immunizations}/>
-          <PhrNotes currentPatient={this.currentPatient()}
-                    notes={this.props.notes}
-                    params={this.props.params}/>
+          <Immunizations immunizations={this.props.immunizations}
+                         fetchPdfAsync={this.props.fetchPdfAsync}
+                         pdf={this.props.pdf}
+                         params={this.props.params}/>
+          <PhrNotes currentPatient={this.currentPatient()} notes={this.props.notes} params={this.props.params}/>
         </div>
       )
     }else{
@@ -60,8 +59,7 @@ class _Phr extends React.Component{
           <div styleName='greyLine'></div>
           <p styleName='emptyText'>As your {this.checkPatientGender()} data becomes available this section will populate with important facts and figures
             related to her health and development</p>
-          <PhrNotes currentPatient={this.currentPatient()}
-                    params={this.props.params}/>
+          <PhrNotes currentPatient={this.currentPatient()} params={this.props.params}/>
         </div>
       )
     }

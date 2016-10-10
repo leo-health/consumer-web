@@ -11,7 +11,10 @@ export const PhrListActionTypes = {
   POST_NOTE_REQUEST_FAIL: 'POST_NOTE_REQUEST_FAIL',
   FETCH_NOTE_REQUEST: 'GET_NOTE_REQUEST',
   FETCH_NOTE_REQUEST_SUCCESS: 'FETCH_NOTE_REQUEST_SUCCESS',
-  FETCH_NOTE_REQUEST_FAIL: 'FETCH_NOTE_REQUEST_FAIL'
+  FETCH_NOTE_REQUEST_FAIL: 'FETCH_NOTE_REQUEST_FAIL',
+  FETCH_PDF_REQUEST: 'FETCH_PDF_REQUEST',
+  FETCH_PDF_REQUEST_SUCCESS: 'FETCH_PDF_REQUEST_SUCCESS',
+  FETCH_PDF_REQUEST_FAIL: 'FETCH_PDF_REQUEST_FAIL'
 };
 
 export function fetchPhrsRequest() {
@@ -109,6 +112,39 @@ export function fetchNoteAsync(params){
     return fetch(uri, {method: "get"})
         .then(response => response.json())
         .then(json => dispatch(responseSuccessOrFail(json.data, fetchNoteRequestSuccess, fetchNoteRequestFail)))
+  }
+}
+
+
+export function fetchPdfRequest() {
+  return {
+    type: PhrListActionTypes.FETCH_PDF_REQUEST
+  };
+}
+
+export function fetchPdfRequestSuccess(payload) {
+  debugger
+  return {
+    type: PhrListActionTypes.FETCH_PDF_REQUEST_SUCCESS,
+    pdf: payload.url
+  }
+}
+
+export function fetchPdfRequestFail() {
+  return {
+    type: PhrListActionTypes.FETCH_PDF_REQUEST_FAIL
+  };
+}
+
+export function fetchPdfAsync(params){
+  return (dispatch, getState) => {
+    dispatch(fetchPhrsRequest());
+    var base = Constants.API_BASE_URL;
+    var auth = getState().getIn(["authentication","token"]);
+    var uri = `${base}/patients/${params.id}/immunizations?authentication_token=${auth}&response_type=pdf`;
+    return fetch(uri, {
+      method: "get"
+    }).then(response => dispatch(responseSuccessOrFail(response, fetchPdfRequestSuccess, fetchPdfRequestFail)))
   }
 }
 

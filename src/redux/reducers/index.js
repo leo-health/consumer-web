@@ -9,13 +9,14 @@ import entities, * as fromEntities from './entities';
 import schedulingSlot, * as fromSchedulingSlot from './schedulingSlot';
 import schedulingPatient from './schedulingPatient';
 import schedulingAppointmentType from './schedulingAppointmentType';
-import {phrList, patientNote} from './phrListReducer';
+import {phrList, patientNote, immunizationPdf} from './phrListReducer';
 
 export default combineReducers({
   entities,
   authentication,
   phrList,
   patientNote,
+  immunizationPdf,
   schedulingPatient,
   schedulingSlot,
   schedulingAppointmentType

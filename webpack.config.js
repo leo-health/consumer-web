@@ -5,7 +5,7 @@ var path = require('path');
 const LOCAL_CLIENT_SERVER = "http://localhost:8080";
 const NGROK_CLIENT_SERVER = "http://lcw.ngrok.io";
 
-const CLIENT_SERVER = LOCAL_CLIENT_SERVER;
+const CLIENT_SERVER = NGROK_CLIENT_SERVER;
 
 module.exports = {
   entry: [
