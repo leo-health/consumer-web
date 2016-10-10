@@ -101,7 +101,7 @@ body{
 }
 
 .greyLine {
-    margin: 2vh 0 2vh 0;
+    margin: 0 0 2vh 0;
     border-bottom: .2vh solid #7C7C7C;
 }
 
@@ -173,7 +173,7 @@ body{
 }
 
 .vitalGraph {
-    margin: 0 -4vw 0 -4vw;
+    margin: -3vh -4vw 0 -4vw;
 }
 
 .vitalGraph .selectionBar{
@@ -181,6 +181,7 @@ body{
     width: 50%;
     text-align: center;
     padding-bottom: 0.5vh;
+    margin-bottom: 1vh;
 }
 
 .vitalGraph .active{

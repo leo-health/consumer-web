@@ -39,7 +39,9 @@ const options = {
       position: "bottom",
       scaleLabel: {
         display: true,
-        labelString: 'AGE'
+        labelString: 'AGE',
+        fontStyle: 'bold',
+        fontSize: 20
       },
       ticks: {
         display: false
@@ -53,7 +55,9 @@ const options = {
       display: true,
       scaleLabel: {
         display: true,
-        labelString: 'HEIGHT'
+        labelString: 'HEIGHT',
+        fontStyle: 'bold',
+        fontSize: 20
       },
       ticks: {
         display: false
@@ -114,9 +118,8 @@ class VitalsGraph extends React.Component {
       <div styleName='vitalGraph'>
         <div styleName={cx('selectionBar', { active: this.state.dataType === 'weights' })} onClick={() => this.switchData('weights')}>WEIGHT</div>
         <div styleName={cx('selectionBar', { active: this.state.dataType === 'heights' })} onClick={() => this.switchData('heights')}>HEIGHT</div>
-
         <div styleName='dashboard'>
-          {this.state.currentVital.formatted_value_with_units}
+          {this.state.currentVital.formatted_value_with_units.slice(0,2)}
           <p>WEIGHT</p>
         </div>
         <div styleName='dashboard'>
