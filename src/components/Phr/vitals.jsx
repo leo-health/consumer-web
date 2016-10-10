@@ -9,10 +9,11 @@ class Vitals extends React.Component {
     if ( heights.length === 0 && weights.length === 0 ){
       return <p styleName='emptyText'>No Vitals Measurements</p>
     } else{
-     return <VitalsTable height={heights[0]} weight={weights[0]}/>
+      return <VitalsTable height={heights[0]}
+                          weight={weights[0]}
+                          convertPercentile={this.convertPercentile}/>
     }
   }
-
 
   tableOrGraph() {
     if(!this.props.heights || !this.props.weights) return;
@@ -20,6 +21,7 @@ class Vitals extends React.Component {
     if(heights.length > 1 || weights.length > 1){
       return <VitalsGraph heights={heights}
                           weights={weights}
+                          convertPercentile={this.convertPercentile}
                           currentPatient={this.props.currentPatient}/>
     }else{
       return (
@@ -29,6 +31,20 @@ class Vitals extends React.Component {
           {this.renderVitals(heights, weights)}
         </div>
       )
+    }
+  }
+
+  convertPercentile(percentile){
+    percentile = percentile % 10;
+    switch (percentile){
+      case 1:
+        return 'st';
+      case 2:
+        return 'nd';
+      case 3:
+        return 'rd';
+      default:
+        return 'th';
     }
   }
 

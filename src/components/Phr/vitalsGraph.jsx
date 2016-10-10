@@ -84,11 +84,13 @@ class VitalsGraph extends React.Component {
       convertedVitals.push({x: age, y: vital.value})
     });
 
-    return { datasets: [{
-      data: convertedVitals,
-      pointHoverBackgroundColor: "#FF5F40",
-      pointHoverBorderColor: "#FF5F40"
-    }] }
+    return {
+      datasets: [{
+        data: convertedVitals,
+        pointHoverBackgroundColor: "#FF5F40",
+        pointHoverBorderColor: "#FF5F40"
+      }]
+    }
   }
 
   formatTakenAt(){
@@ -107,10 +109,6 @@ class VitalsGraph extends React.Component {
     })
   }
 
-  componentDidMount(){
-
-  }
-
   render() {
     return (
       <div styleName='vitalGraph'>
@@ -126,7 +124,7 @@ class VitalsGraph extends React.Component {
           <p>TAKEN AT</p>
         </div>
         <div styleName='dashboard'>
-          {this.state.currentVital.percentile}
+          {this.state.currentVital.percentile}{this.props.convertPercentile(this.state.currentVital.percentile)}
           <p>PERCENTILE</p>
         </div>
         <Line data={this.generateData()}
