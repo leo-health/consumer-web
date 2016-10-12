@@ -5,8 +5,16 @@ import styles from './chat.css';
 import MessageList from './Messages/MessageList';
 import ChatInput from './Input/ChatInput';
 
-const Chat = React.createClass({
-  render: function() {
+import {connect} from 'react-redux';
+import * as messaging_action_creators from 'redux/actions/messaging_action_creators';
+
+class Chat extends React.Component {
+
+  componentWillMount() {
+    this.props.getConversation();
+  }
+
+  render() {
     return (
       <div className='chat'>
         <Link to="/">
@@ -21,7 +29,7 @@ const Chat = React.createClass({
               Chat with Leo
             </div>
           </div>
-          <div styleName='message-container'>
+          <div>
             <MessageList/>
           </div>
           <div styleName='input-container'>
@@ -31,6 +39,6 @@ const Chat = React.createClass({
       </div>
     );
   }
-});
+}
 
-export default CSSModules(Chat, styles);
+export default connect(null, messaging_action_creators)(CSSModules(Chat, styles));

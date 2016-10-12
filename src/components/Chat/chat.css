@@ -14,11 +14,11 @@
   padding-top: 3%;
 }
 
-.message-container {
-  height: 84%;
-}
-
 .input-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
   background-color: #01AAE5;
   height: 8%;
 }

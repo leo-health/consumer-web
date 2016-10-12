@@ -9,6 +9,7 @@ import entities, * as fromEntities from './entities';
 import schedulingSlot, * as fromSchedulingSlot from './schedulingSlot';
 import schedulingPatient from './schedulingPatient';
 import schedulingAppointmentType from './schedulingAppointmentType';
+import messaging from './messaging';
 import {phrList} from './phrListReducer';
 
 export default combineReducers({
@@ -17,7 +18,8 @@ export default combineReducers({
   phrList,
   schedulingPatient,
   schedulingSlot,
-  schedulingAppointmentType
+  schedulingAppointmentType,
+  messaging
 });
 
 export const getGroupedSlotsByDate = state => {
