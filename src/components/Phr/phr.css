@@ -127,10 +127,12 @@ body{
 
 .container .noteHeader{
     padding: 0 2vw 0 2vw;
+    margin-bottom: 0.5vh;
     color: white;
     height: 8vh;
     background-color: #FF5F40;
     font-size: 35px;
+    box-sizing: border-box;
     width: 100%;
     text-align: center;
 }

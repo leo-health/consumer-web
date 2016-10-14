@@ -6,6 +6,7 @@ import CSSModules from 'react-css-modules';
 import * as phrListActionCreators from './phrListActionCreators';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
+import spdf from "simple-react-pdf";
 
 class _ExportPdf extends React.Component {
   constructor(props) {
@@ -16,15 +17,6 @@ class _ExportPdf extends React.Component {
     this.setState({ note: e.target.value.trim() })
   }
 
-  componentDidMount(){
-    debugger
-    this.props.fetchPdfAsync({id: this.props.params.id});
-  }
-
-  renderPdf() {
-    if(this.props.pdf) return <embed src={this.props.pdf} width="800px" height="1100px"/>
-  }
-
   render() {
     return (
       <div styleName='container'>
@@ -32,7 +24,8 @@ class _ExportPdf extends React.Component {
           <p>Coco</p>
           <Link styleName='noteButton' onClick={()=>this.submitNote()} to={`/phr/${this.props.params.id}`}>DONE</Link>
         </div>
-        {this.renderPdf()}
+        <spdf.SimplePDF
+            file="http://lapi.ngrok.io/api/v1/patients/2/immunizations?authentication_token=xkKagDbiGxycgyr3edHu&response_type=pdf"/>
       </div>
     );
   }

@@ -54,7 +54,7 @@
   overflow-y: auto;
   text-align: center;
   background-color: white;
-  font-size: 40px;
+  font-size: 40pt;
 }
 
 :global .window-close {
