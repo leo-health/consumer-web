@@ -18,9 +18,11 @@ class _ExportPdf extends React.Component {
   }
 
   render() {
+    var shareUrl = require("../../images/share.png");
     return (
       <div styleName='container'>
         <div styleName='noteHeader'>
+          <a href="mailto: w@gmail.com"><img  styleName='shareButton' src={shareUrl}/></a>
           <p>Coco</p>
           <Link styleName='noteButton' onClick={()=>this.submitNote()} to={`/phr/${this.props.params.id}`}>DONE</Link>
         </div>

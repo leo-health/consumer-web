@@ -161,6 +161,12 @@ body{
     padding-right: 2vw;
 }
 
+.noteHeader .shareButton{
+    position: absolute;
+    left: 0;
+    padding-right: 2vw;
+}
+
 .container textarea{
     padding: 2vh 2vw 0 2vw;
     text-align: left;

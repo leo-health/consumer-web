@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDom from 'react-dom';
 import styles from './phr.css';
 import CSSModules from 'react-css-modules';
 import {Line} from 'react-chartjs-2';
