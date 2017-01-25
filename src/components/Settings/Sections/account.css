@@ -1,0 +1,31 @@
+.container {
+  margin-left: 7vw;
+}
+
+.header {
+  font-size: 80px;
+  font-weight: 300;
+  font-family: 'Raleway';
+  color: #666;
+  margin: 3vh 0;
+}
+
+.option {
+  font-size: 45px;
+  color: #666;
+  margin-bottom: 1vh;
+  font-weight: 300;
+}
+
+.divider {
+  height: 1px;
+  width: 85vw;
+  background-color: #666;
+  margin-bottom: 2vh;
+}
+
+.name {
+  composes: option;
+  color: #FC5E48;
+  font-weight: 400;
+}

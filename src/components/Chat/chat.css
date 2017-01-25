@@ -1,7 +1,8 @@
 .header-container {
-  height: 8%;
+  height: 8vh;
   background-color: #01AAE5;
-  position: relative;
+  position: fixed;
+  width: 96vw;
 }
 
 .header {
@@ -15,10 +16,13 @@
 }
 
 .message-container {
-  height: 84%;
+  margin-top: 8vh;
+  position: relative;
+  height: 80vh;
+  overflow-y: scroll;
 }
 
 .input-container {
   background-color: #01AAE5;
-  height: 8%;
+  height: 8vh;
 }

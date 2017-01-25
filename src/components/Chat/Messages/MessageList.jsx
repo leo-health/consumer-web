@@ -10,30 +10,34 @@ const DUMMY_MESSAGES = [
     sender: 'Dr. Om Lata',
     title: 'MD',
     timestamp: '12:30pm',
-    message: 'Welcome to Leo. If you have any questions or comments you can reach us at anytime.'
+    message: 'Welcome to Leo. If you have any questions or comments you can reach us at anytime.',
+    avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg'
   },
   {
     id: 2,
     sender: 'Amy',
     title: 'Self',
     timestamp: '2:49pm',
-    message: 'Hi Dr. Lata, I was wondering if you could tell me more about the process for our first visit with Emily.'
+    message: 'Hi Dr. Lata, I was wondering if you could tell me more about the process for our first visit with Emily.',
+    avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/eomerx/128.jpg'
   },
   {
     id: 3,
     sender: 'Mark',
     title: 'Guardian',
     timestamp: '2:50pm',
-    message: 'Emily has had a bad cough recently. Should we schedule a sick visit as well.'
+    message: 'Emily has had a bad cough recently. Should we schedule a sick visit as well.',
+    avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/eomerx/128.jpg'
   },
   {
     id: 4,
     sender: 'Dr. Om Lata',
     title: 'MD',
     timestamp: '12:30pm',
-    message: 'Hello Mark, no need for a separate visit. We can take a look at Emily\'s cough when you schedule your first visit.'
+    message: 'Hello Mark, no need for a separate visit. We can take a look at Emily\'s cough when you schedule your first visit.',
+    avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg'
   }
-]
+];
 
 const MessageList = React.createClass({
   getInitialState: function(){
